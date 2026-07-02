@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>제유종 | 삼성생명 기업재무컨설턴트</title>
+<title>제유종 | 삼성생명 법인사업부 팀장</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -57,17 +57,43 @@
 
   .hero-badge {
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.15em;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
     color: var(--sky-blue-light);
     text-transform: uppercase;
     border: 1.5px solid rgba(46,136,222,0.4);
-    padding: 8px 18px;
+    padding: 10px 24px;
     border-radius: 4px;
     margin-bottom: 36px;
     opacity: 0;
     animation: fadeUp 0.8s 0.2s ease forwards;
+  }
+
+  .hero-slogan {
+    margin-top: 28px;
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(1.05rem, 2.8vw, 1.35rem);
+    font-weight: 600;
+    color: #fff;
+    max-width: 560px;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.9s ease forwards;
+  }
+
+  .hero-slogan span { color: var(--sky-blue-light); }
+
+  .hero-photo {
+    width: 132px;
+    height: 132px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255,255,255,0.25);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.1s ease forwards;
+    background: rgba(255,255,255,0.08);
   }
 
   .hero-name {
@@ -200,6 +226,30 @@
   }
 
   .about-body p + p { margin-top: 16px; }
+
+  .about-list {
+    list-style: none;
+  }
+
+  .about-list li {
+    position: relative;
+    padding-left: 28px;
+    font-size: 1rem;
+    color: var(--text);
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .about-list li + li { margin-top: 14px; }
+
+  .about-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--sky-blue);
+    font-weight: bold;
+  }
 
   .about-stats {
     display: grid;
@@ -354,35 +404,22 @@
     gap: 40px;
   }
 
-  .book-cover {
+  .book-cover-link {
     flex-shrink: 0;
-    width: 140px;
-    height: 200px;
-    background: linear-gradient(135deg, var(--navy-light) 0%, var(--sky-blue) 100%);
-    border: 2px solid var(--sky-blue);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 16px;
-    text-align: center;
+    display: block;
+    width: 160px;
     border-radius: 4px;
+    overflow: hidden;
     box-shadow: 0 12px 32px rgba(46,136,222,0.2);
+    transition: transform 0.3s;
   }
 
-  .book-cover-title {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #fff;
-    line-height: 1.4;
-  }
+  .book-cover-link:hover { transform: translateY(-4px); }
 
-  .book-cover-sub {
-    font-size: 10px;
-    color: rgba(255,255,255,0.6);
-    margin-top: 12px;
-    letter-spacing: 0.1em;
+  .book-cover-img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   .book-body .section-label { color: var(--sky-blue); }
@@ -408,6 +445,179 @@
     border-radius: 3px;
     font-weight: 500;
   }
+
+  /* ── SECTION NOTE / DISCLAIMER ── */
+  .section-note {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 520px;
+    margin-top: -8px;
+  }
+
+  .section-disclaimer {
+    margin-top: 32px;
+    font-size: 0.78rem;
+    color: var(--muted);
+    opacity: 0.75;
+    line-height: 1.6;
+  }
+
+  /* ── CASES & PRECEDENTS ── */
+  .cases-section { background: #fff; }
+
+  .cases-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .case-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px;
+    transition: all 0.3s;
+  }
+
+  .case-card:hover {
+    box-shadow: 0 8px 24px rgba(46,136,222,0.1);
+    transform: translateY(-4px);
+  }
+
+  .case-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: #fff;
+    background: var(--sky-blue);
+    padding: 4px 12px;
+    border-radius: 3px;
+    margin-bottom: 14px;
+  }
+
+  .case-card h4 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .case-card p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  /* ── REPRESENTATIVE CASES ── */
+  .rep-cases-section { background: var(--cream); }
+
+  .rep-cases {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 40px;
+  }
+
+  .rep-case {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .rep-case:last-child { border-bottom: none; }
+
+  .rep-case-num {
+    display: inline-block;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--sky-blue);
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+  }
+
+  .rep-case h4 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .rep-case-meta {
+    font-size: 0.82rem;
+    color: var(--sky-blue);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .rep-case p:last-child {
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  /* ── JOINT TEAM ── */
+  .team-section { background: #fff; }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 40px;
+  }
+
+  .team-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px 16px;
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .team-card:hover {
+    box-shadow: 0 8px 24px rgba(46,136,222,0.1);
+    transform: translateY(-4px);
+    border-color: var(--sky-blue);
+  }
+
+  .team-icon {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .team-role {
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+  }
+
+  .team-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .book-buy-link {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--sky-blue);
+    text-decoration: none;
+    border-bottom: 1px solid var(--sky-blue);
+    padding-bottom: 2px;
+    transition: color 0.3s;
+  }
+
+  .book-buy-link:hover { color: var(--sky-blue-light); border-color: var(--sky-blue-light); }
 
   /* ── PROCESS ── */
   .process { background: var(--cream); }
@@ -650,10 +860,12 @@
 
     .services-grid { grid-template-columns: 1fr; }
     .expertise-grid { grid-template-columns: 1fr; }
+    .cases-grid { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
     .about-stats { grid-template-columns: repeat(2, 1fr); }
     .contact-container { grid-template-columns: 1fr; gap: 32px; }
     .book-inner { flex-direction: column; gap: 28px; }
-    .book-cover { width: 120px; height: 170px; }
+    .book-cover-link { width: 130px; }
     .hero-cta { flex-direction: column; }
     .btn-primary, .btn-secondary, .form-submit { width: 100%; justify-content: center; }
   }
@@ -661,6 +873,8 @@
   @media (max-width: 560px) {
     .hero { padding: 60px 16px 40px; }
     .hero-name { font-size: 2rem; }
+    .hero-photo { width: 100px; height: 100px; }
+    .team-grid { grid-template-columns: 1fr; }
     section { padding: 48px 16px; }
     .container { padding: 0; }
     .services-grid { gap: 12px; }
@@ -673,15 +887,20 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">🏆 삼성생명 기업재무컨설턴트</div>
+  <!-- TODO: profile.jpg 파일을 리포지토리 루트에 업로드해 실제 프로필 사진으로 교체하세요 -->
+  <img src="profile.jpg" alt="제유종 프로필 사진" class="hero-photo">
+  <div class="hero-badge">🏆 삼성생명 법인사업부 팀장</div>
   <h1 class="hero-name">
     제유종
-    <em>Daniel Jhe</em>
+    <em>Group Financial Consultant</em>
   </h1>
   <div class="hero-divider"></div>
   <p class="hero-sub">
     기업 대표와 임원의 자산을 지키고,<br>
     세금을 줄이고, 미래를 설계합니다.
+  </p>
+  <p class="hero-slogan">
+    "제 고객은 <span>제 자산</span>입니다.<br>항상 여러분 편에 서서 컨설팅 합니다."
   </p>
   <div class="hero-cta">
     <a href="#contact" class="btn-primary">📞 상담 예약하기</a>
@@ -693,30 +912,53 @@
 <section class="about">
   <div class="container">
     <div class="reveal">
-      <p class="section-label">About Me</p>
-      <h2 class="section-title">10년의 금융<br><span>실전 경험</span></h2>
+      <p class="section-label">Profile</p>
+      <h2 class="section-title">약력</h2>
       <hr class="divider">
     </div>
-    <div class="about-body reveal">
-      <p>
-        캐나다 시가총액 1위 금융기관 등 에서 약 10년간 개인 자산관리·법인 대출·모기지를 담당하며 고액 자산가 및 사업주 고객을 전담했습니다. 국제 금융 시장의 구조를 이해하고, 글로벌 관점에서 자산을 관리하는 경험을 갖추었습니다.
-      </p>
-      <p>
-        현재는 대한민국 법인 대표·임원을 대상으로 세무·노무컨설팅, 퇴직금 설계, 상속·증여세 절세 솔루션, 기업대출 등을 제공합니다. 기업의 체계적 리스크를 제거하고 사업수완을 높이는 <strong>종합 재무 컨설팅</strong>을 지향하며, 각 법인·오너의 상황에 맞춘 <strong>맞춤형 설계</strong>를 제공합니다.
-      </p>
-    </div>
+    <ul class="about-list reveal">
+      <li>벤쿠버 패티슨 고등학교(Pattison High School) 졸업</li>
+      <li>캘리포니아 주립대학교(California State University) 졸업</li>
+      <li>Global Maxfin Capital (Wealth Management Division) 재직</li>
+      <li>J&amp;Company International Limited 법인대표</li>
+      <li>Royal Bank of Canada 재직</li>
+      <li>Meridian Credit Union 재직</li>
+      <li>삼성생명 (법인사업부) 재직</li>
+    </ul>
     <div class="about-stats reveal">
       <div class="stat">
-        <span class="stat-num">10<sup>+</sup></span>
-        <span class="stat-label">금융업 경력</span>
+        <span class="stat-num">10년<sup>+</sup></span> <span class="stat-label">금융업 경력</span>
       </div>
       <div class="stat">
-        <span class="stat-num">500<sup>+</sup></span>
-        <span class="stat-label">자산관리 고객</span>
+        <span class="stat-num">상위 0.1<sup>%</sup></span> <span class="stat-label">신뢰도+고객만족도 5년연속</span>
       </div>
       <div class="stat">
-        <span class="stat-num">1000억<sup>+</sup></span>
-        <span class="stat-label">누적 자산관리 규모</span>
+        <span class="stat-num">1000억원<sup>+</sup></span> <span class="stat-label">누적 자산유치액</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK -->
+<section class="book-section">
+  <div class="container">
+    <div class="book-inner reveal">
+      <a href="https://product.kyobobook.co.kr/detail/S000217504825" target="_blank" rel="noopener" class="book-cover-link">
+        <img src="book-cover.jpg" alt="『언노운 리치』 책 표지" class="book-cover-img">
+      </a>
+      <div class="book-body">
+        <p class="section-label">저서</p>
+        <h2 class="section-title">『언노운 리치』</h2>
+        <p class="book-desc">
+          자산을 지키는 방법을 모른 채 부를 쌓는 이들에게 나누고 싶은 메시지. 캐나다 시가총액 1위 자산운용사의 지속가능한 자산관리 철학과, 미국의 금융시스템이 어떤 원리로 부자를 양산하는지를 실용적으로 쉽게 풀어낸 이야기.
+        </p>
+        <div>
+          <span class="book-tag">교보문고 출판</span>
+          <span class="book-tag">개인금융</span>
+          <span class="book-tag">자산관리</span>
+          <span class="book-tag">절세 전략</span>
+        </div>
+        <a href="https://product.kyobobook.co.kr/detail/S000217504825" target="_blank" rel="noopener" class="book-buy-link">교보문고에서 보기 →</a>
       </div>
     </div>
   </div>
@@ -768,8 +1010,56 @@
         </div>
       </div>
       <div class="service-card">
-        <span class="service-icon">🔍</span>
-        <p class="service-name">정책금융 & 보조금</p>
+        <span class="service-icon">🧾</span>
+        <p class="service-name">세무컨설팅</p>
+        <p class="service-desc">법인·개인 세무 진단 및 절세 전략 수립</p>
+        <div class="service-details">
+          <ul>
+            <li>법인세·소득세 진단</li>
+            <li>세무조사 사전 대응</li>
+            <li>세무사 연계 자문</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">👥</span>
+        <p class="service-name">노무컨설팅</p>
+        <p class="service-desc">근로계약·취업규칙 정비, 노무 리스크 진단</p>
+        <div class="service-details">
+          <ul>
+            <li>취업규칙·근로계약 점검</li>
+            <li>노무 리스크 사전 진단</li>
+            <li>공인노무사 연계 자문</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">📄</span>
+        <p class="service-name">비상장주식평가</p>
+        <p class="service-desc">보충적 평가방법에 따른 지분가치 진단</p>
+        <div class="service-details">
+          <ul>
+            <li>주식가치 사전 평가</li>
+            <li>지분 구조 리스크 진단</li>
+            <li>승계·매각 대비 설계</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">⚠️</span>
+        <p class="service-name">기업리스크 분석</p>
+        <p class="service-desc">재해소송, 세무조사·추적과세 리스크 진단</p>
+        <div class="service-details">
+          <ul>
+            <li>재해소송 대응 체계 점검</li>
+            <li>세무조사·추적과세 리스크 진단</li>
+            <li>사전 리스크 관리 컨설팅</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🏛️</span>
+        <p class="service-name">정부대출 & 정책자금</p>
         <p class="service-desc">정부 지원 사업 연계 및 네트워킹</p>
         <div class="service-details">
           <ul>
@@ -779,59 +1069,130 @@
           </ul>
         </div>
       </div>
+      <div class="service-card">
+        <span class="service-icon">💰</span>
+        <p class="service-name">가지급금 정리</p>
+        <p class="service-desc">대표이사 가지급금 단계적 상환 설계</p>
+        <div class="service-details">
+          <ul>
+            <li>가지급금 원인 진단</li>
+            <li>상환 로드맵 수립</li>
+            <li>인정이자 부담 완화</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🦺</span>
+        <p class="service-name">산재보험료 절감</p>
+        <p class="service-desc">산재보험료율 진단 및 절감 방안 설계</p>
+        <div class="service-details">
+          <ul>
+            <li>업종별 보험료율 진단</li>
+            <li>절감 가능 항목 분석</li>
+            <li>재해소송 리스크 관리</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- EXPERTISE -->
-<section class="expertise">
+<!-- CASES & PRECEDENTS -->
+<section class="cases-section">
   <div class="container">
     <div class="reveal">
-      <p class="section-label">Expertise</p>
-      <h2 class="section-title">전문 영역</h2>
+      <p class="section-label">Risk & Precedents</p>
+      <h2 class="section-title">대표적 기업 리스크와<br><span>법안·판례</span></h2>
       <hr class="divider">
+      <p class="section-note">기업 대표가 놓치기 쉬운 법적·세무적 리스크를 실제 법령·판례 흐름과 함께 안내해 드립니다.</p>
     </div>
-    <div class="expertise-grid reveal">
-      <div class="expertise-item">
-        <h4>🇨🇦 국제금융 경험</h4>
-        <p>캐나다 RBC에서 쌓은 글로벌 금융 지식과 국제 자산관리 경험으로 국내 고객에게 세계 수준의 금융 컨설팅을 제공합니다.</p>
+    <div class="cases-grid reveal">
+      <div class="case-card">
+        <span class="case-tag">가지급금</span>
+        <h4>가지급금 세무조사 강화 트렌드</h4>
+        <p>대표이사 가지급금은 국세청의 주요 세무조사·추적과세 대상입니다. 방치 시 인정이자 익금산입, 손금불산입 등으로 법인세·소득세 부담이 함께 커집니다.</p>
       </div>
-      <div class="expertise-item">
-        <h4>🏦 기업금융 전문성</h4>
-        <p>법인 대출, 신용 평가, 자금 운영 등 기업 재무의 전반에 대한 깊은 이해로 사업주의 자금 흐름을 최적화합니다.</p>
+      <div class="case-card">
+        <span class="case-tag">상속·증여</span>
+        <h4>가업상속공제 & 사전증여 개정 흐름</h4>
+        <p>가업상속공제 요건과 한도는 세법 개정을 통해 지속적으로 변화하고 있습니다. 개정 시점에 맞춘 사전증여·지분 설계가 절세의 핵심입니다.</p>
       </div>
-      <div class="expertise-item">
-        <h4>⚖️ 세무·노무 연계</h4>
-        <p>세무사, 노무사와의 네트워크를 통해 법인보험, 절세, 보험료 처리 등 모든 영역에서 통합 솔루션을 제공합니다.</p>
+      <div class="case-card">
+        <span class="case-tag">비상장주식</span>
+        <h4>보충적 평가방법과 지분 리스크</h4>
+        <p>비상장주식은 상속세 및 증여세법상 보충적 평가방법에 따라 예상보다 높게 평가되는 경우가 많아, 사전에 지분 구조를 점검할 필요가 있습니다.</p>
       </div>
-      <div class="expertise-item">
-        <h4>📈 자산증식 전략</h4>
-        <p>개인 자산관리 500+ 고객의 경험으로 검증된 포트폴리오 설계, 절세, 상속 플래닝을 체계적으로 진행합니다.</p>
+      <div class="case-card">
+        <span class="case-tag">산재·재해소송</span>
+        <h4>임원의 산재보상 책임 판례 흐름</h4>
+        <p>산업현장 재해소송에서 사업주·임원의 관리감독 책임을 폭넓게 인정하는 판례가 늘고 있어, 산재보험료 및 배상 리스크 관리가 중요해지고 있습니다.</p>
       </div>
     </div>
+    <p class="section-disclaimer">※ 위 내용은 일반적인 리스크 유형 소개이며, 실제 게재 전 최신 법령·판례로 반드시 검증·업데이트해 주세요.</p>
   </div>
 </section>
 
-<!-- BOOK -->
-<section class="book-section">
+<!-- REPRESENTATIVE CASES -->
+<section class="rep-cases-section">
   <div class="container">
-    <div class="book-inner reveal">
-      <div class="book-cover">
-        <p class="book-cover-title">언노운<br>리치</p>
-        <p class="book-cover-sub">교보문고 출판</p>
+    <div class="reveal">
+      <p class="section-label">Case Studies</p>
+      <h2 class="section-title">대표 컨설팅 사례</h2>
+      <hr class="divider">
+    </div>
+    <div class="rep-cases reveal">
+      <div class="rep-case">
+        <span class="rep-case-num">Case 01</span>
+        <h4>제조업 A대표 · 가지급금 정리</h4>
+        <p class="rep-case-meta">업종: 제조업 · 이슈: 장기 미정리 가지급금</p>
+        <p>장기간 누적된 가지급금으로 세무조사 리스크에 노출된 법인을 대상으로, 법인보험 및 급여체계 재설계를 통해 가지급금을 단계적으로 정리하고 인정이자 부담을 완화했습니다.</p>
       </div>
-      <div class="book-body">
-        <p class="section-label">저서</p>
-        <h2 class="section-title">『언노운 리치』</h2>
-        <p class="book-desc">
-          자산을 지키는 방법을 모른 채 부를 쌓는 사람들에게 보내는 메시지. 금융 전문가로서의 10년 현장 경험을 담아 교보문고에서 출판했습니다. 부의 축적뿐 아니라 보호, 상속, 절세까지 아우르는 실용적인 금융 지식을 제시합니다.
-        </p>
-        <div>
-          <span class="book-tag">교보문고 출판</span>
-          <span class="book-tag">개인금융</span>
-          <span class="book-tag">자산관리</span>
-          <span class="book-tag">절세 전략</span>
-        </div>
+      <div class="rep-case">
+        <span class="rep-case-num">Case 02</span>
+        <h4>건설업 B대표 · 상속·증여 설계</h4>
+        <p class="rep-case-meta">업종: 건설업 · 이슈: 2세 승계 및 상속세 부담</p>
+        <p>가업승계를 앞둔 대표를 대상으로 사전증여 시뮬레이션과 지분 구조 재설계를 진행해, 예상 상속세 부담을 낮추는 승계 로드맵을 수립했습니다.</p>
+      </div>
+      <div class="rep-case">
+        <span class="rep-case-num">Case 03</span>
+        <h4>IT서비스 C대표 · 산재보험료 & 퇴직금 재원</h4>
+        <p class="rep-case-meta">업종: IT서비스 · 이슈: 산재보험료 및 임원 퇴직금 재원 부족</p>
+        <p>산재보험료율 진단을 통한 절감 방안을 제시하고, 동시에 임원 퇴직금 재원을 확보할 수 있는 법인보험 구조를 함께 설계했습니다.</p>
+      </div>
+    </div>
+    <p class="section-disclaimer">※ 위 사례는 예시 구성입니다. 실제 상담 사례로 교체하실 때는 고객 동의 및 비밀유지 의무에 따라 반드시 익명화해 주세요.</p>
+  </div>
+</section>
+
+<!-- JOINT TEAM -->
+<section class="team-section">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Cross-functional Consulting</p>
+      <h2 class="section-title">전문인력단이 함께하는<br><span>공동 컨설팅</span></h2>
+      <hr class="divider">
+      <p class="section-note">공인노무사, 공인회계사, 삼성생명 재무설계팀 등 각 분야 전문가와 함께 하나의 팀으로 컨설팅합니다.</p>
+    </div>
+    <div class="team-grid reveal">
+      <div class="team-card">
+        <span class="team-icon">🧑‍💼</span>
+        <p class="team-role">제유종</p>
+        <p class="team-desc">삼성생명 법인사업부 팀장 · 컨설팅 총괄</p>
+      </div>
+      <div class="team-card">
+        <span class="team-icon">⚖️</span>
+        <p class="team-role">공인노무사</p>
+        <p class="team-desc">근로계약·노무 리스크 자문</p>
+      </div>
+      <div class="team-card">
+        <span class="team-icon">🧮</span>
+        <p class="team-role">공인회계사</p>
+        <p class="team-desc">세무·회계 진단 및 절세 자문</p>
+      </div>
+      <div class="team-card">
+        <span class="team-icon">🏦</span>
+        <p class="team-role">삼성생명 재무설계팀</p>
+        <p class="team-desc">법인·개인 재무 설계 지원</p>
       </div>
     </div>
   </div>
@@ -850,7 +1211,7 @@
         <span class="step-num">01</span>
         <div class="step-content">
           <p class="step-title">초기 미팅 (30분)</p>
-          <p class="step-desc">현재 법인 구조, 대표 보수, 가족 관계 등 기본 현황을 파악합니다. 부담 없이 현황만 공유해 주셔도 됩니다. 비용은 없습니다.</p>
+          <p class="step-desc">현재 법인 구조, 법인특성, 니즈 등 기본 현황을 파악합니다. 부담 없이 현황만 공유해 주셔도 됩니다. 비용은 없습니다.</p>
         </div>
       </div>
       <div class="step reveal">
@@ -898,16 +1259,22 @@
           </p>
         </div>
         <div class="contact-item">
-          <p class="contact-item-label">📍 위치</p>
-          <p class="contact-item-value">서울 강남구</p>
+          <p class="contact-item-label">📍 회사 주소</p>
+          <p class="contact-item-value">06194 서울 강남구 테헤란로 424 FN타워대치 17층</p>
         </div>
         <div class="contact-item">
           <p class="contact-item-label">🏢 회사</p>
-          <p class="contact-item-value">삼성생명 GFC</p>
+          <p class="contact-item-value">삼성생명 서초법인지역단 삼성금융법인지점</p>
         </div>
         <div class="contact-item">
           <p class="contact-item-label">⏰ 상담 시간</p>
-          <p class="contact-item-value">월-금 09:00 ~ 18:00</p>
+          <p class="contact-item-value">연중무휴 24시</p>
+        </div>
+        <div class="contact-item">
+          <p class="contact-item-label">💬 카카오톡 오픈상담</p>
+          <p class="contact-item-value">
+            <a href="https://open.kakao.com/o/gjRBr3Bi" target="_blank" rel="noopener">오픈채팅 바로가기 →</a>
+          </p>
         </div>
       </div>
 
@@ -969,8 +1336,9 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>제유종 · 삼성생명 기업재무컨설턴트</p>
+  <p>제유종 · 삼성생명 법인사업부 팀장</p>
   <p>서울 강남 · 010-2110-6010</p>
+  <p style="margin-top: 10px; opacity: 0.6;">"제 고객은 제 자산입니다. 항상 여러분 편에 서서 컨설팅 합니다."</p>
   <p style="margin-top: 12px; opacity: 0.3;">© 2026 · 본 페이지는 개인 소개 및 비즈니스 목적으로 제작되었습니다.</p>
 </footer>
 
