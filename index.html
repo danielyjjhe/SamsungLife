@@ -463,6 +463,107 @@
     line-height: 1.6;
   }
 
+  /* ── WHITEPAPER TABLE ── */
+  .whitepaper-block {
+    margin-top: 56px;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 36px;
+  }
+
+  .whitepaper-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .whitepaper-source {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .whitepaper-group-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--sky-blue);
+    margin-top: 32px;
+    margin-bottom: 10px;
+  }
+
+  .whitepaper-block > .whitepaper-group-title:first-of-type { margin-top: 0; }
+
+  .whitepaper-msg {
+    list-style: none;
+    margin-bottom: 16px;
+  }
+
+  .whitepaper-msg li {
+    font-size: 0.85rem;
+    color: var(--text);
+    font-weight: 500;
+    line-height: 1.7;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .whitepaper-msg li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--sky-blue);
+    font-weight: 700;
+  }
+
+  .whitepaper-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 8px;
+    background: #fff;
+  }
+
+  .whitepaper-table th,
+  .whitepaper-table td {
+    border: 1px solid var(--border);
+    padding: 12px 14px;
+    text-align: left;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    vertical-align: top;
+  }
+
+  .whitepaper-table th {
+    background: var(--navy);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+
+  .whitepaper-table td:first-child,
+  .whitepaper-table th:first-child {
+    width: 36px;
+    text-align: center;
+    color: var(--sky-blue);
+    font-weight: 700;
+  }
+
+  .whitepaper-table td:nth-child(2) {
+    width: 150px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .whitepaper-table td:last-child {
+    width: 100px;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+
+  .whitepaper-table strong { color: #c0392b; }
+
   /* ── CASES & PRECEDENTS ── */
   .cases-section { background: #fff; }
 
@@ -618,6 +719,30 @@
   }
 
   .book-buy-link:hover { color: var(--sky-blue-light); border-color: var(--sky-blue-light); }
+
+  /* ── PERSONAL WEALTH ── */
+  .personal-wealth {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  }
+
+  .personal-wealth-inner {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .personal-wealth .section-label { color: var(--sky-blue-light); }
+  .personal-wealth .section-title { color: #fff; }
+  .personal-wealth .section-title span { color: var(--sky-blue-light); }
+  .personal-wealth .divider { margin-left: auto; margin-right: auto; }
+
+  .personal-wealth-text {
+    font-size: 1.02rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.9;
+    margin: 28px 0 36px;
+  }
 
   /* ── PROCESS ── */
   .process { background: var(--cream); }
@@ -868,6 +993,9 @@
     .book-cover-link { width: 130px; }
     .hero-cta { flex-direction: column; }
     .btn-primary, .btn-secondary, .form-submit { width: 100%; justify-content: center; }
+    .whitepaper-block { padding: 20px; }
+    .whitepaper-table { display: block; overflow-x: auto; white-space: nowrap; }
+    .whitepaper-table td, .whitepaper-table th { white-space: normal; }
   }
 
   @media (max-width: 560px) {
@@ -973,14 +1101,50 @@
     </div>
     <div class="services-grid reveal">
       <div class="service-card">
-        <span class="service-icon">🏢</span>
-        <p class="service-name">법인보험 설계</p>
-        <p class="service-desc">임원 퇴직금 재원 마련, 단체상해·단체실손 구조화</p>
+        <span class="service-icon">⚠️</span>
+        <p class="service-name">기업리스크 분석</p>
+        <p class="service-desc">재해소송, 세무조사·추적과세 리스크 진단</p>
         <div class="service-details">
           <ul>
-            <li>임원 퇴직금 보장</li>
-            <li>복리후생 최적화</li>
-            <li>법인세 절감</li>
+            <li>재해소송 대응 체계 점검</li>
+            <li>세무조사·추적과세 리스크 진단</li>
+            <li>사전 리스크 관리 컨설팅</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">💰</span>
+        <p class="service-name">가지급금 정리</p>
+        <p class="service-desc">대표이사 가지급금 단계적 상환 설계</p>
+        <div class="service-details">
+          <ul>
+            <li>가지급금 원인 진단</li>
+            <li>상환 로드맵 수립</li>
+            <li>인정이자 부담 완화</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🦺</span>
+        <p class="service-name">산재보험료 절감</p>
+        <p class="service-desc">산재보험료율 진단 및 절감 방안 설계</p>
+        <div class="service-details">
+          <ul>
+            <li>업종별 보험료율 진단</li>
+            <li>절감 가능 항목 분석</li>
+            <li>재해소송 리스크 관리</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🏛️</span>
+        <p class="service-name">정부대출 & 정책자금</p>
+        <p class="service-desc">정부 지원 사업 연계 및 네트워킹</p>
+        <div class="service-details">
+          <ul>
+            <li>KOSMES 정책융자</li>
+            <li>청년고용 지원금</li>
+            <li>R&D 보조사업</li>
           </ul>
         </div>
       </div>
@@ -993,18 +1157,6 @@
             <li>상속세 시뮬레이션</li>
             <li>증여 전략 수립</li>
             <li>차명주식 정리</li>
-          </ul>
-        </div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">📊</span>
-        <p class="service-name">연금·퇴직금 설계</p>
-        <p class="service-desc">퇴직연금(DB/DC/IRP) 구조 설계</p>
-        <div class="service-details">
-          <ul>
-            <li>법인세 절감</li>
-            <li>노후 소득 확보</li>
-            <li>규정 준수</li>
           </ul>
         </div>
       </div>
@@ -1033,6 +1185,30 @@
         </div>
       </div>
       <div class="service-card">
+        <span class="service-icon">🏢</span>
+        <p class="service-name">법인보험 설계</p>
+        <p class="service-desc">임원 퇴직금 재원 마련, 단체상해·단체실손 구조화</p>
+        <div class="service-details">
+          <ul>
+            <li>임원 퇴직금 보장</li>
+            <li>복리후생 최적화</li>
+            <li>법인세 절감</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">📊</span>
+        <p class="service-name">연금·퇴직금 설계</p>
+        <p class="service-desc">퇴직연금(DB/DC/IRP) 구조 설계</p>
+        <div class="service-details">
+          <ul>
+            <li>법인세 절감</li>
+            <li>노후 소득 확보</li>
+            <li>규정 준수</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-card">
         <span class="service-icon">📄</span>
         <p class="service-name">비상장주식평가</p>
         <p class="service-desc">보충적 평가방법에 따른 지분가치 진단</p>
@@ -1041,54 +1217,6 @@
             <li>주식가치 사전 평가</li>
             <li>지분 구조 리스크 진단</li>
             <li>승계·매각 대비 설계</li>
-          </ul>
-        </div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">⚠️</span>
-        <p class="service-name">기업리스크 분석</p>
-        <p class="service-desc">재해소송, 세무조사·추적과세 리스크 진단</p>
-        <div class="service-details">
-          <ul>
-            <li>재해소송 대응 체계 점검</li>
-            <li>세무조사·추적과세 리스크 진단</li>
-            <li>사전 리스크 관리 컨설팅</li>
-          </ul>
-        </div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">🏛️</span>
-        <p class="service-name">정부대출 & 정책자금</p>
-        <p class="service-desc">정부 지원 사업 연계 및 네트워킹</p>
-        <div class="service-details">
-          <ul>
-            <li>KOSMES 정책융자</li>
-            <li>청년고용 지원금</li>
-            <li>R&D 보조사업</li>
-          </ul>
-        </div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">💰</span>
-        <p class="service-name">가지급금 정리</p>
-        <p class="service-desc">대표이사 가지급금 단계적 상환 설계</p>
-        <div class="service-details">
-          <ul>
-            <li>가지급금 원인 진단</li>
-            <li>상환 로드맵 수립</li>
-            <li>인정이자 부담 완화</li>
-          </ul>
-        </div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">🦺</span>
-        <p class="service-name">산재보험료 절감</p>
-        <p class="service-desc">산재보험료율 진단 및 절감 방안 설계</p>
-        <div class="service-details">
-          <ul>
-            <li>업종별 보험료율 진단</li>
-            <li>절감 가능 항목 분석</li>
-            <li>재해소송 리스크 관리</li>
           </ul>
         </div>
       </div>
@@ -1109,25 +1237,121 @@
       <div class="case-card">
         <span class="case-tag">가지급금</span>
         <h4>가지급금 세무조사 강화 트렌드</h4>
-        <p>대표이사 가지급금은 국세청의 주요 세무조사·추적과세 대상입니다. 방치 시 인정이자 익금산입, 손금불산입 등으로 법인세·소득세 부담이 함께 커집니다.</p>
+        <p>대표이사 가지급금은 국세청의 주요 세무조사·추적과세 대상입니다. 방치할수록 인정이자가 계속 붙어 원금 위에 이자가 쌓이고, 그 이자에 다시 세금이 붙는 구조라 미리 준비하지 않으면 세금 부담이 눈덩이처럼 불어납니다.</p>
       </div>
       <div class="case-card">
-        <span class="case-tag">상속·증여</span>
-        <h4>가업상속공제 & 사전증여 개정 흐름</h4>
-        <p>가업상속공제 요건과 한도는 세법 개정을 통해 지속적으로 변화하고 있습니다. 개정 시점에 맞춘 사전증여·지분 설계가 절세의 핵심입니다.</p>
+        <span class="case-tag">중대재해처벌법</span>
+        <h4>대표의 책임판례 흐름과 기업부도 예방</h4>
+        <p>중대재해처벌법 시행 이후 대표이사에 대한 실형·법정구속 판례가 이어지고 있습니다. 형사처벌뿐 아니라 거액의 손해배상·벌금이 기업 존속 자체를 위협할 수 있어, 사전 안전보건관리체계 구축이 곧 기업부도 예방책입니다.</p>
       </div>
       <div class="case-card">
-        <span class="case-tag">비상장주식</span>
-        <h4>보충적 평가방법과 지분 리스크</h4>
-        <p>비상장주식은 상속세 및 증여세법상 보충적 평가방법에 따라 예상보다 높게 평가되는 경우가 많아, 사전에 지분 구조를 점검할 필요가 있습니다.</p>
+        <span class="case-tag">상속세·기업승계</span>
+        <h4>대표 유고시 상속세발 기업부도 리스크</h4>
+        <p>법인대표가 갑작스럽게 유고하면, 남은 가족은 준비되지 않은 상속세 납부 재원 문제에 직면합니다. 지분 대부분이 회사에 묶여 있는 경우, 상속세를 마련하지 못해 지분을 헐값에 매각하거나 기업이 흔들리는 사례가 반복되고 있습니다.</p>
       </div>
       <div class="case-card">
-        <span class="case-tag">산재·재해소송</span>
-        <h4>임원의 산재보상 책임 판례 흐름</h4>
-        <p>산업현장 재해소송에서 사업주·임원의 관리감독 책임을 폭넓게 인정하는 판례가 늘고 있어, 산재보험료 및 배상 리스크 관리가 중요해지고 있습니다.</p>
+        <span class="case-tag">비상장주식·상속</span>
+        <h4>상속재산 증가추이와 비상장주식 가치평가</h4>
+        <p>상속재산 규모가 매년 증가하는 가운데, 비상장주식은 양도·상속 시점의 평가액에 따라 세부담이 크게 달라집니다. 적정 배당액 산출과 사전지분이동을 통해 상속세·양도세를 합법적으로 절세할 수 있습니다.</p>
       </div>
     </div>
-    <p class="section-disclaimer">※ 위 내용은 일반적인 리스크 유형 소개이며, 실제 게재 전 최신 법령·판례로 반드시 검증·업데이트해 주세요.</p>
+
+    <div class="whitepaper-block reveal">
+      <p class="whitepaper-title">📘 2025 중대재해 사고백서 수록 사례</p>
+      <p class="whitepaper-source">자료 출처: 고용노동부 「2025 중대재해 사고백서」</p>
+
+      <p class="whitepaper-group-title">Ⅰ. 대규모 반복 사고 사례</p>
+      <ul class="whitepaper-msg">
+        <li>경영메시지 1 : 안전은 비용이 아니라 자본이다 — 기업의 미래를 위한 투자</li>
+        <li>경영메시지 2 : 경영책임자는 어떻게 조직을 변화시킬 수 있는가?</li>
+      </ul>
+      <table class="whitepaper-table">
+        <thead>
+          <tr><th>#</th><th>업종</th><th>개요</th><th>사상자 수</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>리튬배터리 제조공장<br>(제조업)</td>
+            <td>리튬배터리 검수 포장 작업 중 <strong>폭발 및 화재</strong> · 1심 징역 15년</td>
+            <td>사망 23명<br>부상 9명</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>특수강 등 제조공장<br>(제조업)</td>
+            <td>연소함 내부 슬래그 제거 작업 중 고온에서 <strong>화상</strong> 등 3건 · 금속을 녹일 때 발생하는 찌꺼기 처리 사고</td>
+            <td>사망 1명<br>사망 1명<br>사망 2명</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>비철금속 제조공장<br>(제조업)</td>
+            <td>탱크 모터 교체 작업 중 <strong>중독</strong> 등 · 1심 징역 1년 6월(집행유예 3년)</td>
+            <td>사망 1명<br>부상 3명</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="whitepaper-group-title">Ⅱ. 주요 의무별 위반 사례</p>
+      <ul class="whitepaper-msg">
+        <li>경영메시지 3 : 중소기업에서 안전보건관리체계 구축이 중요한 이유</li>
+        <li>경영메시지 4 : 형식적인 의무 이행으로 재해를 막을 수 없다</li>
+      </ul>
+      <table class="whitepaper-table">
+        <thead>
+          <tr><th>#</th><th>업종</th><th>개요</th><th>사상자 수</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>4</td>
+            <td>자동차부품 제조공장<br>(제조업)</td>
+            <td>용접 작업 중인 로봇과 지그에 <strong>끼임</strong> · 자재를 잡아서 고정하는 기구 · 1심 징역 9월(집행유예 1년)</td>
+            <td>사망 1명</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>행거 파이프 제조공장<br>(제조업)</td>
+            <td>코일묶음 하역 중 천장크레인 후크에서 이탈한 코일에 <strong>깔림</strong> · 1심 징역 10월(집행유예 1년)</td>
+            <td>사망 1명</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>철근 등 제조공장<br>(제조업)</td>
+            <td>작업 중 코일형태에 의해 이탈한 소재에 대퇴부 <strong>관통</strong> · 열간 코일형태의 봉 형태의 강재가 생산라인을 이탈하는 현상 · 1심 징역 1년(집행유예 2년)</td>
+            <td>사망 1명</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>물류센터 신축 현장<br>(건설업)</td>
+            <td>고소작업대에 탑승한 상태에서 이동 중 하지절물과 <strong>끼임</strong></td>
+            <td>사망 1명</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="whitepaper-group-title">Ⅲ. 사고 다발 위험요인</p>
+      <table class="whitepaper-table">
+        <thead>
+          <tr><th>#</th><th>위험요인</th><th>개요</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>8</td>
+            <td>이동식 비계<br>(떨어짐)</td>
+            <td>천장 배관 보온재 설치 작업 중 <strong>떨어짐</strong> 등 3건</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>고소작업대<br>(떨어짐, 넘어짐 등)</td>
+            <td>천장 상부 트러스와 고소작업대 난간 사이에 <strong>끼임</strong> 등 3건</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>벌목<br>(깔림, 맞음 등)</td>
+            <td>벌목 작업 중 다른 나무에 걸쳐있던 벌도목이 떨어져 <strong>맞음</strong> 등 3건</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
@@ -1142,24 +1366,23 @@
     <div class="rep-cases reveal">
       <div class="rep-case">
         <span class="rep-case-num">Case 01</span>
-        <h4>제조업 A대표 · 가지급금 정리</h4>
-        <p class="rep-case-meta">업종: 제조업 · 이슈: 장기 미정리 가지급금</p>
-        <p>장기간 누적된 가지급금으로 세무조사 리스크에 노출된 법인을 대상으로, 법인보험 및 급여체계 재설계를 통해 가지급금을 단계적으로 정리하고 인정이자 부담을 완화했습니다.</p>
+        <h4>제조업 L대표 · 가지급금 정리</h4>
+        <p class="rep-case-meta">업종: 제조업 · 이슈: 약 9억원 규모의 장기 가지급금</p>
+        <p>L대표의 법인은 약 9억원의 가지급금이 누적된 상태였습니다. 법인세법상 인정이자율(연 4.6%)을 적용해 계산한 결과, 매년 약 4,100만원의 이자가 새로 발생하고 있었고, 이를 상환하지 않고 방치할 경우 이자가 원금에 가산되어 10년 후에는 가지급금 잔액이 약 14억원까지 불어나는 것으로 나타났습니다. 단기·장기 해결방안을 함께 설계해 제공한 결과, 장기적으로 발생할 인정이자 부담을 약 60% 절감할 수 있었습니다.</p>
       </div>
       <div class="rep-case">
         <span class="rep-case-num">Case 02</span>
-        <h4>건설업 B대표 · 상속·증여 설계</h4>
-        <p class="rep-case-meta">업종: 건설업 · 이슈: 2세 승계 및 상속세 부담</p>
-        <p>가업승계를 앞둔 대표를 대상으로 사전증여 시뮬레이션과 지분 구조 재설계를 진행해, 예상 상속세 부담을 낮추는 승계 로드맵을 수립했습니다.</p>
+        <h4>건설업 K대표 · 산재리스크 관리</h4>
+        <p class="rep-case-meta">업종: 건설업 · 이슈: 높은 산재사고율과 배상 리스크</p>
+        <p>산재사고 발생률이 높은 건설업 특성상 실제 사고 시 발생할 수 있는 배상비용과 형사리스크를 미리 계산하고 예방하는 것이 중요합니다. 리스크 진단을 통해 리스크를 제거하고 산재보험료율을 절감하여 기업의 비용과 리스크를 동시에 제거·절감한 케이스입니다.</p>
       </div>
       <div class="rep-case">
         <span class="rep-case-num">Case 03</span>
-        <h4>IT서비스 C대표 · 산재보험료 & 퇴직금 재원</h4>
-        <p class="rep-case-meta">업종: IT서비스 · 이슈: 산재보험료 및 임원 퇴직금 재원 부족</p>
-        <p>산재보험료율 진단을 통한 절감 방안을 제시하고, 동시에 임원 퇴직금 재원을 확보할 수 있는 법인보험 구조를 함께 설계했습니다.</p>
+        <h4>IT서비스 K대표 · 퇴직금·상속재원 마련</h4>
+        <p class="rep-case-meta">업종: IT서비스 · 이슈: 임원 퇴직금 및 상속세 재원 부족</p>
+        <p>K대표를 대상으로 임원 퇴직금 재원을 마련함과 동시에, 상속감자를 활용한 상속재원 마련 전략을 설계했습니다. 공인회계사와의 공동 컨설팅을 통해 상속세 절감까지 함께 이끌어낸 사례입니다.</p>
       </div>
     </div>
-    <p class="section-disclaimer">※ 위 사례는 예시 구성입니다. 실제 상담 사례로 교체하실 때는 고객 동의 및 비밀유지 의무에 따라 반드시 익명화해 주세요.</p>
   </div>
 </section>
 
@@ -1197,6 +1420,23 @@
   </div>
 </section>
 
+<!-- PERSONAL WEALTH -->
+<section class="personal-wealth">
+  <div class="container">
+    <div class="personal-wealth-inner reveal">
+      <p class="section-label">Investment & Insurance</p>
+      <h2 class="section-title">법인을 넘어,<br><span>개인 자산까지</span></h2>
+      <hr class="divider">
+      <p class="personal-wealth-text">
+        영리한 사람은 작은 돈으로 더 큰 돈을 만들어 냅니다. 법인을 운영해 이익을 창출하시는 대표님들처럼요.<br><br>
+        투자와 보험도 마찬가지입니다. 우리는 영리한 방법을 채택해 작은 돈으로 큰 돈을 만듭니다.<br>
+        어떤 방법이 영리한 방법일까요?
+      </p>
+      <a href="#contact" class="btn-primary">개인 투자&amp;보험 컨설팅 의뢰하기 →</a>
+    </div>
+  </div>
+</section>
+
 <!-- PROCESS -->
 <section class="process">
   <div class="container">
@@ -1209,29 +1449,29 @@
       <div class="step reveal">
         <span class="step-num">01</span>
         <div class="step-content">
-          <p class="step-title">초기 미팅 (30분)</p>
-          <p class="step-desc">현재 법인 구조, 법인특성, 니즈 등 기본 현황을 파악합니다. 부담 없이 현황만 공유해 주셔도 됩니다. 비용은 없습니다.</p>
+          <p class="step-title">스크리닝 인터뷰</p>
+          <p class="step-desc">법인 구조, 사업 특성, 세무·노사 이슈, 리스크 등 기본 현황을 파악합니다. 부담 없이 현황만 공유해 주셔도 됩니다. 비용은 없습니다.</p>
         </div>
       </div>
       <div class="step reveal">
         <span class="step-num">02</span>
         <div class="step-content">
-          <p class="step-title">니즈 분석 & 제안서 작성</p>
-          <p class="step-desc">절세 가능 금액, 퇴직금 예상액, 상속세 시뮬레이션 등 맞춤 수치를 포함한 평균 200페이지 분량의 제안서를 정리해 드립니다.</p>
+          <p class="step-title">통합 분석 & 솔루션 설계</p>
+          <p class="step-desc">스크리닝 인터뷰 내용을 토대로 기업 분석보고서를 작성하고, 필요 시 공인세무사·노무사와 함께 데이터와 근거에 기반한 맞춤 솔루션을 설계합니다.</p>
         </div>
       </div>
       <div class="step reveal">
         <span class="step-num">03</span>
         <div class="step-content">
-          <p class="step-title">솔루션 설계 & 계약</p>
-          <p class="step-desc">최적의 상품 구조를 제안하고, 필요 시 세무사·노무사 협력 네트워크를 연계하여 통합 솔루션을 구성합니다.</p>
+          <p class="step-title">솔루션 제안 & 실행</p>
+          <p class="step-desc">설계된 솔루션을 바탕으로 최종 제안을 드립니다. 상속감자, 퇴직금 재원 마련, 절세전략 등 일부 컨설팅은 세법상 보험상품을 활용해 실행되며, 제안이 마음에 드신다면 바로 진행해 드립니다.</p>
         </div>
       </div>
       <div class="step reveal">
         <span class="step-num">04</span>
         <div class="step-content">
           <p class="step-title">지속 관리</p>
-          <p class="step-desc">계약 이후에도 세법 개정, 정책 변화에 맞춰 포트폴리오를 지속적으로 점검하고 업데이트합니다.</p>
+          <p class="step-desc">계약 이후에도 세법 개정, 정책 변화, 법인의 성장에 맞춰 서비스를 지속적으로 점검·업데이트하며 든든한 동반자가 되어드립니다.</p>
         </div>
       </div>
     </div>
@@ -1328,7 +1568,7 @@
 <section class="cta-section">
   <div class="container">
     <h2 class="section-title reveal">부담 없이 시작하세요</h2>
-    <p class="cta-sub reveal">30분 초기 상담은 무료입니다. 편하신 시간에 연락 주시면 됩니다.</p>
+    <p class="cta-sub reveal">"제 고객은 제 자산입니다. 항상 여러분 편에 서서 컨설팅 합니다."</p>
     <a href="tel:+82-10-2110-6010" class="btn-dark reveal">📞 지금 전화하기</a>
   </div>
 </section>
