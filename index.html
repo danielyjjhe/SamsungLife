@@ -564,6 +564,12 @@
 
   .whitepaper-table strong { color: #c0392b; }
 
+  .whitepaper-table .sentence {
+    color: #c0392b;
+    font-weight: 700;
+    font-size: 1.15em;
+  }
+
   /* ── CASES & PRECEDENTS ── */
   .cases-section { background: #fff; }
 
@@ -993,9 +999,9 @@
     .book-cover-link { width: 130px; }
     .hero-cta { flex-direction: column; }
     .btn-primary, .btn-secondary, .form-submit { width: 100%; justify-content: center; }
-    .whitepaper-block { padding: 20px; }
-    .whitepaper-table { display: block; overflow-x: auto; white-space: nowrap; }
-    .whitepaper-table td, .whitepaper-table th { white-space: normal; }
+    .whitepaper-block { padding: 20px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .whitepaper-table { min-width: 600px; }
+    .whitepaper-table td:nth-child(3) { min-width: 220px; }
   }
 
   @media (max-width: 560px) {
@@ -1273,7 +1279,7 @@
           <tr>
             <td>1</td>
             <td>리튬배터리 제조공장<br>(제조업)</td>
-            <td>리튬배터리 검수 포장 작업 중 <strong>폭발 및 화재</strong> · 1심 징역 15년</td>
+            <td>리튬배터리 검수 포장 작업 중 <strong>폭발 및 화재</strong> · 1심 <span class="sentence">징역 15년</span></td>
             <td>사망 23명<br>부상 9명</td>
           </tr>
           <tr>
@@ -1285,7 +1291,7 @@
           <tr>
             <td>3</td>
             <td>비철금속 제조공장<br>(제조업)</td>
-            <td>탱크 모터 교체 작업 중 <strong>중독</strong> 등 · 1심 징역 1년 6월(집행유예 3년)</td>
+            <td>탱크 모터 교체 작업 중 <strong>중독</strong> 등 · 1심 <span class="sentence">징역 1년 6월(집행유예 3년)</span></td>
             <td>사망 1명<br>부상 3명</td>
           </tr>
         </tbody>
@@ -1304,19 +1310,19 @@
           <tr>
             <td>4</td>
             <td>자동차부품 제조공장<br>(제조업)</td>
-            <td>용접 작업 중인 로봇과 지그에 <strong>끼임</strong> · 자재를 잡아서 고정하는 기구 · 1심 징역 9월(집행유예 1년)</td>
+            <td>용접 작업 중인 로봇과 지그에 <strong>끼임</strong> · 자재를 잡아서 고정하는 기구 · 1심 <span class="sentence">징역 9월(집행유예 1년)</span></td>
             <td>사망 1명</td>
           </tr>
           <tr>
             <td>5</td>
             <td>행거 파이프 제조공장<br>(제조업)</td>
-            <td>코일묶음 하역 중 천장크레인 후크에서 이탈한 코일에 <strong>깔림</strong> · 1심 징역 10월(집행유예 1년)</td>
+            <td>코일묶음 하역 중 천장크레인 후크에서 이탈한 코일에 <strong>깔림</strong> · 1심 <span class="sentence">징역 10월(집행유예 1년)</span></td>
             <td>사망 1명</td>
           </tr>
           <tr>
             <td>6</td>
             <td>철근 등 제조공장<br>(제조업)</td>
-            <td>작업 중 코일형태에 의해 이탈한 소재에 대퇴부 <strong>관통</strong> · 열간 코일형태의 봉 형태의 강재가 생산라인을 이탈하는 현상 · 1심 징역 1년(집행유예 2년)</td>
+            <td>작업 중 코일형태에 의해 이탈한 소재에 대퇴부 <strong>관통</strong> · 열간 코일형태의 봉 형태의 강재가 생산라인을 이탈하는 현상 · 1심 <span class="sentence">징역 1년(집행유예 2년)</span></td>
             <td>사망 1명</td>
           </tr>
           <tr>
