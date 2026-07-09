@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>내 보험 보장분석 | 제유종 삼성생명 GFC</title>
+<meta name="description" content="내 보험이 나에게 유리한지 통계 기반으로 무료 분석해드립니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:       #0F1B35;
+    --navy-light: #1A2E5E;
+    --sky-blue:   #2E88DE;
+    --sky-blue-light: #5BA3F5;
+    --cream:      #F8F9FB;
+    --text:       #2C3E50;
+    --muted:      #5A6C7D;
+    --border:     #E0E6ED;
+    --success:    #27AE60;
+    --warn:       #E0A429;
+    --danger:     #E74C3C;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    padding-bottom: 60px;
+  }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--navy);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .topbar-title {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Noto Serif KR', serif;
+  }
+
+  .topbar-back {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 12px;
+  }
+
+  .progress-track {
+    height: 4px;
+    background: rgba(255,255,255,0.15);
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--sky-blue);
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 40px 20px 20px;
+  }
+
+  .step { display: none; animation: fadeIn 0.35s ease; }
+  .step.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .step-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--sky-blue);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .step-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .step-desc {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin-bottom: 28px;
+  }
+
+  /* ── INTRO ── */
+  .intro-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 18px;
+  }
+
+  .intro-card h3 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.05rem;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .intro-card p { font-size: 0.9rem; color: var(--text); font-weight: 300; }
+  .intro-card p + p { margin-top: 10px; }
+  .intro-card .highlight { color: var(--sky-blue); font-weight: 600; }
+
+  .disclaimer-box {
+    background: var(--navy);
+    color: rgba(255,255,255,0.85);
+    border-radius: 10px;
+    padding: 22px;
+    font-size: 0.83rem;
+    line-height: 1.8;
+    margin-bottom: 18px;
+  }
+
+  .disclaimer-box h4 {
+    color: #fff;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .disclaimer-box ul { padding-left: 18px; }
+  .disclaimer-box li { margin-bottom: 4px; }
+
+  .consent-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+
+  .consent-row input { margin-top: 3px; flex-shrink: 0; width: 16px; height: 16px; accent-color: var(--sky-blue); }
+  .consent-row span { font-size: 0.85rem; }
+  .consent-row .required { color: var(--danger); font-weight: 700; margin-right: 4px; }
+
+  /* ── FORM ELEMENTS ── */
+  .field { margin-bottom: 22px; }
+  .field label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .field .hint { font-weight: 300; color: var(--muted); font-size: 0.78rem; margin-top: 6px; }
+
+  input[type="text"], input[type="tel"], input[type="number"], input[type="date"], textarea, select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--text);
+    transition: border-color 0.2s;
+  }
+
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--sky-blue); }
+  textarea { resize: vertical; min-height: 80px; }
+
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .otp-row { display: flex; gap: 10px; }
+  .otp-row input { flex: 1; }
+  .btn-mini {
+    padding: 12px 16px;
+    background: var(--navy);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn-mini:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .otp-note { font-size: 0.78rem; color: var(--sky-blue); margin-top: 8px; }
+
+  .verify-badge {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    background: rgba(39,174,96,0.1);
+    color: var(--success);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-top: 10px;
+  }
+  .verify-badge.show { display: flex; }
+
+  /* ── CHOICE GRID (checkbox/radio pills) ── */
+  .choice-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .choice-grid.single { grid-template-columns: 1fr; }
+  .choice-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.86rem;
+    background: #fff;
+    transition: all 0.15s;
+  }
+  .choice-pill:hover { border-color: var(--sky-blue-light); }
+  .choice-pill.checked { border-color: var(--sky-blue); background: rgba(46,136,222,0.06); }
+  .choice-pill input { accent-color: var(--sky-blue); width: 16px; height: 16px; flex-shrink: 0; }
+
+  /* ── FAMILY TREE ── */
+  .tree-wrap { margin-bottom: 10px; }
+  .tree-row { display: flex; justify-content: center; gap: 10px; margin-bottom: 4px; }
+  .tree-connector { text-align: center; color: var(--border); font-size: 20px; line-height: 1; margin: 2px 0; }
+  .tree-card {
+    flex: 1;
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    max-width: 145px;
+  }
+  .tree-card.self { background: var(--navy); border-color: var(--navy); max-width: 160px; }
+  .tree-card.self .tree-name { color: #fff; }
+  .tree-name { font-size: 0.8rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; text-align: center; }
+  .tree-diseases { display: flex; flex-direction: column; gap: 5px; }
+  .tree-check { display: flex; align-items: center; gap: 6px; font-size: 0.72rem; color: var(--text); }
+  .tree-check input { width: 13px; height: 13px; accent-color: var(--sky-blue); flex-shrink: 0; }
+
+  /* ── DYNAMIC LIST (기왕력/현증) ── */
+  .dyn-list { margin-bottom: 12px; }
+  .dyn-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr auto;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: center;
+  }
+  .dyn-remove {
+    background: none;
+    border: none;
+    color: var(--danger);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+  .btn-add {
+    background: none;
+    border: 1.5px dashed var(--sky-blue);
+    color: var(--sky-blue);
+    padding: 10px;
+    width: 100%;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* ── NAV BUTTONS ── */
+  .nav-row { display: flex; gap: 10px; margin-top: 32px; }
+  .btn {
+    flex: 1;
+    padding: 15px;
+    border-radius: 6px;
+    border: none;
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+  }
+  .btn-next { background: var(--sky-blue); color: #fff; }
+  .btn-next:hover { background: var(--sky-blue-light); }
+  .btn-next:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; }
+  .btn-prev { background: #fff; color: var(--navy); border: 1.5px solid var(--border); flex: 0 0 90px; }
+
+  /* ── RESULT ── */
+  .result-hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    border-radius: 12px;
+    padding: 32px 24px;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .result-hero p.eyebrow { color: var(--sky-blue-light); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 10px; }
+  .result-hero h2 { font-family: 'Noto Serif KR', serif; color: #fff; font-size: 1.4rem; line-height: 1.5; }
+
+  .risk-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .risk-item {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+  }
+  .risk-item.low { border-left-color: var(--success); }
+  .risk-item.mid { border-left-color: var(--warn); }
+  .risk-item.high { border-left-color: var(--danger); }
+  .risk-item-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .risk-item-name { font-weight: 700; color: var(--navy); font-size: 0.92rem; }
+  .risk-tag { font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 12px; }
+  .risk-tag.low { background: rgba(39,174,96,0.12); color: var(--success); }
+  .risk-tag.mid { background: rgba(224,164,41,0.15); color: #a67818; }
+  .risk-tag.high { background: rgba(231,76,60,0.12); color: var(--danger); }
+  .risk-item-desc { font-size: 0.83rem; color: var(--muted); font-weight: 300; }
+
+  .reco-section { margin-bottom: 24px; }
+  .reco-section h3 { font-family: 'Noto Serif KR', serif; color: var(--navy); font-size: 1.1rem; margin-bottom: 14px; }
+  .reco-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+  }
+  .reco-card .reco-title { font-weight: 700; color: var(--sky-blue); font-size: 0.88rem; margin-bottom: 6px; }
+  .reco-card .reco-body { font-size: 0.85rem; color: var(--text); font-weight: 300; }
+
+  .timing-insight {
+    background: rgba(46,136,222,0.06);
+    border: 1.5px solid var(--sky-blue-light);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 24px;
+  }
+  .timing-insight p { font-size: 0.87rem; color: var(--navy); line-height: 1.75; font-weight: 300; }
+  .timing-insight p b { color: var(--sky-blue); font-weight: 700; }
+
+  .result-disclaimer {
+    font-size: 0.78rem;
+    color: var(--muted);
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 24px;
+  }
+
+  .cta-block {
+    background: #fff;
+    border: 2px solid var(--sky-blue);
+    border-radius: 10px;
+    padding: 22px;
+    text-align: center;
+  }
+  .cta-block p { font-size: 0.88rem; color: var(--text); margin-bottom: 14px; }
+  .btn-cta {
+    display: inline-block;
+    background: var(--sky-blue);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-cta:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; }
+  .cta-block .consent-row { margin-bottom: 16px; }
+  .cta-sent { color: var(--success); font-weight: 700; font-size: 0.85rem; margin-top: 12px; display: none; }
+  .cta-sent.show { display: block; }
+
+  @media (max-width: 480px) {
+    .choice-grid { grid-template-columns: 1fr; }
+    .row2 { grid-template-columns: 1fr; }
+    .tree-card { max-width: 100px; padding: 8px; }
+    .tree-name { font-size: 0.7rem; }
+    .tree-check { font-size: 0.65rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" class="topbar-back">← 처음으로</a>
+  <span class="topbar-title">🔍 무료 보장분석</span>
+  <span style="width:60px"></span>
+</div>
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+<div class="wrap">
+
+  <!-- STEP 0: INTRO -->
+  <div class="step active" data-step="0">
+    <p class="step-eyebrow">Insurance Analysis</p>
+    <h2 class="step-title">내 보험은 보험사에게 유리할까?<br>나에게 유리할까?</h2>
+    <p class="step-desc">3분이면 충분합니다. 건강 정보와 생활습관을 바탕으로, 통계적으로 나에게 유리한 보장구조를 분석해드려요.</p>
+
+    <div class="intro-card">
+      <h3>보험은 원래 이렇게 작동합니다</h3>
+      <p>보험은 수백만 명이 하나의 자금 풀에 보험료를 모으고, 통계를 기반으로 그 중 일부만 보험금을 받는 구조입니다. 대다수는 낸 돈보다 적게 받고, 소수만 낸 돈보다 훨씬 많이 받습니다.</p>
+      <p><span class="highlight">나에게 유리한 보험</span>이란, 카지노가 아주 근소한 확률적 우위만으로 꾸준히 수익을 내는 것처럼 — 내 건강상태·가족력·생활습관을 기준으로 통계적으로 내가 유리한 쪽에 설 수 있는 보장을 먼저 확보하는 것을 뜻합니다.</p>
+    </div>
+
+    <div class="disclaimer-box">
+      <h4>📋 개인정보 수집·이용 안내 (개인정보보호법 준수)</h4>
+      <ul>
+        <li>수집 목적: 본 서비스는 오직 <b>보장분석 결과 제공</b> 목적으로만 정보를 사용합니다.</li>
+        <li>수집 항목: 이름, 생년월일, 휴대폰번호, 소득정보 및 건강·생활습관 관련 정보(민감정보)</li>
+        <li>보관 및 파기: 입력하신 정보는 서버에 저장되지 않습니다. <b>상담을 신청하지 않고 창을 닫으시면</b> 모든 정보가 브라우저에서 즉시 자동 폐기됩니다. 상담을 신청하시는 경우의 처리 방식은 바로 아래 항목을 확인해주세요.</li>
+        <li>제3자 제공 및 국외이전: 상담을 신청하시는 경우에 한해, 입력하신 상세 분석 정보 전체가 담당 컨설턴트에게 이메일로 전달됩니다. 이 과정에서 해외 사업자인 Formspree, Inc.(미국)의 양식 전송 서비스를 이용하며, 전달된 정보는 상담 목적으로만 사용되고 상담 종료 후 지체 없이 파기됩니다. 상담을 신청하지 않으시면 어떤 정보도 전송되지 않습니다.</li>
+        <li>본 분석은 참고용 통계 정보이며, 의학적 진단이나 보험사의 실제 인수심사 결과와 다를 수 있습니다.</li>
+      </ul>
+      <p style="margin-top:12px; font-size:0.78rem;"><a href="privacy.html" target="_blank" style="color: var(--sky-blue-light);">전체 개인정보처리방침 보기 →</a></p>
+    </div>
+
+    <label class="consent-row" for="consent1">
+      <input type="checkbox" id="consent1">
+      <span><span class="required">[필수]</span>개인정보(이름, 생년월일, 휴대폰번호) 수집·이용에 동의합니다.</span>
+    </label>
+    <label class="consent-row" for="consent2">
+      <input type="checkbox" id="consent2">
+      <span><span class="required">[필수]</span>민감정보(건강상태, 질병 이력, 가족력 등) 수집·이용에 동의하며, 분석 후 즉시 폐기됨을 확인했습니다.</span>
+    </label>
+
+    <div class="nav-row">
+      <button class="btn btn-next" id="introNext" disabled onclick="goTo(1)">분석 시작하기 →</button>
+    </div>
+  </div>
+
+  <!-- STEP 1: 본인확인 -->
+  <div class="step" data-step="1">
+    <p class="step-eyebrow">Step 1 · 본인확인</p>
+    <h2 class="step-title">본인확인을 진행해주세요</h2>
+    <p class="step-desc">정확한 통계 분석을 위해 이름·생년월일·휴대폰번호를 확인합니다.<br><span style="color:var(--sky-blue)">※ 현재는 데모 버전으로 간이 인증만 진행됩니다. 정식 서비스에서는 PASS 등 실제 통신사 본인인증으로 전환됩니다.</span></p>
+
+    <div class="field">
+      <label for="name">이름</label>
+      <input type="text" id="name" placeholder="홍길동">
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label for="birthdate">생년월일</label>
+        <input type="date" id="birthdate">
+      </div>
+      <div class="field">
+        <label>성별</label>
+        <div class="choice-grid">
+          <label class="choice-pill"><input type="radio" name="gender" value="male" onchange="updatePillState(this)"> 남성</label>
+          <label class="choice-pill"><input type="radio" name="gender" value="female" onchange="updatePillState(this)"> 여성</label>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label for="phone">휴대폰번호</label>
+      <div class="otp-row">
+        <input type="tel" id="phone" placeholder="010-0000-0000">
+        <button class="btn-mini" id="sendOtpBtn" onclick="sendOtp()">인증번호 발송</button>
+      </div>
+    </div>
+    <div class="field" id="otpField" style="display:none">
+      <label for="otpCode">인증번호 6자리</label>
+      <div class="otp-row">
+        <input type="text" id="otpCode" maxlength="6" placeholder="123456">
+        <button class="btn-mini" onclick="verifyOtp()">확인</button>
+      </div>
+      <p class="otp-note" id="otpNote"></p>
+      <div class="verify-badge" id="verifyBadge">✓ 본인확인이 완료되었습니다</div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn btn-prev" onclick="goTo(0)">이전</button>
+      <button class="btn btn-next" id="step1Next" disabled onclick="goTo(2)">다음 →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: 신체정보 -->
+  <div class="step" data-step="2">
+    <p class="step-eyebrow">Step 2 · 기본정보</p>
+    <h2 class="step-title">키, 몸무게, 소득을 알려주세요</h2>
+    <div class="row2">
+      <div class="field">
+        <label for="height">키 (cm)</label>
+        <input type="number" id="height" placeholder="170">
+      </div>
+      <div class="field">
+        <label for="weight">몸무게 (kg)</label>
+        <input type="number" id="weight" placeholder="65">
+      </div>
+    </div>
+    <div class="field">
+      <label for="income">월 세전 수입 (만원)</label>
+      <input type="number" id="income" placeholder="예: 400">
+      <p class="hint">적정 보장금액과 보험료 수준을 소득에 맞게 설계하기 위한 참고 자료로만 사용됩니다.</p>
+    </div>
+    <div class="nav-row">
+      <button class="btn btn-prev" onclick="goTo(1)">이전</button>
+      <button class="btn btn-next" onclick="goTo(3)">다음 →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: 기저질환 -->
+  <div class="step" data-step="3">
+    <p class="step-eyebrow">Step 3 · 기저질환</p>
+    <h2 class="step-title">해당하는 항목을 모두 선택해주세요</h2>
+    <p class="step-desc">없으시면 선택하지 않고 다음으로 넘어가시면 됩니다.</p>
+    <div class="choice-grid" id="conditionGrid">
+      <label class="choice-pill"><input type="checkbox" value="고혈압" onchange="updatePillState(this)"> 고혈압</label>
+      <label class="choice-pill"><input type="checkbox" value="고지혈증" onchange="updatePillState(this)"> 고지혈증</label>
+      <label class="choice-pill"><input type="checkbox" value="당뇨" onchange="updatePillState(this)"> 당뇨</label>
+      <label class="choice-pill"><input type="checkbox" value="B형간염" onchange="updatePillState(this)"> B형간염 보유</label>
+      <label class="choice-pill"><input type="checkbox" value="C형간염" onchange="updatePillState(this)"> C형간염 보유</label>
+    </div>
+    <div class="field" style="margin-top:20px">
+      <label for="conditionEtc">그 밖에 본인만 알고 있거나 신경 쓰이는 건강상의 이슈</label>
+      <textarea id="conditionEtc" placeholder="예: 건강검진에서 수치가 애매하게 나온 항목, 정밀검사를 미루고 있는 부분, 진단은 받지 않았지만 걱정되는 증상 등 — 위 목록에 없어도 편하게 적어주세요."></textarea>
+      <p class="hint">진단명이 아니어도 괜찮습니다. 사소하게 느껴지는 부분도 분석 정확도에 도움이 됩니다.</p>
+    </div>
+    <div class="nav-row">
+      <button class="btn btn-prev" onclick="goTo(2)">이전</button>
+      <button class="btn btn-next" onclick="goTo(4)">다음 →</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: 가족력 -->
+  <div class="step" data-step="4">
+    <p class="step-eyebrow">Step 4 · 가족력</p>
+    <h2 class="step-title">가족력을 체크해주세요</h2>
+    <p class="step-desc">친가·외가 조부모까지, 해당 질환을 앓았거나 앓고 있는 분께 표시해주세요.</p>
+
+    <div class="tree-wrap" id="familyTree"></div>
+
+    <div class="nav-row">
+      <button class="btn btn-prev" onclick="goTo(3)">이전</button>
+      <button class="btn btn-next" onclick="goTo(5)">다음 →</button>
+    </div>
+  </div>
+
+  <!-- STEP 5: 기왕력 -->
+  <div class="step" data-step="5">
+    <p class="step-eyebrow">Step 5 · 기왕력</p>
+    <h2 class="step-title">과거에 진단받은 질병이 있나요?</h2>
+    <p class="step-desc">완치되었더라도 과거에 진단·치료받은 이력이 있다면 추가해주세요.</p>
+    <div class="dyn-list" id="pastHistoryList"></div>
+    <button class="btn-add" onclick="addDynRow('pastHistoryList')">+ 과거 병력 추가</button>
+    <div class="nav-row">
+      <button class="btn btn-prev" onclick="goTo(4)">이전</button>
+      <button class="btn btn-next" onclick="goTo(6)">다음 →</button>
+    </div>
+  </div>
+
+  <!-- STEP 6: 현증 -->
+  <div class="step" data-step="6">
+    <p class="step-eyebrow">Step 6 · 현재 질환</p>
+    <h2 class="step-title">현재 앓고 있는 질환이 있나요?</h2>
+    <div class="dyn-list" id="currentHistoryList"></div>
+    <button class="btn-add" onclick="addDynRow('currentHistoryList')">+ 현재 질환 추가</button>
+    <div class="nav-row">
+      <button class="btn btn-prev" onclick="goTo(5)">이전</button>
+      <button class="btn btn-next" onclick="goTo(7)">다음 →</button>
+    </div>
+  </div>
+
+  <!-- STEP 7: 직업/운전/취미/사고 -->
+  <div class="step" data-step="7">
+    <p class="step-eyebrow">Step 7 · 직업 및 활동</p>
+    <h2 class="step-title">직업과 일상 활동을 알려주세요</h2>
+
+    <div class="field">
+      <label for="job">직업 (실제 수행하는 업무를 구체적으로)</label>
+      <input type="text" id="job" placeholder="예: 사무직, 건설현장 관리, 화물차 운전 등">
+      <p class="hint">직무 위험도는 입력하신 내용을 기준으로 자동 판단됩니다.</p>
+    </div>
+
+    <div class="field">
+      <label>운전을 하시나요?</label>
+      <div class="choice-grid">
+        <label class="choice-pill"><input type="radio" name="driving" value="yes" onchange="updatePillState(this)"> 예</label>
+        <label class="choice-pill"><input type="radio" name="driving" value="no" onchange="updatePillState(this)"> 아니오</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>즐기시는 위험 취미가 있나요? (해당 시 모두 선택)</label>
+      <div class="choice-grid" id="hobbyGrid">
+        <label class="choice-pill"><input type="checkbox" value="스쿠버다이빙" onchange="updatePillState(this)"> 스쿠버다이빙</label>
+        <label class="choice-pill"><input type="checkbox" value="암벽등반" onchange="updatePillState(this)"> 암벽등반</label>
+        <label class="choice-pill"><input type="checkbox" value="오토바이" onchange="updatePillState(this)"> 오토바이</label>
+        <label class="choice-pill"><input type="checkbox" value="스카이다이빙/패러글라이딩" onchange="updatePillState(this)"> 스카이다이빙/패러글라이딩</label>
+        <label class="choice-pill"><input type="checkbox" value="해외오지여행" onchange="updatePillState(this)"> 해외 오지여행</label>
+        <label class="choice-pill"><input type="checkbox" value="없음" onchange="updatePillState(this)"> 없음</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>과거 교통사고 이력이 있나요?</label>
+      <div class="choice-grid">
+        <label class="choice-pill"><input type="radio" name="accident" value="yes" onchange="updatePillState(this)"> 있음</label>
+        <label class="choice-pill"><input type="radio" name="accident" value="no" onchange="updatePillState(this)"> 없음</label>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn btn-prev" onclick="goTo(6)">이전</button>
+      <button class="btn btn-next" onclick="goTo(8)">다음 →</button>
+    </div>
+  </div>
+
+  <!-- STEP 8: 생활습관 -->
+  <div class="step" data-step="8">
+    <p class="step-eyebrow">Step 8 · 생활습관</p>
+    <h2 class="step-title">평소 생활습관을 알려주세요</h2>
+
+    <div class="field">
+      <label>음주 여부</label>
+      <div class="choice-grid">
+        <label class="choice-pill"><input type="radio" name="drinking" value="none" onchange="updatePillState(this)"> 안 마심</label>
+        <label class="choice-pill"><input type="radio" name="drinking" value="light" onchange="updatePillState(this)"> 가끔(월 1~4회)</label>
+        <label class="choice-pill"><input type="radio" name="drinking" value="moderate" onchange="updatePillState(this)"> 주 1~2회</label>
+        <label class="choice-pill"><input type="radio" name="drinking" value="heavy" onchange="updatePillState(this)"> 주 3회 이상</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>흡연 여부</label>
+      <div class="choice-grid">
+        <label class="choice-pill"><input type="radio" name="smoking" value="none" onchange="updatePillState(this)"> 비흡연</label>
+        <label class="choice-pill"><input type="radio" name="smoking" value="past" onchange="updatePillState(this)"> 과거 흡연(현재 금연)</label>
+        <label class="choice-pill"><input type="radio" name="smoking" value="current" onchange="updatePillState(this)"> 현재 흡연</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>식습관</label>
+      <div class="choice-grid single">
+        <label class="choice-pill"><input type="radio" name="diet" value="healthy" onchange="updatePillState(this)"> 건강식단 위주</label>
+        <label class="choice-pill"><input type="radio" name="diet" value="normal" onchange="updatePillState(this)"> 보통 (신경쓰지 않는 편)</label>
+        <label class="choice-pill"><input type="radio" name="diet" value="onemeal" onchange="updatePillState(this)"> 1일 1식</label>
+        <label class="choice-pill"><input type="radio" name="diet" value="greasy" onchange="updatePillState(this)"> 육류·튀김·면 등 기름지거나 매운 음식을 즐기는 편</label>
+        <label class="choice-pill"><input type="radio" name="diet" value="if16" onchange="updatePillState(this)"> 간헐적 단식 (16시간 공복)</label>
+        <label class="choice-pill"><input type="radio" name="diet" value="threemeal" onchange="updatePillState(this)"> 1일 3식</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>수면 패턴</label>
+      <div class="choice-grid">
+        <label class="choice-pill"><input type="radio" name="sleepType" value="early" onchange="updatePillState(this)"> 11시 이전 취침 (주행성)</label>
+        <label class="choice-pill"><input type="radio" name="sleepType" value="late" onchange="updatePillState(this)"> 밤 12시 이후 취침 (야행성)</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>일 평균 수면시간</label>
+      <div class="choice-grid">
+        <label class="choice-pill"><input type="radio" name="sleepHours" value="over8" onchange="updatePillState(this)"> 8시간 이상</label>
+        <label class="choice-pill"><input type="radio" name="sleepHours" value="under8" onchange="updatePillState(this)"> 8시간 미만</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="lifestyleEtc">기타 특이 생활습관 (선택)</label>
+      <textarea id="lifestyleEtc" placeholder="예: 격일 마라톤, 교대근무 등 특이사항이 있다면 적어주세요"></textarea>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn btn-prev" onclick="goTo(7)">이전</button>
+      <button class="btn btn-next" onclick="goTo(9)">다음 →</button>
+    </div>
+  </div>
+
+  <!-- STEP 9: 기존보험 -->
+  <div class="step" data-step="9">
+    <p class="step-eyebrow">Step 9 · 기존 가입보험</p>
+    <h2 class="step-title">현재 가입한 보험이 있다면 알려주세요</h2>
+    <p class="step-desc">기억나는 대로 상품 종류와 대략적인 보장범위를 적어주세요. 없으시면 비워두셔도 됩니다.</p>
+    <div class="field">
+      <textarea id="existingInsurance" rows="5" placeholder="예: OO생명 실손보험 (2018년 가입), OO화재 암보험 3천만원 등"></textarea>
+    </div>
+    <div class="nav-row">
+      <button class="btn btn-prev" onclick="goTo(8)">이전</button>
+      <button class="btn btn-next" onclick="runAnalysis()">분석 결과 보기 →</button>
+    </div>
+  </div>
+
+  <!-- STEP 10: 결과 -->
+  <div class="step" data-step="10">
+    <div class="result-hero">
+      <p class="eyebrow">ANALYSIS RESULT</p>
+      <h2 id="resultHeadline">분석 결과</h2>
+    </div>
+
+    <div class="risk-grid" id="riskGrid"></div>
+
+    <div class="reco-section">
+      <h3>💡 통계적으로 유리한 보장 방향</h3>
+      <div id="recoList"></div>
+    </div>
+
+    <div class="timing-insight">
+      <p>보험료는 가입 시점의 나이와 건강상태를 기준으로 확정되며, 이후 인상되지 않고 유지됩니다. 즉 <b>오늘이 앞으로 가입하실 수 있는 가장 낮은 보험료</b>인 셈입니다. 보장성 보험은 상품 구조에 따라 세액공제 등 세제 혜택과, 만기 시 납입한 보험료를 돌려받는 환급형 설계 중 선택이 가능합니다.</p>
+    </div>
+
+    <div class="result-disclaimer">
+      본 결과는 입력하신 정보와 일반적인 의학·보험 통계를 바탕으로 한 참고용 분석입니다. 실제 진단, 보험 가입 가능 여부 및 조건은 의료진의 진단과 보험사의 심사 결과에 따라 달라질 수 있습니다.
+    </div>
+
+    <div class="cta-block">
+      <p><b>제유종 GFC</b>와 함께 이 결과를 바탕으로<br>실제 가입 가능한 상품까지 정밀 설계받아보세요.</p>
+      <label class="consent-row" for="consentSend" style="text-align:left">
+        <input type="checkbox" id="consentSend" onchange="document.getElementById('consultBtn').disabled = !this.checked">
+        <span><span class="required">[필수]</span>위 상세 분석 정보(신체정보·병력·가족력·생활습관 등)를 담당 컨설턴트 이메일로 전송하는 데 동의합니다. 전송 과정에서 해외 사업자(Formspree, Inc., 미국)의 서비스가 이용되며, 전달된 정보는 상담 목적으로만 사용 후 파기됩니다.</span>
+      </label>
+      <button class="btn-cta" id="consultBtn" disabled onclick="requestConsult()">이 결과로 상담 신청하기</button>
+      <p class="cta-sent" id="ctaSent">✓ 신청이 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const TOTAL_STEPS = 10;
+  let currentStep = 0;
+
+  function goTo(step) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.querySelector('.step[data-step="' + step + '"]').classList.add('active');
+    currentStep = step;
+    document.getElementById('progressFill').style.width = (step / TOTAL_STEPS * 100) + '%';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function updatePillState(el) {
+    const pill = el.closest('.choice-pill');
+    if (el.type === 'checkbox') {
+      pill.classList.toggle('checked', el.checked);
+    } else {
+      // radio: clear siblings in the same group
+      document.querySelectorAll('input[name="' + el.name + '"]').forEach(r => {
+        r.closest('.choice-pill').classList.toggle('checked', r.checked);
+      });
+    }
+  }
+
+  // ── Consent gating ──
+  const c1 = document.getElementById('consent1');
+  const c2 = document.getElementById('consent2');
+  function checkConsent() {
+    document.getElementById('introNext').disabled = !(c1.checked && c2.checked);
+  }
+  c1.addEventListener('change', checkConsent);
+  c2.addEventListener('change', checkConsent);
+
+  // ── Step 1: mock OTP verification (placeholder for real PASS/NICE integration) ──
+  let generatedOtp = null;
+  let verified = false;
+
+  function sendOtp() {
+    const phone = document.getElementById('phone').value.trim();
+    if (!phone) { alert('휴대폰번호를 입력해주세요.'); return; }
+    generatedOtp = String(Math.floor(100000 + Math.random() * 900000));
+    document.getElementById('otpField').style.display = 'block';
+    document.getElementById('otpNote').textContent = '[데모] 테스트용 인증번호: ' + generatedOtp + ' (실서비스에서는 실제 SMS로 발송됩니다)';
+  }
+
+  function verifyOtp() {
+    const input = document.getElementById('otpCode').value.trim();
+    if (input === generatedOtp) {
+      verified = true;
+      document.getElementById('verifyBadge').classList.add('show');
+      checkStep1();
+    } else {
+      alert('인증번호가 일치하지 않습니다.');
+    }
+  }
+
+  function checkStep1() {
+    const name = document.getElementById('name').value.trim();
+    const birthdate = document.getElementById('birthdate').value;
+    const gender = document.querySelector('input[name="gender"]:checked');
+    document.getElementById('step1Next').disabled = !(name && birthdate && gender && verified);
+  }
+  ['name', 'birthdate'].forEach(id => document.getElementById(id).addEventListener('input', checkStep1));
+  document.querySelectorAll('input[name="gender"]').forEach(r => r.addEventListener('change', checkStep1));
+
+  // ── Family tree ──
+  const RELATIVES = [
+    { id: 'pgf', label: '친할아버지' }, { id: 'pgm', label: '친할머니' },
+    { id: 'mgf', label: '외할아버지' }, { id: 'mgm', label: '외할머니' },
+    { id: 'father', label: '아버지' }, { id: 'mother', label: '어머니' }
+  ];
+  const HEREDITARY_DISEASES = ['당뇨', '고혈압', '암', '심장질환/뇌졸중', '치매'];
+
+  function renderFamilyTree() {
+    const grandparents = RELATIVES.slice(0, 4);
+    const parents = RELATIVES.slice(4);
+    let html = '<div class="tree-row">';
+    grandparents.forEach(r => { html += treeCard(r); });
+    html += '</div><div class="tree-connector">│</div><div class="tree-row">';
+    parents.forEach(r => { html += treeCard(r); });
+    html += '</div><div class="tree-connector">│</div><div class="tree-row"><div class="tree-card self"><p class="tree-name">나 (본인)</p></div></div>';
+    document.getElementById('familyTree').innerHTML = html;
+  }
+
+  function treeCard(r) {
+    let inner = '<div class="tree-card"><p class="tree-name">' + r.label + '</p><div class="tree-diseases">';
+    HEREDITARY_DISEASES.forEach(d => {
+      inner += '<label class="tree-check"><input type="checkbox" data-relative="' + r.id + '" value="' + d + '"> ' + d + '</label>';
+    });
+    inner += '</div></div>';
+    return inner;
+  }
+  renderFamilyTree();
+
+  // ── Dynamic lists (기왕력 / 현증) ──
+  function addDynRow(listId) {
+    const list = document.getElementById(listId);
+    const row = document.createElement('div');
+    row.className = 'dyn-item';
+    row.innerHTML =
+      '<input type="text" placeholder="질병명 (예: 위염)" class="dyn-name">' +
+      '<input type="number" placeholder="연도" class="dyn-year">' +
+      '<button class="dyn-remove" onclick="this.parentElement.remove()">✕</button>';
+    list.appendChild(row);
+  }
+
+  // ── Collect all answers ──
+  function collectAnswers() {
+    const get = id => document.getElementById(id)?.value || '';
+    const checked = sel => Array.from(document.querySelectorAll(sel)).map(el => el.value);
+    const radioVal = name => document.querySelector('input[name="' + name + '"]:checked')?.value || '';
+
+    const familyDiseases = {};
+    document.querySelectorAll('#familyTree input[type="checkbox"]:checked').forEach(el => {
+      const rel = el.getAttribute('data-relative');
+      if (!familyDiseases[rel]) familyDiseases[rel] = [];
+      familyDiseases[rel].push(el.value);
+    });
+
+    const pastHistory = Array.from(document.querySelectorAll('#pastHistoryList .dyn-item')).map(row => ({
+      name: row.querySelector('.dyn-name').value,
+      year: row.querySelector('.dyn-year').value
+    })).filter(x => x.name);
+
+    const currentHistory = Array.from(document.querySelectorAll('#currentHistoryList .dyn-item')).map(row => ({
+      name: row.querySelector('.dyn-name').value,
+      year: row.querySelector('.dyn-year').value
+    })).filter(x => x.name);
+
+    return {
+      name: get('name'),
+      birthdate: get('birthdate'),
+      gender: radioVal('gender'),
+      height: parseFloat(get('height')) || null,
+      weight: parseFloat(get('weight')) || null,
+      income: parseFloat(get('income')) || null,
+      conditions: checked('#conditionGrid input:checked'),
+      conditionEtc: get('conditionEtc'),
+      familyDiseases,
+      pastHistory,
+      currentHistory,
+      job: get('job'),
+      driving: radioVal('driving'),
+      hobbies: checked('#hobbyGrid input:checked'),
+      accidentHistory: radioVal('accident'),
+      drinking: radioVal('drinking'),
+      smoking: radioVal('smoking'),
+      diet: radioVal('diet'),
+      sleepType: radioVal('sleepType'),
+      sleepHours: radioVal('sleepHours'),
+      lifestyleEtc: get('lifestyleEtc'),
+      existingInsurance: get('existingInsurance')
+    };
+  }
+
+  // ── Scoring engine ──
+  // NOTE: 아래 가중치는 국내외 역학 문헌에서 일반적으로 보고되는 상대위험도 범위를 참고한
+  // 근사값이며, 개인 맞춤 진단이 아닌 방향성 참고 지표입니다.
+  function analyze(a) {
+    const risks = { metabolic: 0, cardio: 0, cancer: 0, injury: 0, liver: 0 };
+    const notes = { metabolic: [], cardio: [], cancer: [], injury: [], liver: [] };
+
+    function bump(cat, amt, note) { risks[cat] += amt; if (note) notes[cat].push(note); }
+
+    // BMI
+    if (a.height && a.weight) {
+      const bmi = a.weight / Math.pow(a.height / 100, 2);
+      if (bmi >= 25) { bump('metabolic', 2, '체질량지수(BMI) ' + bmi.toFixed(1) + ' — 과체중 이상으로 대사질환 위험 증가'); bump('cardio', 1); }
+      if (bmi >= 30) { bump('metabolic', 1, '고도비만 구간으로 위험 추가 상승'); }
+    }
+
+    // 기저질환
+    if (a.conditions.includes('고혈압')) bump('cardio', 3, '현재 고혈압 보유');
+    if (a.conditions.includes('고지혈증')) bump('cardio', 2, '현재 고지혈증 보유');
+    if (a.conditions.includes('당뇨')) bump('metabolic', 3, '현재 당뇨 보유');
+    if (a.conditions.includes('B형간염')) bump('liver', 3, 'B형간염 보유 — 만성간질환·간암 위험 관리 필요');
+    if (a.conditions.includes('C형간염')) bump('liver', 3, 'C형간염 보유 — 만성간질환 위험 관리 필요');
+    if (a.conditionEtc && a.conditionEtc.trim()) bump('metabolic', 0, '별도 기재하신 건강 이슈 있음 — 상담 시 정밀 확인 필요');
+
+    // 가족력 (직계 부모 가중치를 조부모보다 높게)
+    const relKoreanLabel = { pgf:'친할아버지', pgm:'친할머니', mgf:'외할아버지', mgm:'외할머니', father:'아버지', mother:'어머니' };
+    const fd = a.familyDiseases;
+    Object.keys(fd).forEach(rel => {
+      const weight = (rel === 'father' || rel === 'mother') ? 2 : 1;
+      const relLabel = relKoreanLabel[rel] || rel;
+      fd[rel].forEach(d => {
+        if (d === '당뇨') bump('metabolic', weight, relLabel + ' 당뇨 가족력 — 발병 위험 유의미하게 증가');
+        if (d === '고혈압') bump('cardio', weight, relLabel + ' 고혈압 가족력');
+        if (d === '심장질환/뇌졸중') bump('cardio', weight + 1, relLabel + ' 심장질환/뇌졸중 가족력');
+        if (d === '암') bump('cancer', weight + 1, relLabel + ' 암 가족력');
+      });
+    });
+
+    // 생활습관이 가족력 위험을 가중
+    const hasMetabolicFamilyHistory = risks.metabolic > 0;
+    if (a.smoking === 'current') { bump('cardio', 3, '현재 흡연 — 심혈관질환 및 폐암 위험 크게 증가'); bump('cancer', 3); }
+    if (a.smoking === 'past') { bump('cardio', 1, '과거 흡연 이력'); }
+    if (a.drinking === 'heavy') { bump('liver', 3, '잦은 음주 — 간질환 위험 증가'); }
+    if (a.drinking === 'moderate') { bump('liver', 1); }
+    if (a.sleepHours === 'under8') {
+      bump('metabolic', hasMetabolicFamilyHistory ? 2 : 1, '수면 부족 — 대사질환 위험 요인이며 가족력 보유 시 위험을 가중시킴');
+      bump('cardio', 1);
+    }
+    if (a.diet === 'normal') bump('metabolic', 1, '식습관 관리가 느슨한 편');
+    if (a.diet === 'onemeal') bump('metabolic', 1, '1일 1식 — 혈당 변동성 관리 필요');
+    if (a.diet === 'greasy') { bump('metabolic', 2, '고지방·고자극 식습관 — 대사질환 위험 요인'); bump('cardio', 1, '고지방 식습관 — 심혈관 위험 요인'); }
+
+    // 직업/활동
+    const highRiskJobKeywords = ['건설', '현장', '운전', '기사', '용접', '고소', '중장비', '어업', '광산'];
+    if (highRiskJobKeywords.some(k => a.job.includes(k))) {
+      bump('injury', 3, '직무 특성상 상해 위험이 높은 업종으로 판단됨');
+    }
+    if (a.driving === 'yes') bump('injury', 1, '운전 활동 있음');
+    if (a.accidentHistory === 'yes') bump('injury', 2, '과거 교통사고 이력 있음');
+    if (a.hobbies.some(h => h !== '없음')) bump('injury', a.hobbies.filter(h => h !== '없음').length, '위험 취미 활동 보유');
+
+    // 현증/기왕력
+    if (a.currentHistory.length > 0) bump('metabolic', 1, '현재 치료 중인 질환 있음 — 가입 가능한 보장 범위 사전 확인 필요');
+    if (a.pastHistory.length > 0) notes.metabolic.push('과거 병력 ' + a.pastHistory.length + '건 — 고지의무 대상 여부 확인 필요');
+
+    return { risks, notes };
+  }
+
+  function levelOf(score) {
+    if (score >= 5) return 'high';
+    if (score >= 2) return 'mid';
+    return 'low';
+  }
+  const levelLabel = { low: '낮음', mid: '보통', high: '높음' };
+  const catLabel = {
+    metabolic: '대사질환 (당뇨·고지혈 등)',
+    cardio: '심혈관질환',
+    cancer: '암',
+    injury: '상해',
+    liver: '간질환'
+  };
+
+  function runAnalysis() {
+    const a = collectAnswers();
+    window.__lastAnswers = a;
+    const { risks, notes } = analyze(a);
+    window.__lastResult = { risks, notes };
+
+    document.getElementById('resultHeadline').textContent =
+      (a.name ? a.name + '님, ' : '') + '통계 기반 보장분석 결과입니다';
+
+    const grid = document.getElementById('riskGrid');
+    grid.innerHTML = '';
+    Object.keys(risks).forEach(cat => {
+      const level = levelOf(risks[cat]);
+      const item = document.createElement('div');
+      item.className = 'risk-item ' + level;
+      item.innerHTML =
+        '<div class="risk-item-head"><span class="risk-item-name">' + catLabel[cat] + '</span>' +
+        '<span class="risk-tag ' + level + '">위험도 ' + levelLabel[level] + '</span></div>' +
+        '<p class="risk-item-desc">' + (notes[cat].length ? notes[cat].join(' · ') : '특이 위험요인이 확인되지 않았습니다.') + '</p>';
+      grid.appendChild(item);
+    });
+
+    const recoList = document.getElementById('recoList');
+    recoList.innerHTML = '';
+    const recos = buildRecommendations(risks, a);
+    recos.forEach(r => {
+      const card = document.createElement('div');
+      card.className = 'reco-card';
+      card.innerHTML = '<p class="reco-title">' + r.title + '</p><p class="reco-body">' + r.body + '</p>';
+      recoList.appendChild(card);
+    });
+
+    goTo(10);
+  }
+
+  function buildRecommendations(risks, a) {
+    const list = [];
+    if (risks.metabolic >= 2) {
+      list.push({
+        title: '유병자보험 · 당뇨 특화 보장',
+        body: '대사질환 위험이 확인된 만큼, 향후 유병력이 확정되기 전 지금 표준체 조건으로 가입하는 것이 통계적으로 유리합니다. 이미 소견이 있다면 간편심사형·유병자보험으로 가입 가능성을 먼저 확인하는 것이 좋습니다.'
+      });
+    }
+    if (risks.cardio >= 2) {
+      list.push({
+        title: 'CI보험 · 심혈관 특약',
+        body: '심혈관질환 관련 위험요인이 다수 확인되어, 뇌졸중·심근경색 등을 보장하는 CI(치명적질병)보험이나 관련 특약을 우선 검토하시는 것을 권해드립니다.'
+      });
+    }
+    if (risks.cancer >= 2) {
+      list.push({
+        title: '암보험 (가족력 대응형)',
+        body: '가족력이 확인된 만큼, 진단금 중심의 암보험을 통해 조기 발견·치료 시 필요한 자금을 미리 확보해두는 것이 유리합니다.'
+      });
+    }
+    if (risks.injury >= 2) {
+      list.push({
+        title: '상해보험 · 운전자보험',
+        body: '직업·취미·운전 활동으로 인한 상해 위험이 확인되어, 후유장해와 골절 등을 폭넓게 보장하는 상해보험 또는 운전자보험 보강이 필요합니다.'
+      });
+    }
+    if (risks.liver >= 2) {
+      list.push({
+        title: '간질환 보장 강화',
+        body: '간 관련 위험요인이 확인되어, 간경변·간암까지 이어지는 진행 단계를 폭넓게 보장하는 특약을 우선 검토하시는 것이 좋습니다.'
+      });
+    }
+    if (list.length === 0) {
+      list.push({
+        title: '표준체 기준 기본 보장 설계',
+        body: '현재까지 확인된 특이 위험요인은 크지 않습니다. 지금처럼 건강한 상태일 때 표준체 조건으로 실손·정기보험 등 기본 보장을 확보해두시는 것이 장기적으로 가장 유리합니다.'
+      });
+    }
+    return list;
+  }
+
+  // ── 이메일 전송용 상세 요약 포맷 ──
+  function formatFamilyDiseases(fd) {
+    const relLabel = { pgf:'친할아버지', pgm:'친할머니', mgf:'외할아버지', mgm:'외할머니', father:'아버지', mother:'어머니' };
+    const keys = Object.keys(fd);
+    if (!keys.length) return '해당 없음';
+    return keys.map(k => relLabel[k] + ': ' + fd[k].join(', ')).join(' / ');
+  }
+
+  function formatHistoryList(list) {
+    if (!list.length) return '해당 없음';
+    return list.map(x => x.name + (x.year ? ' (' + x.year + '년)' : '')).join(', ');
+  }
+
+  const dietLabel = {
+    healthy: '건강식단 위주', normal: '보통(신경쓰지 않는 편)', onemeal: '1일 1식',
+    greasy: '육류·튀김·면 등 기름지거나 매운 음식을 즐기는 편',
+    if16: '간헐적 단식(16시간 공복)', threemeal: '1일 3식', '': '미입력'
+  };
+  const drinkingLabel = { none:'안 마심', light:'가끔(월 1~4회)', moderate:'주 1~2회', heavy:'주 3회 이상', '':'미입력' };
+  const smokingLabel = { none:'비흡연', past:'과거 흡연(현재 금연)', current:'현재 흡연', '':'미입력' };
+  const sleepTypeLabel = { early:'11시 이전 취침(주행성)', late:'밤 12시 이후 취침(야행성)', '':'미입력' };
+  const sleepHoursLabel = { over8:'8시간 이상', under8:'8시간 미만', '':'미입력' };
+
+  function buildFullSummary(a, risks, notes) {
+    const lines = [];
+    lines.push('■ 기본정보');
+    lines.push('- 성별: ' + (a.gender === 'male' ? '남성' : a.gender === 'female' ? '여성' : '미입력'));
+    lines.push('- 생년월일: ' + (a.birthdate || '미입력'));
+    lines.push('- 키/몸무게: ' + (a.height || '-') + 'cm / ' + (a.weight || '-') + 'kg');
+    lines.push('- 월 세전 수입: ' + (a.income ? a.income + '만원' : '미입력'));
+    lines.push('');
+    lines.push('■ 기저질환');
+    lines.push('- 진단명: ' + (a.conditions.length ? a.conditions.join(', ') : '해당 없음'));
+    lines.push('- 기타 신경쓰이는 건강 이슈: ' + (a.conditionEtc && a.conditionEtc.trim() ? a.conditionEtc.trim() : '해당 없음'));
+    lines.push('');
+    lines.push('■ 가족력');
+    lines.push('- ' + formatFamilyDiseases(a.familyDiseases));
+    lines.push('');
+    lines.push('■ 기왕력 (과거 병력)');
+    lines.push('- ' + formatHistoryList(a.pastHistory));
+    lines.push('');
+    lines.push('■ 현증 (현재 앓고 있는 질환)');
+    lines.push('- ' + formatHistoryList(a.currentHistory));
+    lines.push('');
+    lines.push('■ 직업 및 활동');
+    lines.push('- 직업: ' + (a.job || '미입력'));
+    lines.push('- 운전 여부: ' + (a.driving === 'yes' ? '함' : a.driving === 'no' ? '안 함' : '미입력'));
+    lines.push('- 위험 취미: ' + (a.hobbies.length ? a.hobbies.join(', ') : '해당 없음'));
+    lines.push('- 교통사고 이력: ' + (a.accidentHistory === 'yes' ? '있음' : a.accidentHistory === 'no' ? '없음' : '미입력'));
+    lines.push('');
+    lines.push('■ 생활습관');
+    lines.push('- 음주: ' + (drinkingLabel[a.drinking] || '미입력'));
+    lines.push('- 흡연: ' + (smokingLabel[a.smoking] || '미입력'));
+    lines.push('- 식습관: ' + (dietLabel[a.diet] || '미입력'));
+    lines.push('- 수면 패턴: ' + (sleepTypeLabel[a.sleepType] || '미입력'));
+    lines.push('- 평균 수면시간: ' + (sleepHoursLabel[a.sleepHours] || '미입력'));
+    lines.push('- 기타 특이 생활습관: ' + (a.lifestyleEtc && a.lifestyleEtc.trim() ? a.lifestyleEtc.trim() : '해당 없음'));
+    lines.push('');
+    lines.push('■ 기존 가입보험');
+    lines.push('- ' + (a.existingInsurance && a.existingInsurance.trim() ? a.existingInsurance.trim() : '해당 없음'));
+    lines.push('');
+    lines.push('■ 프로그램 위험도 분석 결과');
+    Object.keys(risks).forEach(cat => {
+      const lvl = levelOf(risks[cat]);
+      lines.push('- ' + catLabel[cat] + ': ' + levelLabel[lvl] + (notes[cat].length ? ' (' + notes[cat].join(' · ') + ')' : ''));
+    });
+    return lines.join('\n');
+  }
+
+  // ── CTA: 상담 신청 (상세 분석 정보 전체 전송 — 이용자가 전용 동의 체크 시에만 활성화) ──
+  function requestConsult() {
+    const a = window.__lastAnswers;
+    const r = window.__lastResult;
+    if (!a) return;
+    if (!document.getElementById('consentSend').checked) return;
+
+    const fullSummary = buildFullSummary(a, r.risks, r.notes);
+
+    const formData = new FormData();
+    formData.append('name', a.name);
+    formData.append('phone', document.getElementById('phone').value);
+    formData.append('birthdate', a.birthdate);
+    formData.append('lead_source', '보장분석 프로그램');
+    formData.append('message', fullSummary);
+
+    const btn = document.getElementById('consultBtn');
+    btn.disabled = true;
+    btn.textContent = '전송 중...';
+
+    fetch('https://formspree.io/f/mjgqjpev', {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    }).then(res => {
+      if (res.ok) {
+        document.getElementById('ctaSent').classList.add('show');
+        btn.textContent = '신청 완료';
+      } else {
+        throw new Error('전송 실패');
+      }
+    }).catch(() => {
+      alert('전송에 실패했습니다. 전화(010-2110-6010)로 문의해주세요.');
+      btn.disabled = false;
+      btn.textContent = '이 결과로 상담 신청하기';
+    });
+  }
+</script>
+</body>
+</html>
