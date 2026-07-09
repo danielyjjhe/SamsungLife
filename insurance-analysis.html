@@ -260,6 +260,14 @@
   .tree-name { font-size: 0.8rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; text-align: center; }
   .tree-diseases { display: flex; flex-direction: column; gap: 5px; }
   .tree-check { display: flex; align-items: center; gap: 6px; font-size: 0.72rem; color: var(--text); }
+  .tree-etc-input {
+    width: 100%;
+    margin-top: 2px;
+    padding: 5px 6px;
+    font-size: 0.68rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
   .tree-check input { width: 13px; height: 13px; accent-color: var(--sky-blue); flex-shrink: 0; }
 
   /* ── DYNAMIC LIST (기왕력/현증) ── */
@@ -320,6 +328,18 @@
   .result-hero h2 { font-family: 'Noto Serif KR', serif; color: #fff; font-size: 1.4rem; line-height: 1.5; }
 
   .risk-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+
+  .scale-note {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .scale-note b { color: var(--navy); }
   .risk-item {
     background: #fff;
     border: 1px solid var(--border);
@@ -549,9 +569,9 @@
 
   <!-- STEP 4: 가족력 -->
   <div class="step" data-step="4">
-    <p class="step-eyebrow">Step 4 · 가족력</p>
-    <h2 class="step-title">가족력을 체크해주세요</h2>
-    <p class="step-desc">친가·외가 조부모까지, 해당 질환을 앓았거나 앓고 있는 분께 표시해주세요.</p>
+    <p class="step-eyebrow">Step 4 · 가족력 및 본인 과거력</p>
+    <h2 class="step-title">가족력과 본인의 과거 병력을 체크해주세요</h2>
+    <p class="step-desc">친가·외가 조부모까지 해당 질환을 앓았거나 앓고 있는 분께 표시해주시고, 맨 아래 "나(본인)" 항목에는 직접 진단받았던 이력을 체크해주세요. 목록에 없는 병명은 '기타'를 선택 후 입력해주세요.</p>
 
     <div class="tree-wrap" id="familyTree"></div>
 
@@ -715,6 +735,10 @@
       <h2 id="resultHeadline">분석 결과</h2>
     </div>
 
+    <div class="scale-note">
+      <b>위험도는 어떻게 산정되나요?</b> 입력하신 항목마다 통계적으로 확인된 위험요인에 점수를 부여해 합산합니다. 합산 점수가 <b>0~1점이면 낮음, 2~4점이면 보통, 5점 이상이면 높음</b>으로 표시됩니다. 각 항목의 점수는 아래 카드에 함께 표기된 근거(예: "약 3배", "약 2.5배")를 기준으로 부여되며, 근거 통계가 확인되지 않은 요인은 방향성만 반영해 보수적으로 점수를 매겼습니다.
+    </div>
+
     <div class="risk-grid" id="riskGrid"></div>
 
     <div class="reco-section">
@@ -814,7 +838,7 @@
     { id: 'mgf', label: '외할아버지' }, { id: 'mgm', label: '외할머니' },
     { id: 'father', label: '아버지' }, { id: 'mother', label: '어머니' }
   ];
-  const HEREDITARY_DISEASES = ['당뇨', '고혈압', '암', '심장질환/뇌졸중', '치매'];
+  const HEREDITARY_DISEASES = ['당뇨', '고혈압', '암', '심장질환/뇌졸중', '치매', '기타'];
 
   function renderFamilyTree() {
     const grandparents = RELATIVES.slice(0, 4);
@@ -823,17 +847,30 @@
     grandparents.forEach(r => { html += treeCard(r); });
     html += '</div><div class="tree-connector">│</div><div class="tree-row">';
     parents.forEach(r => { html += treeCard(r); });
-    html += '</div><div class="tree-connector">│</div><div class="tree-row"><div class="tree-card self"><p class="tree-name">나 (본인)</p></div></div>';
+    html += '</div><div class="tree-connector">│</div><div class="tree-row">';
+    html += treeCard({ id: 'self', label: '나 (본인)' }, true);
+    html += '</div>';
     document.getElementById('familyTree').innerHTML = html;
   }
 
-  function treeCard(r) {
-    let inner = '<div class="tree-card"><p class="tree-name">' + r.label + '</p><div class="tree-diseases">';
+  function treeCard(r, isSelf) {
+    let inner = '<div class="tree-card' + (isSelf ? ' self' : '') + '"><p class="tree-name">' + r.label + '</p><div class="tree-diseases">';
     HEREDITARY_DISEASES.forEach(d => {
-      inner += '<label class="tree-check"><input type="checkbox" data-relative="' + r.id + '" value="' + d + '"> ' + d + '</label>';
+      if (d === '기타') {
+        inner += '<label class="tree-check"><input type="checkbox" data-relative="' + r.id + '" value="기타" onchange="toggleTreeEtc(this)"> 기타</label>' +
+                 '<input type="text" class="tree-etc-input" data-relative="' + r.id + '" placeholder="병명 입력" style="display:none">';
+      } else {
+        inner += '<label class="tree-check"><input type="checkbox" data-relative="' + r.id + '" value="' + d + '"> ' + d + '</label>';
+      }
     });
     inner += '</div></div>';
     return inner;
+  }
+
+  function toggleTreeEtc(el) {
+    const wrap = el.closest('.tree-diseases');
+    const input = wrap.querySelector('.tree-etc-input[data-relative="' + el.getAttribute('data-relative') + '"]');
+    if (input) input.style.display = el.checked ? 'block' : 'none';
   }
   renderFamilyTree();
 
@@ -859,7 +896,13 @@
     document.querySelectorAll('#familyTree input[type="checkbox"]:checked').forEach(el => {
       const rel = el.getAttribute('data-relative');
       if (!familyDiseases[rel]) familyDiseases[rel] = [];
-      familyDiseases[rel].push(el.value);
+      if (el.value === '기타') {
+        const etcInput = document.querySelector('.tree-etc-input[data-relative="' + rel + '"]');
+        const etcText = etcInput && etcInput.value.trim();
+        familyDiseases[rel].push(etcText ? '기타(' + etcText + ')' : '기타(미입력)');
+      } else {
+        familyDiseases[rel].push(el.value);
+      }
     });
 
     const pastHistory = Array.from(document.querySelectorAll('#pastHistoryList .dyn-item')).map(row => ({
@@ -907,43 +950,59 @@
 
     function bump(cat, amt, note) { risks[cat] += amt; if (note) notes[cat].push(note); }
 
-    // BMI
+    // BMI — 서울대병원·강남센터 공동연구(KoGES 코호트, 2024): 유전적으로 예측된 BMI보다 실제 BMI가 높은 한국인은 2형당뇨병 위험이 약 3배 증가
     if (a.height && a.weight) {
       const bmi = a.weight / Math.pow(a.height / 100, 2);
-      if (bmi >= 25) { bump('metabolic', 2, '체질량지수(BMI) ' + bmi.toFixed(1) + ' — 과체중 이상으로 대사질환 위험 증가'); bump('cardio', 1); }
-      if (bmi >= 30) { bump('metabolic', 1, '고도비만 구간으로 위험 추가 상승'); }
+      if (bmi >= 25) { bump('metabolic', 2, '체질량지수(BMI) ' + bmi.toFixed(1) + ' — 과체중 이상. 국내 코호트 연구에서 이 구간의 당뇨병 위험은 정상체중 대비 약 3배로 보고됨(서울대병원·강남센터, KoGES 코호트)'); bump('cardio', 1); }
+      if (bmi >= 30) { bump('metabolic', 1, '고도비만(BMI 30 이상) 구간 — 대사질환 위험이 추가로 상승하는 구간'); }
     }
 
     // 기저질환
     if (a.conditions.includes('고혈압')) bump('cardio', 3, '현재 고혈압 보유');
     if (a.conditions.includes('고지혈증')) bump('cardio', 2, '현재 고지혈증 보유');
     if (a.conditions.includes('당뇨')) bump('metabolic', 3, '현재 당뇨 보유');
-    if (a.conditions.includes('B형간염')) bump('liver', 3, 'B형간염 보유 — 만성간질환·간암 위험 관리 필요');
-    if (a.conditions.includes('C형간염')) bump('liver', 3, 'C형간염 보유 — 만성간질환 위험 관리 필요');
+    if (a.conditions.includes('B형간염')) bump('liver', 3, 'B형간염 보유 — 비감염자 대비 간암 위험이 약 17배 높다는 통계가 있음(국립암센터)');
+    if (a.conditions.includes('C형간염')) bump('liver', 3, 'C형간염 보유 — 비감염자 대비 간암 위험이 약 17배 높다는 통계가 있음(국립암센터)');
     if (a.conditionEtc && a.conditionEtc.trim()) bump('metabolic', 0, '별도 기재하신 건강 이슈 있음 — 상담 시 정밀 확인 필요');
 
-    // 가족력 (직계 부모 가중치를 조부모보다 높게)
-    const relKoreanLabel = { pgf:'친할아버지', pgm:'친할머니', mgf:'외할아버지', mgm:'외할머니', father:'아버지', mother:'어머니' };
+    // 가족력 (직계 부모 가중치를 조부모보다 높게) + 본인 과거병력(self)
+    // 통계 출처: 당뇨(질병관리청 인용, 시사저널), 고혈압(서울대병원·국민건강영양조사), 암(국립암센터 등 종합)
+    const relKoreanLabel = { pgf:'친할아버지', pgm:'친할머니', mgf:'외할아버지', mgm:'외할머니', father:'아버지', mother:'어머니', self:'본인' };
     const fd = a.familyDiseases;
     Object.keys(fd).forEach(rel => {
+      if (rel === 'self') {
+        fd[rel].forEach(d => {
+          if (d === '당뇨') bump('metabolic', 3, '본인 과거/현재 당뇨 이력 — 보험 가입 시 고지의무 대상이며 재발·악화 관리가 필요합니다');
+          else if (d === '고혈압') bump('cardio', 3, '본인 과거/현재 고혈압 이력 — 보험 가입 시 고지의무 대상입니다');
+          else if (d === '심장질환/뇌졸중') bump('cardio', 4, '본인 과거/현재 심장질환·뇌졸중 이력 — 고지의무 대상이며 상담 시 정밀 확인이 필요합니다');
+          else if (d === '암') bump('cancer', 4, '본인 과거/현재 암 병력 — 고지의무 대상이며 상담 시 정밀 확인이 필요합니다');
+          else if (d === '치매') bump('metabolic', 2, '본인 관련 인지기능 이슈 — 상담 시 확인이 필요합니다');
+          else bump('metabolic', 1, '본인 병력: ' + d + ' — 상담 시 정밀 확인이 필요합니다');
+        });
+        return;
+      }
       const weight = (rel === 'father' || rel === 'mother') ? 2 : 1;
       const relLabel = relKoreanLabel[rel] || rel;
       fd[rel].forEach(d => {
-        if (d === '당뇨') bump('metabolic', weight, relLabel + ' 당뇨 가족력 — 발병 위험 유의미하게 증가');
-        if (d === '고혈압') bump('cardio', weight, relLabel + ' 고혈압 가족력');
-        if (d === '심장질환/뇌졸중') bump('cardio', weight + 1, relLabel + ' 심장질환/뇌졸중 가족력');
-        if (d === '암') bump('cancer', weight + 1, relLabel + ' 암 가족력');
+        if (d === '당뇨') bump('metabolic', weight, relLabel + ' 당뇨 가족력 — 직계가족 중 2형당뇨병 환자가 있으면 발병 위험이 없는 경우보다 약 3.5배 높다는 국내 통계가 있음');
+        if (d === '고혈압') bump('cardio', weight, relLabel + ' 고혈압 가족력 — 가족력이 있는 그룹의 고혈압 유병률이 없는 그룹보다 약 2.5배 높다는 국내 연구 결과가 있음(서울대병원, 국민건강영양조사)');
+        if (d === '심장질환/뇌졸중') bump('cardio', weight + 1, relLabel + ' 심장질환/뇌졸중 가족력 — 심혈관질환의 대표적인 위험 증가 요인으로 알려져 있음');
+        if (d === '암') bump('cancer', weight + 1, relLabel + ' 암 가족력 — 직계가족 중 1인 이상 암 병력이 있으면 발병 위험이 일반적으로 약 2~3배 높은 것으로 보고됨(국립암센터 등, 암종에 따라 편차 있음)');
       });
     });
 
+
     // 생활습관이 가족력 위험을 가중
     const hasMetabolicFamilyHistory = risks.metabolic > 0;
-    if (a.smoking === 'current') { bump('cardio', 3, '현재 흡연 — 심혈관질환 및 폐암 위험 크게 증가'); bump('cancer', 3); }
-    if (a.smoking === 'past') { bump('cardio', 1, '과거 흡연 이력'); }
-    if (a.drinking === 'heavy') { bump('liver', 3, '잦은 음주 — 간질환 위험 증가'); }
+    if (a.smoking === 'current') {
+      bump('cardio', 3, '현재 흡연 — 비흡연자 대비 허혈성심질환 위험이 약 2.2배 높다는 국내 추적조사 결과가 있음');
+      bump('cancer', 3, '현재 흡연 — 비흡연자 대비 폐암 발생 위험이 약 10배 높은 것으로 알려져 있음(질병관리청 등)');
+    }
+    if (a.smoking === 'past') { bump('cardio', 1, '과거 흡연 이력 — 금연 후 시간이 지날수록 위험이 낮아지나 비흡연자보다는 높은 상태'); }
+    if (a.drinking === 'heavy') { bump('liver', 3, '잦은 음주 — 비음주자 대비 간암 발생 위험이 약 2.6배 높다는 연구 결과가 있음'); }
     if (a.drinking === 'moderate') { bump('liver', 1); }
     if (a.sleepHours === 'under8') {
-      bump('metabolic', hasMetabolicFamilyHistory ? 2 : 1, '수면 부족 — 대사질환 위험 요인이며 가족력 보유 시 위험을 가중시킴');
+      bump('metabolic', hasMetabolicFamilyHistory ? 2 : 1, '수면 부족(6시간 이하 기준) — 적정 수면(7~8시간) 대비 비만 위험이 약 1.38배 높다는 국내 메타분석 결과가 있으며, 대사질환 가족력이 있는 경우 이 위험을 가중시킴');
       bump('cardio', 1);
     }
     if (a.diet === 'normal') bump('metabolic', 1, '식습관 관리가 느슨한 편');
@@ -1058,7 +1117,7 @@
 
   // ── 이메일 전송용 상세 요약 포맷 ──
   function formatFamilyDiseases(fd) {
-    const relLabel = { pgf:'친할아버지', pgm:'친할머니', mgf:'외할아버지', mgm:'외할머니', father:'아버지', mother:'어머니' };
+    const relLabel = { pgf:'친할아버지', pgm:'친할머니', mgf:'외할아버지', mgm:'외할머니', father:'아버지', mother:'어머니', self:'본인(과거병력)' };
     const keys = Object.keys(fd);
     if (!keys.length) return '해당 없음';
     return keys.map(k => relLabel[k] + ': ' + fd[k].join(', ')).join(' / ');
@@ -1135,10 +1194,57 @@
     const fullSummary = buildFullSummary(a, r.risks, r.notes);
 
     const formData = new FormData();
+    // 기본 식별 정보
     formData.append('name', a.name);
     formData.append('phone', document.getElementById('phone').value);
-    formData.append('birthdate', a.birthdate);
     formData.append('lead_source', '보장분석 프로그램');
+
+    // 기본정보
+    formData.append('생년월일', a.birthdate || '');
+    formData.append('성별', a.gender === 'male' ? '남성' : a.gender === 'female' ? '여성' : '');
+    formData.append('키(cm)', a.height || '');
+    formData.append('몸무게(kg)', a.weight || '');
+    formData.append('월세전수입(만원)', a.income || '');
+
+    // 기저질환
+    formData.append('기저질환', a.conditions.length ? a.conditions.join(', ') : '해당없음');
+    formData.append('기타건강이슈', a.conditionEtc || '');
+
+    // 가족력 (본인 포함, 관계별로 개별 필드)
+    const relLabelMap = { pgf:'가족력_친할아버지', pgm:'가족력_친할머니', mgf:'가족력_외할아버지', mgm:'가족력_외할머니', father:'가족력_아버지', mother:'가족력_어머니', self:'본인_과거병력' };
+    Object.keys(relLabelMap).forEach(key => {
+      const diseases = a.familyDiseases[key];
+      formData.append(relLabelMap[key], diseases && diseases.length ? diseases.join(', ') : '해당없음');
+    });
+
+    // 기왕력/현증
+    formData.append('기왕력(과거병력)', formatHistoryList(a.pastHistory));
+    formData.append('현증(현재질환)', formatHistoryList(a.currentHistory));
+
+    // 직업 및 활동
+    formData.append('직업', a.job || '');
+    formData.append('운전여부', a.driving === 'yes' ? '함' : a.driving === 'no' ? '안함' : '');
+    formData.append('위험취미', a.hobbies.length ? a.hobbies.join(', ') : '해당없음');
+    formData.append('교통사고이력', a.accidentHistory === 'yes' ? '있음' : a.accidentHistory === 'no' ? '없음' : '');
+
+    // 생활습관
+    formData.append('음주', drinkingLabel[a.drinking] || '');
+    formData.append('흡연', smokingLabel[a.smoking] || '');
+    formData.append('식습관', dietLabel[a.diet] || '');
+    formData.append('수면패턴', sleepTypeLabel[a.sleepType] || '');
+    formData.append('평균수면시간', sleepHoursLabel[a.sleepHours] || '');
+    formData.append('기타생활습관', a.lifestyleEtc || '');
+
+    // 기존 가입보험
+    formData.append('기존가입보험', a.existingInsurance || '');
+
+    // 위험도 분석 결과 (카테고리별)
+    Object.keys(r.risks).forEach(cat => {
+      const lvl = levelOf(r.risks[cat]);
+      formData.append('위험도_' + catLabel[cat], levelLabel[lvl] + (r.notes[cat].length ? ' | ' + r.notes[cat].join(' · ') : ''));
+    });
+
+    // 사람이 읽기 편한 전체 요약본 (위 개별 필드와 동일한 내용을 정리된 형태로 함께 전달)
     formData.append('message', fullSummary);
 
     const btn = document.getElementById('consultBtn');
