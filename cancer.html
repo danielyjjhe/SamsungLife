@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>지금, 암보험이 필요한 이유</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Playfair+Display:wght@600;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0a0a0b; --bg-2:#121214; --card:#17171a; --card-2:#1d1d21;
+    --line:#2a2a2f; --gold:#c9a24b; --gold-2:#e8c977; --red:#c23b3b; --red-2:#e05555;
+    --text:#f2f1ee; --text-dim:#a9a8a5; --text-faint:#777673;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    box-sizing: border-box;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top: env(safe-area-inset-top, 0px);}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:'Noto Sans KR', sans-serif; line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  .serif{font-family:'Playfair Display', 'Noto Sans KR', serif;}
+  section{padding:96px 24px; max-width:1040px; margin:0 auto; position:relative;}
+  .full{max-width:100%; padding-left:0; padding-right:0;}
+  h1,h2,h3{margin:0; font-weight:700;}
+  a{color:var(--gold-2);}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px; font-size:13px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--gold-2); font-weight:700; margin-bottom:18px;
+  }
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--gold-2); display:inline-block;}
+
+  /* HERO */
+  .hero{
+    min-height:92vh; display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center; padding:80px 24px; background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(194,59,59,.18), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 90% 100%, rgba(201,162,75,.10), transparent 60%),
+      var(--bg);
+    border-bottom:1px solid var(--line);
+  }
+  .hero .tag{font-size:14px; letter-spacing:.2em; text-transform:uppercase; color:var(--text-faint); margin-bottom:28px;}
+  .hero h1{font-size:clamp(34px,6vw,64px); line-height:1.25; max-width:900px; font-family:'Playfair Display',serif; font-weight:800;}
+  .hero h1 em{font-style:normal; color:var(--gold-2);}
+  .hero p{margin-top:26px; font-size:18px; color:var(--text-dim); max-width:620px;}
+  .hero .stat-row{display:flex; gap:14px; margin-top:56px; flex-wrap:wrap; justify-content:center;}
+  .pill{
+    border:1px solid var(--line); background:rgba(255,255,255,.02); border-radius:100px;
+    padding:10px 20px; font-size:14px; color:var(--text-dim);
+  }
+  .pill b{color:var(--gold-2); font-weight:700;}
+
+  /* SECTION HEAD */
+  .sec-head{max-width:640px; margin-bottom:52px;}
+  .sec-head h2{font-size:clamp(26px,3.6vw,38px); font-family:'Playfair Display',serif; line-height:1.3;}
+  .sec-head p.lead{color:var(--text-dim); font-size:16.5px; margin-top:16px;}
+
+  /* BIG STAT CARDS */
+  .stat-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:18px; margin-top:8px;}
+  .stat-card{
+    background:linear-gradient(180deg,var(--card),var(--card-2)); border:1px solid var(--line);
+    border-radius:16px; padding:30px 26px;
+  }
+  .stat-card .num{font-family:'Playfair Display',serif; font-size:46px; font-weight:800; color:var(--gold-2); line-height:1;}
+  .stat-card .num small{font-size:20px; font-weight:600; margin-left:2px;}
+  .stat-card .label{margin-top:12px; font-size:14.5px; color:var(--text-dim);}
+  .stat-card .src{margin-top:14px; font-size:11.5px; color:var(--text-faint);}
+  .stat-card.red .num{color:var(--red-2);}
+
+  /* CHART CARD */
+  .chart-card{
+    background:var(--card); border:1px solid var(--line); border-radius:16px; padding:28px 24px 16px;
+    margin-top:32px;
+  }
+  .chart-card h4{font-size:15px; color:var(--text-dim); font-weight:600; margin-bottom:18px;}
+  .chart-wrap{height:280px; position:relative;}
+
+  /* TIMELINE */
+  .timeline{margin-top:44px; border-left:2px solid var(--line); padding-left:0;}
+  .t-item{display:grid; grid-template-columns:120px 1fr; gap:24px; padding:24px 0 24px 28px; position:relative; border-bottom:1px solid var(--line);}
+  .t-item:last-child{border-bottom:none;}
+  .t-item::before{content:""; position:absolute; left:-7px; top:30px; width:12px; height:12px; border-radius:50%; background:var(--bg); border:2px solid var(--gold-2);}
+  .t-item .yr{font-family:'Playfair Display',serif; font-weight:700; color:var(--gold-2); font-size:15px; padding-top:2px;}
+  .t-item .body strong{display:block; font-size:17px; margin-bottom:6px;}
+  .t-item .body p{margin:0; color:var(--text-dim); font-size:15px;}
+
+  /* COST TABLE */
+  .cost-table{width:100%; border-collapse:collapse; margin-top:28px; font-size:14.5px;}
+  .cost-table th, .cost-table td{padding:16px 14px; text-align:left; border-bottom:1px solid var(--line);}
+  .cost-table thead th{color:var(--text-faint); font-weight:600; font-size:12.5px; letter-spacing:.05em; text-transform:uppercase;}
+  .cost-table tbody tr:hover{background:rgba(255,255,255,.02);}
+  .cost-table td.amt{color:var(--gold-2); font-weight:700; font-family:'Playfair Display',serif; font-size:17px;}
+  .cost-table td.amt.hot{color:var(--red-2);}
+  .tag-pill{display:inline-block; font-size:11px; padding:3px 9px; border-radius:100px; border:1px solid var(--line); color:var(--text-faint); margin-top:4px;}
+
+  /* WARNING BOX */
+  .warn{
+    background:linear-gradient(135deg, rgba(194,59,59,.14), rgba(194,59,59,.04));
+    border:1px solid rgba(194,59,59,.35); border-radius:16px; padding:30px 30px; margin-top:32px;
+    display:flex; gap:18px; align-items:flex-start;
+  }
+  .warn .ico{font-size:24px; line-height:1;}
+  .warn strong{display:block; font-size:17px; margin-bottom:8px; color:#ffb3b3;}
+  .warn p{margin:0; color:var(--text-dim); font-size:15px;}
+  .warn.gold{
+    background:linear-gradient(135deg, rgba(201,162,75,.16), rgba(201,162,75,.04));
+    border:1px solid rgba(201,162,75,.4);
+  }
+  .warn.gold strong{color:var(--gold-2);}
+  .warn.gold .cta-btn{
+    display:inline-block; margin-top:16px; background:var(--gold-2); color:#171308;
+    font-weight:700; font-size:14px; padding:12px 24px; border-radius:100px; text-decoration:none;
+  }
+
+  /* QUOTE CARD */
+  .quote-card{
+    background:var(--card); border:1px solid var(--line); border-left:3px solid var(--gold-2);
+    border-radius:4px 16px 16px 4px; padding:28px 30px; margin-top:24px;
+  }
+  .quote-card p{margin:0; font-size:15.5px; color:var(--text); font-style:normal;}
+  .quote-card .cite{margin-top:14px; font-size:12.5px; color:var(--text-faint);}
+
+  /* GRID CARDS (4 pillars) */
+  .pillar-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; margin-top:36px;}
+  .pillar{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:24px 22px;}
+  .pillar .n{font-family:'Playfair Display',serif; font-size:13px; color:var(--gold-2); font-weight:700; margin-bottom:10px;}
+  .pillar h5{font-size:16.5px; margin:0 0 8px;}
+  .pillar p{margin:0; font-size:14px; color:var(--text-dim);}
+
+  /* DIVIDER */
+  .divider{height:1px; background:var(--line); max-width:1040px; margin:0 auto;}
+
+  /* CLOSING */
+  .closing{
+    background:linear-gradient(180deg, var(--bg-2), var(--bg));
+    text-align:center; padding:110px 24px;
+  }
+  .closing h2{font-size:clamp(28px,4.4vw,44px); font-family:'Playfair Display',serif; max-width:780px; margin:0 auto; line-height:1.4;}
+  .closing .gold{color:var(--gold-2);}
+  .closing .sub{color:var(--text-dim); margin-top:20px; font-size:16px; max-width:600px; margin-left:auto; margin-right:auto;}
+  .cta-list{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:40px;}
+  .cta-list .chip{border:1px solid var(--gold-2); color:var(--gold-2); border-radius:100px; padding:10px 20px; font-size:14px; font-weight:600;}
+
+  /* FOOTNOTES */
+  .refs{background:var(--bg-2); border-top:1px solid var(--line); padding:70px 24px;}
+  .refs h3{font-size:14px; text-transform:uppercase; letter-spacing:.1em; color:var(--text-faint); margin-bottom:24px;}
+  .refs ol{margin:0; padding-left:20px; color:var(--text-dim); font-size:13.5px; display:grid; gap:12px;}
+  .refs ol li a{word-break:break-all;}
+  .refs .disclaim{margin-top:36px; padding-top:24px; border-top:1px solid var(--line); font-size:12.5px; color:var(--text-faint); line-height:1.8;}
+
+  @media (max-width:640px){
+    section{padding:64px 20px;}
+    .t-item{grid-template-columns:1fr; gap:6px;}
+    .t-item::before{display:none;}
+    .timeline{border-left:none; padding-left:0;}
+    .t-item{padding-left:0; border-left:2px solid var(--line); padding-left:20px; margin-left:4px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="tag">Samsung Life · Cancer Protection Briefing</div>
+  <h1>암은 확률이 아니라<br><em>순서</em>의 문제입니다</h1>
+  <p>국가암등록통계 기준, 대한민국 국민은 평생 <b>3명 중 1명꼴</b>로 암을 경험합니다.<br>
+  문제는 "걸리느냐"가 아니라 "그날, 준비가 되어 있느냐"입니다.</p>
+  <div class="stat-row">
+    <div class="pill">남성 평생 암 발생확률 <b>44.6%</b></div>
+    <div class="pill">여성 평생 암 발생확률 <b>38.2%</b></div>
+    <div class="pill">신규 암환자 <b>연 28.8만 명</b></div>
+  </div>
+</div>
+
+<!-- 1. 랜덤성 -->
+<section id="random">
+  <div class="eyebrow">01 · 발병은 예고 없이 찾아옵니다</div>
+  <div class="sec-head">
+    <h2>암은 계획하고 걸리는 병이 아닙니다</h2>
+    <p class="lead">보험은 예측 가능한 지출을 대비하는 상품이 아니라, 예측 불가능한 순간을 대비하는 상품입니다. 암은 그 대표적인 사건입니다.</p>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="num">2<small>명 중 1명</small></div>
+      <div class="label">한국 남성의 평생 암 발생확률 (44.6%, 기대수명 80.8세 기준)</div>
+      <div class="src">출처: 중앙암등록본부 2023년 국가암등록통계, 보건복지부</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">3<small>명 중 1명</small></div>
+      <div class="label">한국 여성의 평생 암 발생확률 (38.2%, 기대수명 86.6세 기준)</div>
+      <div class="src">출처: 중앙암등록본부 2023년 국가암등록통계, 보건복지부</div>
+    </div>
+    <div class="stat-card red">
+      <div class="num">28.9<small>만 명</small></div>
+      <div class="label">2023년 신규 암환자 수 — 1999년 통계 집계 이래 2.8배 증가</div>
+      <div class="src">출처: 국립암센터 중앙암등록본부, 2026.01 발표자료</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <h4>신규 암환자 수 추이 (명) — 25년간 2.8배 증가</h4>
+    <div class="chart-wrap"><canvas id="chartTrend"></canvas></div>
+    <div class="stat-card" style="margin-top:16px; border:none; background:none; padding:0;">
+      <div class="src">출처: 국립암센터 중앙암등록본부 2023년 국가암등록통계 (1999·2010·2022·2023년 집계)</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 2. 가족력 -->
+<section id="family">
+  <div class="eyebrow">02 · 가족력이 있다면, 확률이 아니라 시간문제입니다</div>
+  <div class="sec-head">
+    <h2>유전적 위험은 숫자로 이미 증명되어 있습니다</h2>
+    <p class="lead">암은 무작위로 발생하지만, 가족력이 있는 경우 그 무작위성의 '중심'이 통계적으로 훨씬 가까이 당겨져 있습니다.</p>
+  </div>
+
+  <div class="pillar-grid">
+    <div class="pillar">
+      <div class="n">CASE 01</div>
+      <h5>유방암 · BRCA1/2 변이</h5>
+      <p>유전자 변이가 있는 경우 발병 위험이 <b style="color:var(--gold-2)">최대 80%</b>까지 상승. 1촌(부모·형제) 내 환자가 있으면 위험 2~3배 증가.</p>
+    </div>
+    <div class="pillar">
+      <div class="n">CASE 02</div>
+      <h5>위암 · 최고 가족력 비율</h5>
+      <p>국민건강보험 일산병원 연구 기준, 6개 주요 암종 평균 가족력 5.9% 중 위암이 <b style="color:var(--gold-2)">8.1%</b>로 최고치.</p>
+    </div>
+    <div class="pillar">
+      <div class="n">CASE 03</div>
+      <h5>대장암 · 간암</h5>
+      <p>모계 유전비율이 부계보다 높게 나타나는 대표 암종. 생활습관 공유 요인까지 더해져 복합적 위험 형성.</p>
+    </div>
+  </div>
+
+  <div class="quote-card">
+    <p>"6개 암종에 대한 가족력은 평균 5.9%로, 그 중 위암이 8.1%로 가장 높은 가족력을 보였고, 간암, 폐암, 대장암, 유방암, 전립선암 순이었다." — 국민건강보험 일산병원, 암 종별 가족성 위험도 분석 연구</p>
+    <div class="cite">출처: 청년의사, "암종 따라 유전력 달라져…가족력 연관성 고려한 정책 나와야"</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 3. 타이밍/재가입 불가 -->
+<section id="timing">
+  <div class="eyebrow">03 · "그때 가서 가입하면 되지" — 불가능합니다</div>
+  <div class="sec-head">
+    <h2>진단 이후에는, 보험이 문을 닫습니다</h2>
+    <p class="lead">건강할 때는 보험이 필요 없어 보이고, 정작 필요해지는 순간에는 가입 자체가 막힙니다. 이것이 보험을 '미리' 준비해야 하는 근본적인 이유입니다.</p>
+  </div>
+
+  <div class="timeline">
+    <div class="t-item">
+      <div class="yr">D-DAY</div>
+      <div class="body">
+        <strong>암 진단 확정</strong>
+        <p>이 순간부터 일반 암보험 신규 가입은 사실상 불가능합니다. 대부분의 보험사가 고지의무 항목에 '5년 이내 암 진단·치료 이력'을 포함시켜 인수를 거절합니다.</p>
+      </div>
+    </div>
+    <div class="t-item">
+      <div class="yr">치료기간</div>
+      <div class="body">
+        <strong>치료비는 전액 본인 부담으로 시작</strong>
+        <p>실손보험 통원 한도(월 20~30만원)로는 표적항암·중입자 등 고액 비급여 치료비를 감당할 수 없습니다.</p>
+      </div>
+    </div>
+    <div class="t-item">
+      <div class="yr">완치 판정 후 0~5년</div>
+      <div class="body">
+        <strong>보험 시장에서 사실상 배제되는 기간</strong>
+        <p>완치 판정 후에도 최소 5년간은 일반 암보험 가입이 거절되며, 이 기간 중에는 유병자보험(보험료 할증)만 선택 가능합니다.</p>
+      </div>
+    </div>
+    <div class="t-item">
+      <div class="yr">재발 시</div>
+      <div class="body">
+        <strong>기존 부위 재발은 보장에서 제외되는 경우도</strong>
+        <p>실제 판례에서, 보험 가입 전 진단 이력이 있는 부위의 '재발암'은 법원이 면책(보장 제외) 사유로 판단한 사례가 있습니다. 반면 다른 부위로 옮긴 '전이암'은 보장 대상으로 인정되었습니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="warn">
+    <div class="ico">⚠️</div>
+    <div>
+      <strong>핵심은 "진단 전"이 유일한 가입 가능 시점이라는 것</strong>
+      <p>암보험은 건강할 때만 살 수 있는 상품입니다. 진단 이후에는 가장 필요할 때 가장 구하기 어려운 상품이 됩니다.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 4. 치료비 비교 -->
+<section id="cost">
+  <div class="eyebrow">04 · 과거의 항암치료 vs 2026년의 암 치료</div>
+  <div class="sec-head">
+    <h2>치료의 질은 좋아졌지만, 비용은 더 높아졌습니다</h2>
+    <p class="lead">과거의 고전적 항암화학요법은 고통스러웠지만 건강보험 급여 비중이 컸습니다. 현재의 최신 치료(표적항암·중입자)는 부작용은 적지만, 대부분 비급여로 전액 본인 부담입니다.</p>
+  </div>
+
+  <table class="cost-table">
+    <thead>
+      <tr><th>치료법</th><th>치료 방식</th><th>총 예상 비용</th><th>건강보험 적용</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>표적항암 약물치료</td>
+        <td>회당 200~500만원 × 평균 10~18회, 최대 1년 지속</td>
+        <td class="amt">2,000만원~<br>1억원↑</td>
+        <td><span class="tag-pill">비급여 다수 · 전액 본인부담</span></td>
+      </tr>
+      <tr>
+        <td>중입자 방사선치료</td>
+        <td>1회 약 500만원 × 평균 12회, 3~4주 소요</td>
+        <td class="amt hot">5,000만원~<br>8,000만원</td>
+        <td><span class="tag-pill">전액 비급여</span></td>
+      </tr>
+      <tr>
+        <td>표적치료 (건강보험 급여 인정 품목)</td>
+        <td>산정특례 적용 시 본인부담률 5%</td>
+        <td class="amt">연 300~400만원</td>
+        <td><span class="tag-pill">급여 · 본인부담 5%</span></td>
+      </tr>
+      <tr>
+        <td>해외(일본) 중입자치료</td>
+        <td>국내 장비 부재 시 체재비 포함</td>
+        <td class="amt hot">1억~2억원</td>
+        <td><span class="tag-pill">전액 본인부담 + 체재비</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="chart-card">
+    <h4>치료법별 총 비용 비교 (만원)</h4>
+    <div class="chart-wrap"><canvas id="chartCost"></canvas></div>
+  </div>
+
+  <div class="quote-card">
+    <p>"고가의 기기인 만큼 치료비 역시 고가일 수밖에 없습니다. 보통 암 환자가 총 12회 치료를 받는데 들어간 중입자 암 치료 비용은 약 5,000만원에서 8,000만원 선으로 알려져 있습니다. … 중입자 암 치료는 전액 비급여로 건강보험 혜택을 받을 수 없습니다."</p>
+    <div class="cite">출처: 교보생명 뉴스룸, "중입자암치료 비용 얼마나 들까? 최신 방사선 치료법과 암보험 특약까지"</div>
+  </div>
+
+  <div class="warn">
+    <div class="ico">💰</div>
+    <div>
+      <strong>결론 — 필요 준비금은 최소 5,000만원 이상</strong>
+      <p>표적항암과 중입자치료를 병행하거나 비급여 신약을 사용할 경우, 실손보험만으로는 치료비의 일부밖에 보장받지 못합니다. 진단 즉시 목돈을 확보할 수 있는 정액형 암진단비·표적항암치료비·중입자치료비 특약 설계가 필요한 이유입니다.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 5. 2026 최신치료 -->
+<section id="future">
+  <div class="eyebrow">05 · 2026년 9월 현재, 암 치료는 이렇게 진행됩니다</div>
+  <div class="sec-head">
+    <h2>암 치료 패러다임의 전환 — '표준 치료'에서 '정밀 맞춤 치료'로</h2>
+    <p class="lead">2026년은 암 치료가 표준화된 단일 프로토콜에서, 환자 개인의 유전자·조직 특성에 맞춘 정밀 전략으로 완전히 전환되는 분기점으로 평가되고 있습니다.</p>
+  </div>
+
+  <div class="pillar-grid">
+    <div class="pillar">
+      <div class="n">01</div>
+      <h5>표적치료 (RAS 억제제 등)</h5>
+      <p>기존 치료 옵션이 제한적이던 췌장암 등에서 RAS 신호 경로를 직접 차단하는 경구용 신약이 새로운 치료 가능성을 열고 있습니다.</p>
+    </div>
+    <div class="pillar">
+      <div class="n">02</div>
+      <h5>mRNA 기반 맞춤형 백신</h5>
+      <p>환자 개인의 종양 특성에 맞춘 mRNA 백신이 임상 적용되며 개인화 정밀 전략의 핵심 축으로 부상하고 있습니다.</p>
+    </div>
+    <div class="pillar">
+      <div class="n">03</div>
+      <h5>세포치료제 (CAR-T 등)</h5>
+      <p>서울대학교병원 등 국내 주요 기관에서 CAR-T 세포치료 임상시험이 진행 중이며, 국제 공동연구도 확대되고 있습니다.</p>
+    </div>
+    <div class="pillar">
+      <div class="n">04</div>
+      <h5>액체생검(Liquid Biopsy)</h5>
+      <p>혈액 검사만으로 암의 재발·진행을 조기에 포착하는 기술로, 조기 대응 전략의 새로운 표준으로 자리잡고 있습니다.</p>
+    </div>
+  </div>
+
+  <div class="quote-card">
+    <p>"2026년은 암 치료가 '표준화된 프로토콜'에서 '개인화된 정밀 전략'으로 완전히 전환되는 분기점으로 기록될 것이다. … 표적 치료, mRNA 기반 맞춤형 백신, 세포 치료제, 액체 생검이라는 네 축이 실제 임상에서 동시에 작동하기 시작했다."</p>
+    <div class="cite">출처: 뉴스N연합, "2026년 암 치료 패러다임의 전환: 표적 치료·맞춤형 백신·세포 치료제가 여는 새로운 지평" (2026.06)</div>
+  </div>
+
+  <div class="quote-card">
+    <p>대한항암요법연구회는 2026 ASCO(미국임상종양학회)에서 국내 연구진이 발표한 HER2 양성 진행성 담도암 4제 병용요법, RAS 표적치료 등 최신 연구 성과를 공유했으며, 차세대 면역치료와 항체약물접합체(ADC) 개발 흐름도 함께 소개했습니다.</p>
+    <div class="cite">출처: 아시아경제, "항암요법연구회, ASCO 2026서 담도암·대장암 등 새 치료 근거 제시" (2026.06)</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 6. 기존 가입자 CTA -->
+<section id="checkup">
+  <div class="eyebrow">06 · 이미 암보험이 있으신가요?</div>
+  <div class="sec-head">
+    <h2>"가입되어 있다"와 "보장받는다"는 다른 이야기입니다</h2>
+    <p class="lead">암보험은 한번 가입하면 끝이 아닙니다. 정작 진단을 받았을 때 내가 그 보장을 실제로 받을 수 있는지는 별개의 문제입니다.</p>
+  </div>
+
+  <div class="pillar-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+    <div class="pillar">
+      <div class="n">CHECK 01</div>
+      <h5>내 보장, 실제로 받을 수 있나요?</h5>
+      <p>많은 가입자가 본인의 암보험이 어떤 조건에서, 어떤 암종에 대해, 얼마를 지급하는지 정확히 알지 못한 채 보험료만 납입하고 있습니다. 특정 조건 충족 여부, 그리고 <b style="color:var(--gold-2)">전이암도 보장 대상으로 인정되는지</b>는 약관마다 다르게 규정되어 있습니다 — 앞서 살펴본 재발암 면책 판례처럼, 가입 여부와 지급 여부는 전혀 다른 문제입니다.</p>
+    </div>
+    <div class="pillar">
+      <div class="n">CHECK 02</div>
+      <h5>내 보험료, 사라지는 돈인가요 돌려받는 돈인가요?</h5>
+      <p>매달 내는 암보험료가 순수보장형(소멸성)인지, 환급형인지에 따라 만기 시 결과는 전혀 달라집니다. 지금 납입 중인 보험료가 어떤 구조로 설계되어 있는지, 정확히 알고 계신가요?</p>
+    </div>
+  </div>
+
+  <div class="warn gold">
+    <div class="ico">🔍</div>
+    <div>
+      <strong>지금 가입된 암보험, 무료로 점검해 드립니다</strong>
+      <p>보장 내용 분석부터 전이암 인정 여부, 보험료 구조(소멸형/환급형) 확인까지 — 가입 증권만 있으면 5분 내로 확인 가능합니다. 막연히 "들어놨으니 괜찮겠지"라고 넘기기보다, 지금 정확히 무엇을 보장받는지 한 번은 짚고 가야 합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<div class="closing">
+  <div class="eyebrow" style="justify-content:center;">Conclusion</div>
+  <h2>암은 <span class="gold">막을 수 없지만</span>,<br>암으로 인한 <span class="gold">재정 붕괴</span>는 막을 수 있습니다</h2>
+  <p class="sub">발병은 무작위이고, 가족력이 있다면 그 위험은 이미 수치로 증명되어 있습니다.<br>
+  진단 이후에는 보험 문이 닫히고, 최신 치료는 5,000만원 이상의 비급여 비용을 요구합니다.<br>
+  이 모든 조건이 가리키는 결론은 하나, <b style="color:#fff;">지금 준비해야 한다는 것</b>입니다.</p>
+  <div class="cta-list">
+    <div class="chip">암은 예고 없이 찾아옵니다</div>
+    <div class="chip">진단 후엔 가입할 수 없습니다</div>
+    <div class="chip">최신 치료비는 비급여입니다</div>
+    <div class="chip">기존 보장, 무료로 점검해 드립니다</div>
+  </div>
+</div>
+
+<!-- REFERENCES -->
+<div class="refs">
+  <h3>참고 자료 및 출처</h3>
+  <ol>
+    <li>중앙암등록본부, "2023년 국가암등록통계 발표" — 평생 암 발생확률(남 44.6%, 여 38.2%), 신규 암환자 수. <a href="https://www.mohw.go.kr/board.es?mid=a10503010100&bid=0027&act=view&list_no=1488742" target="_blank" rel="noopener">보건복지부 보도자료 바로가기</a></li>
+    <li>국립암센터 국가암지식정보센터, "암 발생률" — 연도별 암발생률 및 평생 암 발생확률 통계. <a href="https://www.cancer.go.kr/lay1/S1T639C640/contents.do" target="_blank" rel="noopener">cancer.go.kr</a></li>
+    <li>교보생명 뉴스룸, "중입자암치료 비용 얼마나 들까? 최신 방사선 치료법과 암보험 특약까지" — 중입자치료 총 비용(5,000만~8,000만원). <a href="https://news.kyobo.com/%EC%A4%91%EC%9E%85%EC%9E%90%EC%95%94%EC%B9%98%EB%A3%8C-%EB%B9%84%EC%9A%A9-%EC%96%BC%EB%A7%88%EB%82%98-%EB%93%A4%EA%B9%8C-%EC%B5%9C%EC%8B%A0-%EB%B0%A9%EC%82%AC%EC%84%A0-%EC%B9%98%EB%A3%8C%EB%B2%95/" target="_blank" rel="noopener">news.kyobo.com</a></li>
+    <li>뱅크샐러드, "중입자치료, 실비는 안되고 암보험은 된다?" — 중입자치료 1회 500만원, 총 5,000만~7,000만원. <a href="https://www.banksalad.com/articles/%EC%A4%91%EC%9E%85%EC%9E%90%EC%B9%98%EB%A3%8C%EB%B9%84%EC%9A%A9-%EC%A0%95%EC%9D%98-%EC%95%94%EB%B3%B4%ED%97%98-%ED%98%9C%ED%83%9D" target="_blank" rel="noopener">banksalad.com</a></li>
+    <li>바른보험연구소, "표적항암치료 보험 특징 및 지급 기준·장단점 총정리 (2026)" — 급여 표적치료 연 300~400만원, 비급여 회당 수백만원. <a href="https://baruninsu-lab.com/forum/topic/266/" target="_blank" rel="noopener">baruninsu-lab.com</a></li>
+    <li>보험저널, "'표적항암치료 비용', 실비 청구 가능할까" — 회당 200~500만원, 총 18회 내외. <a href="https://www.insjournal.co.kr/news/articleView.html?idxno=22547" target="_blank" rel="noopener">insjournal.co.kr</a></li>
+    <li>더플보험, "표적항암치료 비용, 보험으로 얼마나 줄일 수 있을까?" — 혈액암 표적치료제 월 200만원 이상. <a href="https://the-fin.co.kr/health/targeted-therapy/" target="_blank" rel="noopener">the-fin.co.kr</a></li>
+    <li>3분건강레터, "유전 확률 가장 높은 '3가지 암', 가족력을 반드시 확인하세요" — BRCA1/2 변이 시 최대 80% 위험 증가. <a href="https://v.daum.net/v/7Bfg1JVZX6" target="_blank" rel="noopener">v.daum.net</a></li>
+    <li>청년의사, "암종 따라 유전력 달라져…'가족력 연관성 고려한 정책 나와야'" (국민건강보험 일산병원 연구 인용) — 6개 암종 평균 가족력 5.9%, 위암 8.1%. <a href="http://www.docdocdoc.co.kr/news/articleView.html?idxno=2013720" target="_blank" rel="noopener">docdocdoc.co.kr</a></li>
+    <li>이즈보험 뉴스, 재발암·전이암 보험금 지급 관련 법원 판례 해설 — 재발암 면책, 전이암 부책 판단 사례. <a href="https://dazabi.com/insurance_magazine/article.php?id=40905" target="_blank" rel="noopener">dazabi.com</a></li>
+    <li>궁금할 땐, 아하! — 암 완치 판정 후 5년 경과 전 일반 암보험 가입 제한 및 유병자보험 조건 관련 보험 전문가 답변 다수. <a href="https://www.a-ha.io/questions/4f126a6b1033e2188957883194759f65" target="_blank" rel="noopener">a-ha.io</a></li>
+    <li>뉴스N연합, "2026년 암 치료 패러다임의 전환: 표적 치료·맞춤형 백신·세포 치료제가 여는 새로운 지평" (2026.06) — 2026년 암 치료 4대 축. <a href="https://newsyonhap.com/news/107103" target="_blank" rel="noopener">newsyonhap.com</a></li>
+    <li>아시아경제, "항암요법연구회, ASCO 2026서 담도암·대장암 등 새 치료 근거 제시" (2026.06) — 국내 연구진 ASCO 2026 발표 내용. <a href="https://view.asiae.co.kr/article/2026061810345447402" target="_blank" rel="noopener">view.asiae.co.kr</a></li>
+  </ol>
+  <div class="disclaim">
+    ※ 본 자료는 2026년 9월 기준 공개된 언론 보도, 공공기관 통계(국가암등록통계, 국가암지식정보센터) 및 보험업계 콘텐츠를 바탕으로 작성한 상담 보조 자료입니다. 개별 치료비·보험금 지급 여부는 진단명, 가입 상품, 약관, 치료 시점의 급여 기준에 따라 달라질 수 있으며, 실제 상담 시 최신 약관과 개인별 조건을 반드시 함께 확인해야 합니다. 특정 보험 가입을 강제하거나 의학적 진단·치료를 대체하는 자료가 아닙니다.
+  </div>
+</div>
+
+<script>
+(function(){
+  var gold = '#c9a24b';
+  var red = '#c23b3b';
+  var faint = 'rgba(255,255,255,.08)';
+  var textDim = '#a9a8a5';
+
+  Chart.defaults.color = textDim;
+  Chart.defaults.font.family = "'Noto Sans KR', sans-serif";
+
+  new Chart(document.getElementById('chartTrend').getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: ['1999', '2010', '2022', '2023'],
+      datasets: [{
+        label: '신규 암환자 수 (명)',
+        data: [101854, 208458, 281317, 288613],
+        borderColor: gold,
+        backgroundColor: 'rgba(201,162,75,.15)',
+        fill: true,
+        tension: .35,
+        pointBackgroundColor: gold,
+        pointRadius: 5,
+        borderWidth: 3
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { grid: { color: faint }, ticks: { callback: function(v){ return (v/10000)+'만'; } } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  new Chart(document.getElementById('chartCost').getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: ['건강보험 급여\n표적치료(연)', '표적항암\n약물치료', '중입자\n방사선치료', '해외(일본)\n중입자치료'],
+      datasets: [{
+        label: '예상 비용 (만원)',
+        data: [400, 6000, 6500, 15000],
+        backgroundColor: ['#3d6b56', gold, red, '#8a2c2c'],
+        borderRadius: 6,
+        maxBarThickness: 64
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { grid: { color: faint }, ticks: { callback: function(v){ return v+'만'; } } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
