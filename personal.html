@@ -102,7 +102,7 @@
   .pillar-card h3{ font-size:18px; font-weight:700; margin-bottom:10px; color:var(--ink); }
   .pillar-card p{ font-size:14px; color:var(--ink-body); line-height:1.75; }
   .pillar-connector{
-    margin-top:36px; text-align:center; font-size:14.5px; color:var(--ink-soft); font-weight:500;
+    margin-top:36px; text-align:left; font-size:14.5px; color:var(--ink-soft); font-weight:500;
   }
   .pillar-connector b{ color:var(--accent-deep); }
 
@@ -125,7 +125,7 @@
   .calc-row .lbl{ color:var(--ink-soft); }
   .calc-row .val{ font-weight:700; color:var(--ink); font-family:'Noto Serif KR', serif; font-size:16px; }
   .calc-row.hl .val{ color:var(--accent-deep); font-size:19px; }
-  .big-stat{ text-align:center; padding:20px 10px 26px; }
+  .big-stat{ text-align:left; padding:20px 10px 26px; }
   .bs-num{
     font-family:'Noto Serif KR', serif; font-weight:700; color:var(--accent-deep);
     font-size:56px; line-height:1;
@@ -151,19 +151,19 @@
   .tax-note{ margin-top:14px; font-size:12px; color:var(--ink-faint); line-height:1.7; }
 
   /* ── FINAL CTA ── */
-  .final-cta{ background:var(--ink); padding:100px 24px; text-align:center; }
-  .final-cta .stat-line{ font-size:13.5px; color:rgba(255,255,255,.55); font-weight:600; margin:0 auto 20px; max-width:640px; line-height:1.8; }
+  .final-cta{ background:var(--ink); padding:100px 24px; text-align:left; }
+  .final-cta .stat-line{ font-size:13.5px; color:rgba(255,255,255,.55); font-weight:600; margin-bottom:20px; max-width:640px; line-height:1.8; }
   .final-cta h2{
     color:#fff; font-size:clamp(1.7rem, 3.2vw, 2.4rem); font-weight:700; line-height:1.5;
-    max-width:760px; margin:0 auto;
+    max-width:760px;
   }
   .final-cta h2 .accent{ color:#8FB4E8; }
   .final-cta .sub{
     margin-top:22px; color:rgba(255,255,255,.68); font-size:15.5px; line-height:1.85;
-    max-width:600px; margin-left:auto; margin-right:auto;
+    max-width:600px;
   }
   .final-cta .sub b{ color:#fff; }
-  .final-cta-btns{ margin-top:36px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  .final-cta-btns{ margin-top:36px; display:flex; gap:12px; justify-content:flex-start; flex-wrap:wrap; }
 
   /* ── INVEST ── */
   .invest{ background:var(--paper-warm); padding:96px 24px; }
@@ -176,7 +176,7 @@
   .invest-panel .lead b{ color:var(--ink); }
   .invest-panel .btn-primary{ margin-top:24px; }
   .names-card{
-    background:var(--ink); border-radius:12px; padding:30px 26px; text-align:center;
+    background:var(--ink); border-radius:12px; padding:30px 26px; text-align:left;
   }
   .name-chip{
     font-family:'Noto Serif KR', serif; font-size:15px; color:rgba(255,255,255,.82); font-weight:600;
@@ -187,8 +187,8 @@
     margin-top:16px; font-size:20px; font-weight:700; color:#8FB4E8; font-family:'Noto Serif KR', serif;
   }
   .book-note{
-    margin-top:26px; text-align:center; font-size:13.5px; color:var(--ink-soft); line-height:1.85;
-    max-width:600px; margin-left:auto; margin-right:auto;
+    margin-top:26px; text-align:left; font-size:13.5px; color:var(--ink-soft); line-height:1.85;
+    max-width:600px;
   }
   .book-note .serif{ color:var(--ink); font-weight:700; }
   .btn-on-dark{
@@ -241,7 +241,8 @@
   .form-message.error{ display:block; color:var(--error); }
 
   /* ── FOOTER ── */
-  footer{ background:var(--ink); color:rgba(255,255,255,.72); text-align:center; padding:52px 24px 40px; }
+  footer{ background:var(--ink); color:rgba(255,255,255,.72); text-align:left; padding:52px 24px 40px; }
+  footer .footer-inner{ max-width:1080px; margin:0 auto; }
   footer .slogan{ font-family:'Noto Serif KR', serif; font-size:16px; color:#fff; font-weight:600; }
   footer .quote{ margin-top:10px; font-size:13.5px; opacity:.7; line-height:1.8; }
   footer .meta{ margin-top:18px; font-size:12.5px; opacity:.5; }
@@ -505,10 +506,12 @@
 </section>
 
 <footer>
-  <p class="slogan">삼성 법인사업부 제유종 법인컨설턴트</p>
-  <p class="quote">착안대국 착수소국<br>&quot;대국적으로 생각하고 멀리보되, 실행은 한수 한수에 집중함으로써 작은 성공들을 모아 나가는 것이 승리의 길이다.&quot;</p>
-  <p class="meta">© 2026 · 본 페이지는 개인 소개 및 비즈니스 목적으로 제작되었습니다.</p>
-  <p class="meta"><a href="privacy.html">개인정보처리방침</a></p>
+  <div class="footer-inner">
+    <p class="slogan">삼성 법인사업부 제유종 법인컨설턴트</p>
+    <p class="quote">착안대국 착수소국<br>&quot;대국적으로 생각하고 멀리보되, 실행은 한수 한수에 집중함으로써 작은 성공들을 모아 나가는 것이 승리의 길이다.&quot;</p>
+    <p class="meta">© 2026 · 본 페이지는 개인 소개 및 비즈니스 목적으로 제작되었습니다.</p>
+    <p class="meta"><a href="privacy.html">개인정보처리방침</a></p>
+  </div>
 </footer>
 
 <div class="floating-stack">
