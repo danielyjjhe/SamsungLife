@@ -1,1253 +1,167 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>제유종 | 삼성생명 법인사업부 팀장</title>
+<title>제유종 · 삼성 법인사업부 법인컨설턴트</title>
+<meta name="description" content="착안대국 착수소국 — 대국적으로 생각하고 멀리보되, 실행은 한수 한수에 집중함으로써 작은 성공들을 모아 나가는 것이 승리의 길이다. 제유종의 약력과 저서, 상담 프로세스를 소개합니다.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --navy:       #0F1B35;
-    --navy-light: #1A2E5E;
-    --sky-blue:   #2E88DE;
-    --sky-blue-light: #5BA3F5;
-    --black:      #1C1C1C;
-    --cream:      #F8F9FB;
-    --text:       #2C3E50;
-    --muted:      #5A6C7D;
-    --border:     #E0E6ED;
-    --success:    #27AE60;
-    --error:      #E74C3C;
+  :root{
+    --paper:      #FFFFFF;
+    --paper-warm: #FCF8F3;
+    --ink:        #111111;
+    --ink-body:   #2B2B2B;
+    --ink-soft:   #6E655A;
+    --ink-faint:  #A69D8F;
+    --accent:     #17335E;
+    --accent-deep:#0E2141;
+    --accent-pale:#E9EDF5;
+    --accent-line:#B9C6DC;
+    --line:       #EBE3D6;
   }
 
-  html { scroll-behavior: smooth; }
+  html{ scroll-behavior:smooth; }
 
-  body {
-    font-family: 'Noto Sans KR', sans-serif;
-    background: var(--cream);
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.7;
+  body{
+    font-family:'Noto Sans KR', sans-serif;
+    background:var(--paper);
+    color:var(--ink-body);
+    font-size:15.5px;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
   }
+
+  .serif{ font-family:'Noto Serif KR', serif; }
+  a{ color:inherit; }
+  section{ position:relative; }
+  .container{ max-width:880px; margin:0 auto; padding:0 24px; }
 
   /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 80px 24px 60px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+  .hero{
+    padding:120px 24px 90px;
+    background:
+      radial-gradient(680px 420px at 88% -6%, var(--accent-pale) 0%, transparent 65%),
+      var(--paper);
+  }
+  .hero-inner{ max-width:760px; margin:0 auto; padding:0 24px; text-align:left; }
+  .hero-kicker{ font-size:14.5px; color:var(--ink-soft); font-weight:600; margin-bottom:22px; }
+  .hero h1{
+    font-size:clamp(2rem, 4.4vw, 3.1rem); line-height:1.35; font-weight:700; color:var(--ink);
+  }
+  .hero-sub{
+    margin-top:26px; font-size:17px; color:var(--ink-body); max-width:600px; line-height:1.9;
+    border-left:3px solid var(--accent); padding-left:20px;
   }
 
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(46,136,222,0.1) 0%, transparent 70%);
-    pointer-events: none;
+  /* ── SEGMENT ── */
+  .segment{ padding:0 24px 90px; }
+  .segment-intro{ max-width:760px; margin:0 auto; padding:0 24px 22px; font-size:15px; color:var(--ink-soft); font-weight:500; }
+  .segment-grid{
+    max-width:760px; margin:0 auto; padding:0 24px;
+    display:grid; grid-template-columns:1fr 1fr; gap:16px;
+  }
+  .segment-card{
+    display:block; text-decoration:none; background:var(--paper);
+    border:1px solid var(--line); border-radius:14px; padding:26px 24px;
+    transition:border-color .2s, transform .2s;
+  }
+  .segment-card:hover{ border-color:var(--accent); transform:translateY(-2px); }
+  .segment-icon{ font-size:22px; display:block; margin-bottom:14px; }
+  .segment-title{ font-size:16.5px; font-weight:700; color:var(--ink); margin-bottom:8px; }
+  .segment-desc{ font-size:13.5px; color:var(--ink-body); line-height:1.7; }
+  .segment-arrow{
+    display:inline-block; margin-top:16px; font-size:13px; font-weight:600; color:var(--accent-deep);
   }
 
-  .hero-badge {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--sky-blue-light);
-    text-transform: uppercase;
-    border: 1.5px solid rgba(46,136,222,0.4);
-    padding: 10px 24px;
-    border-radius: 4px;
-    margin-bottom: 36px;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.2s ease forwards;
-  }
-
-  .hero-slogan {
-    margin-top: 28px;
-    font-family: 'Noto Serif KR', serif;
-    font-size: clamp(1.05rem, 2.8vw, 1.35rem);
-    font-weight: 600;
-    color: #fff;
-    max-width: 560px;
-    line-height: 1.6;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.9s ease forwards;
-  }
-
-  .hero-slogan span { color: var(--sky-blue-light); }
-
-  .hero-photo {
-    width: 264px;
-    height: 264px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid rgba(255,255,255,0.25);
-    margin-bottom: 28px;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.1s ease forwards;
-    background: rgba(255,255,255,0.08);
-  }
-
-  .hero-name {
-    font-family: 'Noto Serif KR', serif;
-    font-size: clamp(2.4rem, 7vw, 5rem);
-    font-weight: 600;
-    color: #fff;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.4s ease forwards;
-  }
-
-  .hero-name em {
-    display: block;
-    font-style: normal;
-    color: var(--sky-blue-light);
-    font-size: 0.7em;
-    margin-top: 12px;
-  }
-
-  .hero-divider {
-    width: 50px;
-    height: 2px;
-    background: var(--sky-blue);
-    margin: 28px auto;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.6s ease forwards;
-  }
-
-  .hero-sub {
-    font-size: clamp(0.95rem, 2.5vw, 1.15rem);
-    color: rgba(255,255,255,0.75);
-    font-weight: 300;
-    max-width: 520px;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.8s ease forwards;
-  }
-
-  .hero-cta {
-    margin-top: 48px;
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.8s 1s ease forwards;
-  }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--sky-blue);
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    padding: 14px 32px;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: all 0.3s;
-    border: 2px solid var(--sky-blue);
-  }
-
-  .btn-primary:hover {
-    background: var(--sky-blue-light);
-    border-color: var(--sky-blue-light);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(46,136,222,0.3);
-  }
-
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: transparent;
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    padding: 14px 32px;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: all 0.3s;
-    border: 2px solid rgba(255,255,255,0.3);
-  }
-
-  .btn-secondary:hover {
-    background: rgba(255,255,255,0.1);
-    border-color: #fff;
-    transform: translateY(-2px);
-  }
-
-  /* ── SECTION BASE ── */
-  section { padding: 80px 24px; }
-
-  .container { max-width: 780px; margin: 0 auto; }
-
-  .section-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    color: var(--sky-blue);
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-
-  .section-title {
-    font-family: 'Noto Serif KR', serif;
-    font-size: clamp(1.8rem, 4vw, 2.4rem);
-    font-weight: 600;
-    color: var(--navy);
-    line-height: 1.3;
-    margin-bottom: 28px;
-  }
-
-  .section-title span { color: var(--sky-blue); }
-
-  hr.divider { border: none; border-top: 2px solid var(--sky-blue); margin: 0 0 40px; width: 60px; }
+  /* ── SEC HEAD ── */
+  .sec-head{ margin-bottom:40px; }
+  .sec-head .label{ font-size:12.5px; font-weight:700; color:var(--accent-deep); letter-spacing:.02em; margin-bottom:10px; }
+  .sec-head h2{ font-size:clamp(1.5rem, 2.6vw, 1.9rem); font-weight:700; line-height:1.4; }
 
   /* ── ABOUT ── */
-  .about { background: #fff; }
-
-  .about-body {
-    font-size: 1rem;
-    color: var(--text);
-    font-weight: 300;
-    line-height: 1.9;
+  .about{ background:var(--paper-warm); padding:88px 24px; }
+  .about-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:36px; align-items:start; }
+  .about-list{ list-style:none; }
+  .about-list li{
+    font-size:15px; color:var(--ink-body); line-height:1.9; padding:12px 0 12px 22px;
+    border-bottom:1px solid var(--line); position:relative;
   }
-
-  .about-body p + p { margin-top: 16px; }
-
-  .about-list {
-    list-style: none;
+  .about-list li:first-child{ padding-top:0; }
+  .about-list li::before{ content:"—"; position:absolute; left:0; color:var(--accent); }
+  .about-stats{ display:flex; flex-direction:column; gap:16px; }
+  .stat-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:20px 22px;
   }
-
-  .about-list li {
-    position: relative;
-    padding-left: 28px;
-    font-size: 1rem;
-    color: var(--text);
-    font-weight: 400;
-    line-height: 1.6;
-  }
-
-  .about-list li + li { margin-top: 14px; }
-
-  .about-list li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: var(--sky-blue);
-    font-weight: bold;
-  }
-
-  .about-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    margin-top: 48px;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .stat {
-    background: #fff;
-    padding: 32px 20px;
-    text-align: center;
-    transition: background 0.3s;
-  }
-
-  .stat:hover { background: var(--cream); }
-
-  .stat-num {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 2.1rem;
-    font-weight: 600;
-    color: var(--sky-blue);
-    display: block;
-  }
-
-  .stat-num sup { font-size: 0.8rem; }
-
-  .stat-label {
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.05em;
-    margin-top: 8px;
-    display: block;
-    font-weight: 500;
-  }
-
-  /* ── SERVICES ── */
-  .services { background: var(--cream); }
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-
-  .service-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--sky-blue);
-    padding: 32px 28px;
-    border-radius: 4px;
-    transition: all 0.3s;
-  }
-
-  .service-card:hover {
-    box-shadow: 0 8px 24px rgba(46,136,222,0.1);
-    transform: translateY(-4px);
-    border-left-color: var(--sky-blue-light);
-  }
-
-  .service-icon {
-    font-size: 2rem;
-    margin-bottom: 16px;
-    display: block;
-  }
-
-  .service-name {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 10px;
-  }
-
-  .service-desc {
-    font-size: 0.9rem;
-    color: var(--muted);
-    line-height: 1.8;
-  }
-
-  .service-details {
-    margin-top: 14px;
-    padding-top: 14px;
-    border-top: 1px solid var(--border);
-    font-size: 0.85rem;
-    color: var(--text);
-  }
-
-  .service-details li {
-    list-style: none;
-    padding-left: 20px;
-    position: relative;
-    margin-top: 6px;
-  }
-
-  .service-details li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: var(--sky-blue);
-    font-weight: bold;
-  }
-
-  /* ── EXPERTISE ── */
-  .expertise {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
-    color: #fff;
-  }
-
-  .expertise .section-label { color: var(--sky-blue-light); }
-  .expertise .section-title { color: #fff; }
-  .expertise hr.divider { border-top-color: var(--sky-blue-light); }
-
-  .expertise-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin-top: 40px;
-  }
-
-  .expertise-item {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    padding: 24px;
-    border-radius: 4px;
-    backdrop-filter: blur(10px);
-  }
-
-  .expertise-item h4 {
-    font-size: 0.95rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: var(--sky-blue-light);
-  }
-
-  .expertise-item p {
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.8);
-    line-height: 1.7;
-  }
+  .stat-card .num{ font-family:'Noto Serif KR', serif; font-size:24px; font-weight:700; color:var(--accent-deep); }
+  .stat-card .num sup{ font-size:14px; }
+  .stat-card .lbl{ margin-top:6px; font-size:12.5px; color:var(--ink-soft); }
 
   /* ── BOOK ── */
-  .book-section { background: #fff; }
-
-  .book-inner {
-    display: flex;
-    align-items: center;
-    gap: 40px;
+  .book{ background:var(--paper); padding:88px 24px; }
+  .book-inner{ display:grid; grid-template-columns:auto 1fr; gap:36px; align-items:start; }
+  .book-cover-link{ display:block; width:150px; }
+  .book-cover-img{ width:100%; border-radius:6px; box-shadow:0 14px 32px rgba(0,0,0,.14); }
+  .book-body h2{ font-size:clamp(1.4rem, 2.4vw, 1.8rem); font-weight:700; }
+  .book-desc{ margin-top:16px; font-size:14.5px; color:var(--ink-body); line-height:1.85; max-width:520px; }
+  .book-tags{ margin-top:18px; display:flex; gap:8px; flex-wrap:wrap; }
+  .book-tag{
+    font-size:12px; font-weight:600; color:var(--ink-soft); background:var(--paper-warm);
+    border:1px solid var(--line); padding:5px 12px; border-radius:100px;
   }
-
-  .book-cover-link {
-    flex-shrink: 0;
-    display: block;
-    width: 160px;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 12px 32px rgba(46,136,222,0.2);
-    transition: transform 0.3s;
+  .book-buy-link{
+    display:inline-block; margin-top:20px; font-size:14px; font-weight:600; color:var(--accent-deep);
+    text-decoration:none; border-bottom:1.5px solid var(--accent-deep); padding-bottom:2px;
   }
-
-  .book-cover-link:hover { transform: translateY(-4px); }
-
-  .book-cover-img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .book-body .section-label { color: var(--sky-blue); }
-  .book-body .section-title { color: var(--navy); }
-
-  .book-desc {
-    font-size: 0.95rem;
-    color: var(--muted);
-    font-weight: 300;
-    line-height: 1.8;
-    margin-top: 16px;
-  }
-
-  .book-tag {
-    display: inline-block;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    color: var(--sky-blue);
-    border: 1px solid var(--sky-blue);
-    padding: 4px 12px;
-    margin-top: 16px;
-    margin-right: 8px;
-    border-radius: 3px;
-    font-weight: 500;
-  }
-
-  /* ── SECTION NOTE / DISCLAIMER ── */
-  .section-note {
-    font-size: 0.9rem;
-    color: var(--muted);
-    font-weight: 300;
-    max-width: 520px;
-    margin-top: -8px;
-  }
-
-  .section-disclaimer {
-    margin-top: 32px;
-    font-size: 0.78rem;
-    color: var(--muted);
-    opacity: 0.75;
-    line-height: 1.6;
-  }
-
-  /* ── WHITEPAPER TABLE ── */
-  .whitepaper-block {
-    margin-top: 56px;
-    background: var(--cream);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 36px;
-  }
-
-  .whitepaper-title {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 4px;
-  }
-
-  .whitepaper-source {
-    font-size: 0.78rem;
-    color: var(--muted);
-    margin-bottom: 28px;
-  }
-
-  .whitepaper-group-title {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--sky-blue);
-    margin-top: 32px;
-    margin-bottom: 10px;
-  }
-
-  .whitepaper-block > .whitepaper-group-title:first-of-type { margin-top: 0; }
-
-  .whitepaper-msg {
-    list-style: none;
-    margin-bottom: 16px;
-  }
-
-  .whitepaper-msg li {
-    font-size: 0.85rem;
-    color: var(--text);
-    font-weight: 500;
-    line-height: 1.7;
-    padding-left: 16px;
-    position: relative;
-  }
-
-  .whitepaper-msg li::before {
-    content: '·';
-    position: absolute;
-    left: 0;
-    color: var(--sky-blue);
-    font-weight: 700;
-  }
-
-  .whitepaper-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 8px;
-    background: #fff;
-  }
-
-  .whitepaper-table th,
-  .whitepaper-table td {
-    border: 1px solid var(--border);
-    padding: 12px 14px;
-    text-align: left;
-    font-size: 0.85rem;
-    line-height: 1.6;
-    vertical-align: top;
-  }
-
-  .whitepaper-table th {
-    background: var(--navy);
-    color: #fff;
-    font-weight: 600;
-    font-size: 0.8rem;
-  }
-
-  .whitepaper-table td:first-child,
-  .whitepaper-table th:first-child {
-    width: 36px;
-    text-align: center;
-    color: var(--sky-blue);
-    font-weight: 700;
-  }
-
-  .whitepaper-table td:nth-child(2) {
-    width: 150px;
-    font-weight: 600;
-    color: var(--navy);
-  }
-
-  .whitepaper-table td:last-child {
-    width: 100px;
-    color: var(--muted);
-    font-size: 0.8rem;
-  }
-
-  .whitepaper-table strong { color: #c0392b; }
-
-  .whitepaper-table .sentence {
-    color: #c0392b;
-    font-weight: 700;
-    font-size: 1.15em;
-  }
-
-  /* ── CASES & PRECEDENTS ── */
-  .cases-section { background: #fff; }
-
-  .cases-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin-top: 40px;
-  }
-
-  .case-card {
-    background: var(--cream);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 28px;
-    transition: all 0.3s;
-  }
-
-  .case-card:hover {
-    box-shadow: 0 8px 24px rgba(46,136,222,0.1);
-    transform: translateY(-4px);
-  }
-
-  .case-tag {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    color: #fff;
-    background: var(--sky-blue);
-    padding: 4px 12px;
-    border-radius: 3px;
-    margin-bottom: 14px;
-  }
-
-  .case-card h4 {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 10px;
-  }
-
-  .case-card p {
-    font-size: 0.88rem;
-    color: var(--muted);
-    line-height: 1.75;
-  }
-
-  /* ── REPRESENTATIVE CASES ── */
-  .rep-cases-section { background: var(--cream); }
-
-  .rep-cases {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    margin-top: 40px;
-  }
-
-  .rep-case {
-    padding: 32px 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .rep-case:last-child { border-bottom: none; }
-
-  .rep-case-num {
-    display: inline-block;
-    font-family: 'Noto Serif KR', serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--sky-blue);
-    letter-spacing: 0.1em;
-    margin-bottom: 10px;
-  }
-
-  .rep-case h4 {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 8px;
-  }
-
-  .rep-case-meta {
-    font-size: 0.82rem;
-    color: var(--sky-blue);
-    font-weight: 500;
-    margin-bottom: 10px;
-  }
-
-  .rep-case p:last-child {
-    font-size: 0.92rem;
-    color: var(--text);
-    line-height: 1.8;
-    font-weight: 300;
-  }
-
-  /* ── JOINT TEAM ── */
-  .team-section { background: #fff; }
-
-  .team-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-top: 40px;
-  }
-
-  .team-card {
-    background: var(--cream);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 28px 16px;
-    text-align: center;
-    transition: all 0.3s;
-  }
-
-  .team-card:hover {
-    box-shadow: 0 8px 24px rgba(46,136,222,0.1);
-    transform: translateY(-4px);
-    border-color: var(--sky-blue);
-  }
-
-  .team-icon {
-    font-size: 1.8rem;
-    display: block;
-    margin-bottom: 12px;
-  }
-
-  .team-role {
-    font-weight: 600;
-    color: var(--navy);
-    font-size: 0.95rem;
-    margin-bottom: 6px;
-  }
-
-  .team-desc {
-    font-size: 0.8rem;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-
-  .book-buy-link {
-    display: inline-block;
-    margin-top: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--sky-blue);
-    text-decoration: none;
-    border-bottom: 1px solid var(--sky-blue);
-    padding-bottom: 2px;
-    transition: color 0.3s;
-  }
-
-  .book-buy-link:hover { color: var(--sky-blue-light); border-color: var(--sky-blue-light); }
-
-  /* ── PERSONAL WEALTH ── */
-  .personal-wealth {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
-  }
-
-  .personal-wealth-inner {
-    text-align: center;
-    max-width: 640px;
-    margin: 0 auto;
-  }
-
-  .personal-wealth .section-label { color: var(--sky-blue-light); }
-  .personal-wealth .section-title { color: #fff; }
-  .personal-wealth .section-title span { color: var(--sky-blue-light); }
-  .personal-wealth .divider { margin-left: auto; margin-right: auto; }
-
-  .personal-wealth-text {
-    font-size: 1.02rem;
-    font-weight: 300;
-    color: rgba(255,255,255,0.85);
-    line-height: 1.9;
-    margin: 28px 0 36px;
-  }
+  .book-buy-link:hover{ color:var(--accent); border-color:var(--accent); }
 
   /* ── PROCESS ── */
-  .process { background: var(--cream); }
-
-  .steps { display: flex; flex-direction: column; gap: 0; }
-
-  .step {
-    display: flex;
-    gap: 28px;
-    padding: 32px 0;
-    border-bottom: 1px solid var(--border);
-    transition: padding 0.3s;
+  .process{ background:var(--paper-warm); padding:88px 24px; }
+  .steps{ display:flex; flex-direction:column; }
+  .step{
+    display:grid; grid-template-columns:52px 1fr; gap:22px; padding:26px 0;
+    border-bottom:1px solid var(--line);
   }
-
-  .step:last-child { border-bottom: none; }
-
-  .step:hover { padding-left: 8px; }
-
-  .step-num {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--sky-blue);
-    flex-shrink: 0;
-    width: 48px;
-    line-height: 1.2;
-  }
-
-  .step-title {
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 8px;
-    font-size: 1rem;
-  }
-
-  .step-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
-
-  /* ── CONTACT FORM ── */
-  .contact-section {
-    background: var(--cream);
-  }
-
-  .contact-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: start;
-  }
-
-  .contact-info h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 20px;
-  }
-
-  .contact-item {
-    margin-bottom: 28px;
-  }
-
-  .contact-item-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    color: var(--sky-blue);
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
-  .contact-item-value {
-    font-size: 1rem;
-    color: var(--text);
-    font-weight: 500;
-  }
-
-  .contact-item a {
-    color: var(--sky-blue);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-
-  .contact-item a:hover { color: var(--sky-blue-light); }
-
-  .form-group {
-    margin-bottom: 20px;
-  }
-
-  .form-group label {
-    display: block;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--navy);
-    margin-bottom: 6px;
-  }
-
-  .form-group input,
-  .form-group textarea,
-  .form-group select {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 0.9rem;
-    color: var(--text);
-    transition: border-color 0.3s, box-shadow 0.3s;
-  }
-
-  .form-group input:focus,
-  .form-group textarea:focus,
-  .form-group select:focus {
-    outline: none;
-    border-color: var(--sky-blue);
-    box-shadow: 0 0 0 3px rgba(46,136,222,0.1);
-  }
-
-  .form-group textarea {
-    resize: vertical;
-    min-height: 120px;
-  }
-
-  .form-submit {
-    background: var(--sky-blue);
-    color: #fff;
-    border: none;
-    padding: 14px 32px;
-    border-radius: 4px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    width: 100%;
-  }
-
-  .form-submit:hover {
-    background: var(--sky-blue-light);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(46,136,222,0.3);
-  }
-
-  .form-submit:disabled {
-    background: var(--muted);
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  .form-message {
-    padding: 12px 16px;
-    border-radius: 4px;
-    margin-bottom: 16px;
-    font-size: 0.9rem;
-    display: none;
-  }
-
-  .form-message.success {
-    background: rgba(39,174,96,0.1);
-    color: var(--success);
-    border: 1px solid var(--success);
-    display: block;
-  }
-
-  .form-message.error {
-    background: rgba(231,76,60,0.1);
-    color: var(--error);
-    border: 1px solid var(--error);
-    display: block;
-  }
-
-  /* ── CTA ── */
-  .cta-section {
-    background: linear-gradient(135deg, var(--sky-blue) 0%, var(--sky-blue-light) 100%);
-    text-align: center;
-    padding: 72px 24px;
-  }
-
-  .cta-section .section-title {
-    color: #fff;
-    margin-bottom: 16px;
-  }
-
-  .cta-sub {
-    color: rgba(255,255,255,0.85);
-    font-size: 1rem;
-    margin-bottom: 36px;
-    font-weight: 300;
-  }
-
-  .btn-dark {
-    display: inline-block;
-    background: var(--navy);
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    padding: 14px 40px;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: all 0.3s;
-    border: 2px solid var(--navy);
-  }
-
-  .btn-dark:hover {
-    background: transparent;
-    color: var(--navy);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  }
+  .step:first-child{ padding-top:0; }
+  .step:last-child{ border-bottom:none; padding-bottom:0; }
+  .step-num{ font-family:'Noto Serif KR', serif; font-size:22px; font-weight:700; color:var(--accent-line); }
+  .step-title{ font-size:16.5px; font-weight:700; color:var(--ink); margin-bottom:8px; }
+  .step-desc{ font-size:14px; color:var(--ink-body); line-height:1.8; }
 
   /* ── FOOTER ── */
-  footer {
-    background: var(--black);
-    text-align: center;
-    padding: 40px 24px;
-    font-size: 12px;
-    color: rgba(255,255,255,0.4);
-    letter-spacing: 0.05em;
+  footer{ background:var(--ink); color:rgba(255,255,255,.55); text-align:left; padding:44px 24px; }
+  footer .footer-inner{ max-width:880px; margin:0 auto; }
+  footer .meta{ font-size:12.5px; }
+  footer .meta a{ color:rgba(255,255,255,.75); text-decoration:underline; }
+  footer .meta + .meta{ margin-top:8px; }
+
+  @media (max-width:720px){
+    .about-grid{ grid-template-columns:1fr; }
+    .book-inner{ grid-template-columns:1fr; }
+    .book-cover-link{ width:120px; }
   }
-
-  footer p { margin-top: 8px; }
-
-  footer p:first-child { margin-top: 0; }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .reveal.visible { opacity: 1; transform: none; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    section { padding: 60px 24px; }
-
-    .services-grid { grid-template-columns: 1fr; }
-    .expertise-grid { grid-template-columns: 1fr; }
-    .cases-grid { grid-template-columns: 1fr; }
-    .team-grid { grid-template-columns: repeat(2, 1fr); }
-    .about-stats { grid-template-columns: repeat(2, 1fr); }
-    .contact-container { grid-template-columns: 1fr; gap: 32px; }
-    .book-inner { flex-direction: column; gap: 28px; }
-    .book-cover-link { width: 130px; }
-    .hero-cta { flex-direction: column; }
-    .btn-primary, .btn-secondary, .form-submit { width: 100%; justify-content: center; }
-    .whitepaper-block { padding: 20px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .whitepaper-table { min-width: 600px; }
-    .whitepaper-table td:nth-child(3) { min-width: 220px; }
-  }
-
-  @media (max-width: 560px) {
-    .hero { padding: 60px 16px 40px; }
-    .hero-name { font-size: 2rem; }
-    .hero-photo { width: 200px; height: 200px; }
-    .team-grid { grid-template-columns: 1fr; }
-    section { padding: 48px 16px; }
-    .container { padding: 0; }
-    .services-grid { gap: 12px; }
-    .service-card { padding: 20px 16px; }
-    .contact-item { margin-bottom: 20px; }
-  }
-
-  /* ── SEGMENT PICKER (법인/개인 분기) ── */
-  .segment-section {
-    background: #fff;
-    padding: 56px 24px 72px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .segment-intro {
-    text-align: center;
-    max-width: 560px;
-    margin: 0 auto 32px;
-  }
-
-  .segment-intro p {
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-  }
-
-  .segment-grid {
-    max-width: 780px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-
-  .segment-card {
-    display: block;
-    text-decoration: none;
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    padding: 32px 24px;
-    background: var(--cream);
-    transition: all 0.25s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .segment-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 4px;
-    background: var(--sky-blue);
-    transform: scaleY(0);
-    transform-origin: bottom;
-    transition: transform 0.3s ease;
-  }
-
-  .segment-card:hover {
-    border-color: var(--sky-blue);
-    background: #fff;
-    transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(15,27,53,0.1);
-  }
-
-  .segment-card:hover::before { transform: scaleY(1); }
-
-  .segment-icon { font-size: 28px; margin-bottom: 16px; display: block; }
-
-  .segment-title {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 8px;
-  }
-
-  .segment-desc {
-    font-size: 0.9rem;
-    color: var(--muted);
-    font-weight: 300;
-    line-height: 1.6;
-    margin-bottom: 18px;
-  }
-
-  .segment-arrow {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--sky-blue);
-    letter-spacing: 0.02em;
-  }
-
-  @media (max-width: 640px) {
-    .segment-grid { grid-template-columns: 1fr; }
-  }
-
-  /* ── LANDING PAGE SHARED (corporate/personal) ── */
-  .seg-hero {
-    min-height: 62vh;
-    padding: 90px 24px 60px;
-  }
-
-  .seg-hero .hero-badge { animation: none; opacity: 1; }
-  .seg-hero .hero-name { animation: none; opacity: 1; font-size: clamp(2rem, 6vw, 3.4rem); }
-  .seg-hero .hero-sub { animation: none; opacity: 1; }
-  .seg-hero .hero-cta { animation: none; opacity: 1; }
-  .seg-hero .hero-divider { animation: none; opacity: 1; }
-
-  .breadcrumb-back {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 50;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    color: rgba(255,255,255,0.85);
-    text-decoration: none;
-    background: rgba(0,0,0,0.25);
-    padding: 8px 14px;
-    border-radius: 20px;
-    backdrop-filter: blur(6px);
-    transition: background 0.2s;
-  }
-
-  .breadcrumb-back:hover { background: rgba(0,0,0,0.4); }
-
-  .fact-strip {
-    background: var(--navy);
-    padding: 0;
-  }
-
-  .fact-grid {
-    max-width: 900px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .fact-item {
-    padding: 28px 20px;
-    text-align: center;
-    border-right: 1px solid rgba(255,255,255,0.1);
-  }
-
-  .fact-item:last-child { border-right: none; }
-
-  .fact-num {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 1.9rem;
-    font-weight: 600;
-    color: var(--sky-blue-light);
-    line-height: 1.2;
-  }
-
-  .fact-label {
-    font-size: 12px;
-    color: rgba(255,255,255,0.65);
-    margin-top: 6px;
-    font-weight: 300;
-  }
-
-  @media (max-width: 640px) {
-    .fact-grid { grid-template-columns: 1fr; }
-    .fact-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .fact-item:last-child { border-bottom: none; }
-  }
-
-  .checklist {
-    list-style: none;
-    background: var(--cream);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 8px;
-  }
-
-  .checklist li {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 16px;
-    font-size: 0.95rem;
-    color: var(--text);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .checklist li:last-child { border-bottom: none; }
-
-  .checklist li::before {
-    content: '✓';
-    flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--sky-blue);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1px;
-  }
-
-  .checklist li strong { color: var(--navy); }
 </style>
 </head>
 <body>
 
 <!-- HERO -->
 <section class="hero">
-  <img src="profile.jpg" alt="제유종 프로필 사진" class="hero-photo">
-  <div class="hero-badge">🏆 삼성생명 법인사업부 팀장</div>
-  <h1 class="hero-name">
-    제유종
-    <em>Group Financial Consultant</em>
-  </h1>
-  <div class="hero-divider"></div>
-  <p class="hero-sub">
-    기업 대표와 임원의 자산을 지키고,<br>
-    세금을 줄이고, 미래를 설계합니다.
-  </p>
-  <p class="hero-slogan">
-    "제 고객은 <span>제 자산</span>입니다.<br>항상 여러분 편에 서서 컨설팅 합니다."
-  </p>
-  <div class="hero-cta">
-    <a href="#contact" class="btn-primary">📞 상담 예약하기</a>
-    <a href="#services" class="btn-secondary">서비스 알아보기 →</a>
+  <div class="hero-inner">
+    <p class="hero-kicker">삼성 법인사업부 제유종 법인컨설턴트</p>
+    <h1 class="serif">착안대국 착수소국</h1>
+    <p class="hero-sub">
+      &quot;대국적으로 생각하고 멀리보되, 실행은 한수 한수에 집중함으로써 작은 성공들을 모아 나가는 것이 승리의 길이다.&quot;
+    </p>
   </div>
 </section>
 
 <!-- SEGMENT PICKER -->
-<section class="segment-section">
-  <div class="segment-intro reveal">
-    <p>어떤 상담이 필요하신가요?</p>
-  </div>
-  <div class="segment-grid reveal">
+<section class="segment">
+  <p class="segment-intro">어떤 상담이 필요하신가요?</p>
+  <div class="segment-grid">
     <a href="corporate.html" class="segment-card">
       <span class="segment-icon">🏢</span>
       <p class="segment-title">법인대표입니다</p>
@@ -1266,48 +180,55 @@
 <!-- ABOUT -->
 <section class="about">
   <div class="container">
-    <div class="reveal">
-      <p class="section-label">Profile</p>
-      <h2 class="section-title">약력</h2>
-      <hr class="divider">
+    <div class="sec-head">
+      <p class="label">Profile</p>
+      <h2 class="serif">약력</h2>
     </div>
-    <ul class="about-list reveal">
-      <li>벤쿠버 패티슨 고등학교(Pattison High School) 졸업</li>
-      <li>캘리포니아 주립대학교(California State University) 졸업</li>
-      <li>Global Maxfin Capital (Wealth Management Division) 재직</li>
-      <li>J&amp;Company International Limited 법인대표</li>
-      <li>Royal Bank of Canada 재직</li>
-      <li>Meridian Credit Union 재직</li>
-      <li>삼성생명 (법인사업부) 재직</li>
-    </ul>
-    <div class="about-stats reveal">
-      <div class="stat">
-        <span class="stat-num">10년<sup>+</sup></span> <span class="stat-label">금융업 경력</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">상위 0.1<sup>%</sup></span> <span class="stat-label">신뢰도+고객만족도 5년연속</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">1000억원<sup>+</sup></span> <span class="stat-label">누적 자산유치액</span>
+    <div class="about-grid">
+      <ul class="about-list">
+        <li>벤쿠버 패티슨 고등학교(Pattison High School) 졸업</li>
+        <li>캘리포니아 주립대학교(California State University) 졸업</li>
+        <li>Global Maxfin Capital (Wealth Management Division) 재직</li>
+        <li>J&amp;Company International Limited 법인대표</li>
+        <li>Royal Bank of Canada 재직</li>
+        <li>Meridian Credit Union 재직</li>
+        <li>삼성생명 (법인사업부) 재직</li>
+      </ul>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="num">10년<sup>+</sup></div>
+          <div class="lbl">금융업 경력</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">상위 0.1<sup>%</sup></div>
+          <div class="lbl">신뢰도 + 고객만족도 5년연속</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">1000억원<sup>+</sup></div>
+          <div class="lbl">누적 자산유치액</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- BOOK -->
-<section class="book-section">
+<section class="book">
   <div class="container">
-    <div class="book-inner reveal">
+    <div class="sec-head">
+      <p class="label">저서</p>
+    </div>
+    <div class="book-inner">
       <a href="https://product.kyobobook.co.kr/detail/S000217504825" target="_blank" rel="noopener" class="book-cover-link">
         <img src="book-cover.jpg" alt="『언노운 리치』 책 표지" class="book-cover-img">
       </a>
       <div class="book-body">
-        <p class="section-label">저서</p>
-        <h2 class="section-title">『언노운 리치』</h2>
+        <h2 class="serif">『언노운 리치』</h2>
         <p class="book-desc">
-          자산을 지키는 방법을 모른 채 부를 쌓는 이들에게 나누고 싶은 메시지. 캐나다 시가총액 1위 자산운용사의 지속가능한 자산관리 철학과, 미국의 금융시스템이 어떤 원리로 부자를 양산하는지를 실용적으로 쉽게 풀어낸 이야기.
+          자산을 지키는 방법을 모른 채 부를 쌓는 이들에게 나누고 싶은 메시지. 캐나다 시가총액 1위 자산운용사의 지속가능한 자산관리 철학과,
+          미국의 금융시스템이 어떤 원리로 부자를 양산하는지를 실용적으로 쉽게 풀어낸 이야기.
         </p>
-        <div>
+        <div class="book-tags">
           <span class="book-tag">교보문고 출판</span>
           <span class="book-tag">개인금융</span>
           <span class="book-tag">자산관리</span>
@@ -1319,385 +240,38 @@
   </div>
 </section>
 
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="container">
-    <div class="reveal">
-      <p class="section-label">Services</p>
-      <h2 class="section-title">기업 대표를 위한<br><span>핵심 솔루션</span></h2>
-      <hr class="divider">
-    </div>
-    <div class="services-grid reveal">
-      <div class="service-card">
-        <span class="service-icon">⚠️</span>
-        <p class="service-name">기업리스크 분석</p>
-        <p class="service-desc">재해소송, 세무조사·추적과세 리스크 진단</p>
-        <div class="service-details">
-          <ul>
-            <li>재해소송 대응 체계 점검</li>
-            <li>세무조사·추적과세 리스크 진단</li>
-            <li>사전 리스크 관리 컨설팅</li>
-          </ul>
-        </div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">💰</span>
-        <p class="service-name">가지급금 정리</p>
-        <p class="service-desc">대표이사 가지급금 단계적 상환 설계</p>
-        <div class="service-details">
-          <ul>
-            <li>가지급금 원인 진단</li>
-            <li>상환 로드맵 수립</li>
-            <li>인정이자 부담 완화</li>
-          </ul>
-        </div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">🦺</span>
-        <p class="service-name">산재보험료 절감</p>
-        <p class="service-desc">산재보험료율 진단 및 절감 방안 설계</p>
-        <div class="service-details">
-          <ul>
-            <li>업종별 보험료율 진단</li>
-            <li>절감 가능 항목 분석</li>
-            <li>재해소송 리스크 관리</li>
-          </ul>
-        </div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">🏛️</span>
-        <p class="service-name">정부대출 & 정책자금</p>
-        <p class="service-desc">정부 지원 사업 연계 및 네트워킹</p>
-        <div class="service-details">
-          <ul>
-            <li>KOSMES 정책융자</li>
-            <li>청년고용 지원금</li>
-            <li>R&D 보조사업</li>
-          </ul>
-        </div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">📉</span>
-        <p class="service-name">상속·증여 절세</p>
-        <p class="service-desc">상속공제 항목 최적화, 사전증여 설계</p>
-        <div class="service-details">
-          <ul>
-            <li>상속세 시뮬레이션</li>
-            <li>증여 전략 수립</li>
-            <li>차명주식 정리</li>
-          </ul>
-        </div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">🧾</span>
-        <p class="service-name">세무컨설팅</p>
-        <p class="service-desc">법인·개인 세무 진단 및 절세 전략 수립</p>
-        <div class="service-details">
-          <ul>
-            <li>법인세·소득세 진단</li>
-            <li>세무조사 사전 대응</li>
-            <li>세무사 연계 자문</li>
-          </ul>
-        </div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">👥</span>
-        <p class="service-name">노무컨설팅</p>
-        <p class="service-desc">근로계약·취업규칙 정비, 노무 리스크 진단</p>
-        <div class="service-details">
-          <ul>
-            <li>취업규칙·근로계약 점검</li>
-            <li>노무 리스크 사전 진단</li>
-            <li>공인노무사 연계 자문</li>
-          </ul>
-        </div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">🏢</span>
-        <p class="service-name">법인보험 설계</p>
-        <p class="service-desc">임원 퇴직금 재원 마련, 단체상해·단체실손 구조화</p>
-        <div class="service-details">
-          <ul>
-            <li>임원 퇴직금 보장</li>
-            <li>복리후생 최적화</li>
-            <li>법인세 절감</li>
-          </ul>
-        </div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">📊</span>
-        <p class="service-name">연금·퇴직금 설계</p>
-        <p class="service-desc">퇴직연금(DB/DC/IRP) 구조 설계</p>
-        <div class="service-details">
-          <ul>
-            <li>법인세 절감</li>
-            <li>노후 소득 확보</li>
-            <li>규정 준수</li>
-          </ul>
-        </div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">📄</span>
-        <p class="service-name">비상장주식평가</p>
-        <p class="service-desc">보충적 평가방법에 따른 지분가치 진단</p>
-        <div class="service-details">
-          <ul>
-            <li>주식가치 사전 평가</li>
-            <li>지분 구조 리스크 진단</li>
-            <li>승계·매각 대비 설계</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CASES & PRECEDENTS -->
-<section class="cases-section">
-  <div class="container">
-    <div class="reveal">
-      <p class="section-label">Risk & Precedents</p>
-      <h2 class="section-title">대표적 기업 리스크와<br><span>법안·판례</span></h2>
-      <hr class="divider">
-      <p class="section-note">기업 대표가 놓치기 쉬운 법적·세무적 리스크를 실제 법령·판례 흐름과 함께 안내해 드립니다.</p>
-    </div>
-    <div class="cases-grid reveal">
-      <div class="case-card">
-        <span class="case-tag">가지급금</span>
-        <h4>가지급금 세무조사 강화 트렌드</h4>
-        <p>대표이사 가지급금은 국세청의 주요 세무조사·추적과세 대상입니다. 방치할수록 인정이자가 계속 붙어 원금 위에 이자가 쌓이고, 그 이자에 다시 세금이 붙는 구조라 미리 준비하지 않으면 세금 부담이 눈덩이처럼 불어납니다.</p>
-      </div>
-      <div class="case-card">
-        <span class="case-tag">중대재해처벌법</span>
-        <h4>대표의 책임판례 흐름과 기업부도 예방</h4>
-        <p>중대재해처벌법 시행 이후 대표이사에 대한 실형·법정구속 판례가 이어지고 있습니다. 형사처벌뿐 아니라 거액의 손해배상·벌금이 기업 존속 자체를 위협할 수 있어, 사전 안전보건관리체계 구축이 곧 기업부도 예방책입니다.</p>
-      </div>
-      <div class="case-card">
-        <span class="case-tag">상속세·기업승계</span>
-        <h4>대표 유고시 상속세발 기업부도 리스크</h4>
-        <p>법인대표가 갑작스럽게 유고하면, 남은 가족은 준비되지 않은 상속세 납부 재원 문제에 직면합니다. 지분 대부분이 회사에 묶여 있는 경우, 상속세를 마련하지 못해 지분을 헐값에 매각하거나 기업이 흔들리는 사례가 반복되고 있습니다.</p>
-      </div>
-      <div class="case-card">
-        <span class="case-tag">비상장주식·상속</span>
-        <h4>상속재산 증가추이와 비상장주식 가치평가</h4>
-        <p>상속재산 규모가 매년 증가하는 가운데, 비상장주식은 양도·상속 시점의 평가액에 따라 세부담이 크게 달라집니다. 적정 배당액 산출과 사전지분이동을 통해 상속세·양도세를 합법적으로 절세할 수 있습니다.</p>
-      </div>
-    </div>
-
-    <div class="whitepaper-block reveal">
-      <p class="whitepaper-title">📘 2025 중대재해 사고백서 수록 사례</p>
-      <p class="whitepaper-source">자료 출처: 고용노동부 「2025 중대재해 사고백서」</p>
-
-      <p class="whitepaper-group-title">Ⅰ. 대규모 반복 사고 사례</p>
-      <ul class="whitepaper-msg">
-        <li>경영메시지 1 : 안전은 비용이 아니라 자본이다 — 기업의 미래를 위한 투자</li>
-        <li>경영메시지 2 : 경영책임자는 어떻게 조직을 변화시킬 수 있는가?</li>
-      </ul>
-      <table class="whitepaper-table">
-        <thead>
-          <tr><th>#</th><th>업종</th><th>개요</th><th>사상자 수</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>리튬배터리 제조공장<br>(제조업)</td>
-            <td>리튬배터리 검수 포장 작업 중 <strong>폭발 및 화재</strong> · 1심 <span class="sentence">징역 15년</span></td>
-            <td>사망 23명<br>부상 9명</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>특수강 등 제조공장<br>(제조업)</td>
-            <td>연소함 내부 슬래그 제거 작업 중 고온에서 <strong>화상</strong> 등 3건 · 금속을 녹일 때 발생하는 찌꺼기 처리 사고</td>
-            <td>사망 1명<br>사망 1명<br>사망 2명</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>비철금속 제조공장<br>(제조업)</td>
-            <td>탱크 모터 교체 작업 중 <strong>중독</strong> 등 · 1심 <span class="sentence">징역 1년 6월(집행유예 3년)</span></td>
-            <td>사망 1명<br>부상 3명</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p class="whitepaper-group-title">Ⅱ. 주요 의무별 위반 사례</p>
-      <ul class="whitepaper-msg">
-        <li>경영메시지 3 : 중소기업에서 안전보건관리체계 구축이 중요한 이유</li>
-        <li>경영메시지 4 : 형식적인 의무 이행으로 재해를 막을 수 없다</li>
-      </ul>
-      <table class="whitepaper-table">
-        <thead>
-          <tr><th>#</th><th>업종</th><th>개요</th><th>사상자 수</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>4</td>
-            <td>자동차부품 제조공장<br>(제조업)</td>
-            <td>용접 작업 중인 로봇과 지그에 <strong>끼임</strong> · 자재를 잡아서 고정하는 기구 · 1심 <span class="sentence">징역 9월(집행유예 1년)</span></td>
-            <td>사망 1명</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>행거 파이프 제조공장<br>(제조업)</td>
-            <td>코일묶음 하역 중 천장크레인 후크에서 이탈한 코일에 <strong>깔림</strong> · 1심 <span class="sentence">징역 10월(집행유예 1년)</span></td>
-            <td>사망 1명</td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>철근 등 제조공장<br>(제조업)</td>
-            <td>작업 중 코일형태에 의해 이탈한 소재에 대퇴부 <strong>관통</strong> · 열간 코일형태의 봉 형태의 강재가 생산라인을 이탈하는 현상 · 1심 <span class="sentence">징역 1년(집행유예 2년)</span></td>
-            <td>사망 1명</td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>물류센터 신축 현장<br>(건설업)</td>
-            <td>고소작업대에 탑승한 상태에서 이동 중 하지절물과 <strong>끼임</strong></td>
-            <td>사망 1명</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p class="whitepaper-group-title">Ⅲ. 사고 다발 위험요인</p>
-      <table class="whitepaper-table">
-        <thead>
-          <tr><th>#</th><th>위험요인</th><th>개요</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>8</td>
-            <td>이동식 비계<br>(떨어짐)</td>
-            <td>천장 배관 보온재 설치 작업 중 <strong>떨어짐</strong> 등 3건</td>
-          </tr>
-          <tr>
-            <td>9</td>
-            <td>고소작업대<br>(떨어짐, 넘어짐 등)</td>
-            <td>천장 상부 트러스와 고소작업대 난간 사이에 <strong>끼임</strong> 등 3건</td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td>벌목<br>(깔림, 맞음 등)</td>
-            <td>벌목 작업 중 다른 나무에 걸쳐있던 벌도목이 떨어져 <strong>맞음</strong> 등 3건</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- REPRESENTATIVE CASES -->
-<section class="rep-cases-section">
-  <div class="container">
-    <div class="reveal">
-      <p class="section-label">Case Studies</p>
-      <h2 class="section-title">대표 컨설팅 사례</h2>
-      <hr class="divider">
-    </div>
-    <div class="rep-cases reveal">
-      <div class="rep-case">
-        <span class="rep-case-num">Case 01</span>
-        <h4>제조업 L대표 · 가지급금 정리</h4>
-        <p class="rep-case-meta">업종: 제조업 · 이슈: 약 9억원 규모의 장기 가지급금</p>
-        <p>L대표의 법인은 약 9억원의 가지급금이 누적된 상태였습니다. 법인세법상 인정이자율(연 4.6%)을 적용해 계산한 결과, 매년 약 4,100만원의 이자가 새로 발생하고 있었고, 이를 상환하지 않고 방치할 경우 이자가 원금에 가산되어 10년 후에는 가지급금 잔액이 약 14억원까지 불어나는 것으로 나타났습니다. 단기·장기 해결방안을 함께 설계해 제공한 결과, 장기적으로 발생할 인정이자 부담을 약 60% 절감할 수 있었습니다.</p>
-      </div>
-      <div class="rep-case">
-        <span class="rep-case-num">Case 02</span>
-        <h4>건설업 K대표 · 산재리스크 관리</h4>
-        <p class="rep-case-meta">업종: 건설업 · 이슈: 높은 산재사고율과 배상 리스크</p>
-        <p>산재사고 발생률이 높은 건설업 특성상 실제 사고 시 발생할 수 있는 배상비용과 형사리스크를 미리 계산하고 예방하는 것이 중요합니다. 리스크 진단을 통해 리스크를 제거하고 산재보험료율을 절감하여 기업의 비용과 리스크를 동시에 제거·절감한 케이스입니다.</p>
-      </div>
-      <div class="rep-case">
-        <span class="rep-case-num">Case 03</span>
-        <h4>IT서비스 K대표 · 퇴직금·상속재원 마련</h4>
-        <p class="rep-case-meta">업종: IT서비스 · 이슈: 임원 퇴직금 및 상속세 재원 부족</p>
-        <p>K대표를 대상으로 임원 퇴직금 재원을 마련함과 동시에, 상속감자를 활용한 상속재원 마련 전략을 설계했습니다. 공인회계사와의 공동 컨설팅을 통해 상속세 절감까지 함께 이끌어낸 사례입니다.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- JOINT TEAM -->
-<section class="team-section">
-  <div class="container">
-    <div class="reveal">
-      <p class="section-label">Cross-functional Consulting</p>
-      <h2 class="section-title">전문인력단이 함께하는<br><span>공동 컨설팅</span></h2>
-      <hr class="divider">
-      <p class="section-note">공인노무사, 공인회계사, 삼성생명 재무설계팀 등 각 분야 전문가와 함께 하나의 팀으로 컨설팅합니다.</p>
-    </div>
-    <div class="team-grid reveal">
-      <div class="team-card">
-        <span class="team-icon">🧑‍💼</span>
-        <p class="team-role">제유종</p>
-        <p class="team-desc">삼성생명 법인사업부 팀장 · 컨설팅 총괄</p>
-      </div>
-      <div class="team-card">
-        <span class="team-icon">⚖️</span>
-        <p class="team-role">공인노무사</p>
-        <p class="team-desc">근로계약·노무 리스크 자문</p>
-      </div>
-      <div class="team-card">
-        <span class="team-icon">🧮</span>
-        <p class="team-role">공인회계사</p>
-        <p class="team-desc">세무·회계 진단 및 절세 자문</p>
-      </div>
-      <div class="team-card">
-        <span class="team-icon">🏦</span>
-        <p class="team-role">삼성생명 재무설계팀</p>
-        <p class="team-desc">법인·개인 재무 설계 지원</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PERSONAL WEALTH -->
-<section class="personal-wealth">
-  <div class="container">
-    <div class="personal-wealth-inner reveal">
-      <p class="section-label">Investment & Insurance</p>
-      <h2 class="section-title">법인을 넘어,<br><span>개인 자산까지</span></h2>
-      <hr class="divider">
-      <p class="personal-wealth-text">
-        영리한 사람은 작은 돈으로 더 큰 돈을 만들어 냅니다. 법인을 운영해 이익을 창출하시는 대표님들처럼요.<br><br>
-        투자와 보험도 마찬가지입니다. 우리는 영리한 방법을 채택해 작은 돈으로 큰 돈을 만듭니다.<br>
-        어떤 방법이 영리한 방법일까요?
-      </p>
-      <a href="#contact" class="btn-primary">개인 투자&amp;보험 컨설팅 의뢰하기 →</a>
-    </div>
-  </div>
-</section>
-
 <!-- PROCESS -->
 <section class="process">
   <div class="container">
-    <div class="reveal">
-      <p class="section-label">Process</p>
-      <h2 class="section-title">상담은 이렇게<br><span>진행됩니다</span></h2>
-      <hr class="divider">
+    <div class="sec-head">
+      <p class="label">Process</p>
+      <h2 class="serif">상담은 이렇게 진행됩니다</h2>
     </div>
     <div class="steps">
-      <div class="step reveal">
-        <span class="step-num">01</span>
-        <div class="step-content">
+      <div class="step">
+        <span class="step-num serif">01</span>
+        <div>
           <p class="step-title">스크리닝 인터뷰</p>
           <p class="step-desc">법인 구조, 사업 특성, 세무·노사 이슈, 리스크 등 기본 현황을 파악합니다. 부담 없이 현황만 공유해 주셔도 됩니다. 비용은 없습니다.</p>
         </div>
       </div>
-      <div class="step reveal">
-        <span class="step-num">02</span>
-        <div class="step-content">
-          <p class="step-title">통합 분석 & 솔루션 설계</p>
+      <div class="step">
+        <span class="step-num serif">02</span>
+        <div>
+          <p class="step-title">통합 분석 &amp; 솔루션 설계</p>
           <p class="step-desc">스크리닝 인터뷰 내용을 토대로 기업 분석보고서를 작성하고, 필요 시 공인세무사·노무사와 함께 데이터와 근거에 기반한 맞춤 솔루션을 설계합니다.</p>
         </div>
       </div>
-      <div class="step reveal">
-        <span class="step-num">03</span>
-        <div class="step-content">
-          <p class="step-title">솔루션 제안 & 실행</p>
+      <div class="step">
+        <span class="step-num serif">03</span>
+        <div>
+          <p class="step-title">솔루션 제안 &amp; 실행</p>
           <p class="step-desc">설계된 솔루션을 바탕으로 최종 제안을 드립니다. 상속감자, 퇴직금 재원 마련, 절세전략 등 일부 컨설팅은 세법상 보험상품을 활용해 실행되며, 제안이 마음에 드신다면 바로 진행해 드립니다.</p>
         </div>
       </div>
-      <div class="step reveal">
-        <span class="step-num">04</span>
-        <div class="step-content">
+      <div class="step">
+        <span class="step-num serif">04</span>
+        <div>
           <p class="step-title">지속 관리</p>
           <p class="step-desc">계약 이후에도 세법 개정, 정책 변화, 법인의 성장에 맞춰 서비스를 지속적으로 점검·업데이트하며 든든한 동반자가 되어드립니다.</p>
         </div>
@@ -1706,171 +280,12 @@
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="contact-section" id="contact">
-  <div class="container">
-    <div class="reveal">
-      <p class="section-label">Contact</p>
-      <h2 class="section-title">지금 바로<br><span>연결하세요</span></h2>
-      <hr class="divider">
-    </div>
-
-    <div class="contact-container reveal">
-      <!-- Contact Info -->
-      <div class="contact-info">
-        <h3>연락처</h3>
-        <div class="contact-item">
-          <p class="contact-item-label">📞 전화</p>
-          <p class="contact-item-value">
-            <a href="tel:+82-10-2110-6010">010-2110-6010</a>
-          </p>
-        </div>
-        <div class="contact-item">
-          <p class="contact-item-label">📍 회사 주소</p>
-          <p class="contact-item-value">06194 서울 강남구 테헤란로 424 FN타워대치 17층</p>
-        </div>
-        <div class="contact-item">
-          <p class="contact-item-label">🏢 회사</p>
-          <p class="contact-item-value">삼성생명 서초법인지역단 삼성금융법인지점</p>
-        </div>
-        <div class="contact-item">
-          <p class="contact-item-label">⏰ 상담 시간</p>
-          <p class="contact-item-value">연중무휴 24시</p>
-        </div>
-        <div class="contact-item">
-          <p class="contact-item-label">💬 카카오톡 오픈상담</p>
-          <p class="contact-item-value">
-            <a href="https://open.kakao.com/o/gjRBr3Bi" target="_blank" rel="noopener">오픈채팅 바로가기 →</a>
-          </p>
-        </div>
-      </div>
-
-      <!-- Contact Form -->
-      <form class="contact-form" id="contactForm">
-        <div class="form-message" id="formMessage"></div>
-
-        <div class="form-group">
-          <label for="name">이름 *</label>
-          <input type="text" id="name" name="name" required>
-        </div>
-
-        <div class="form-group">
-          <label for="phone">연락처 *</label>
-          <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
-        </div>
-
-        <div class="form-group">
-          <label for="company">회사명</label>
-          <input type="text" id="company" name="company">
-        </div>
-
-        <div class="form-group">
-          <label for="email">이메일</label>
-          <input type="email" id="email" name="email">
-        </div>
-
-        <div class="form-group">
-          <label for="service">관심 서비스 *</label>
-          <select id="service" name="service" required>
-            <option value="">선택하세요</option>
-            <option value="기업리스크분석">기업리스크 분석</option>
-            <option value="가지급금정리">가지급금 정리</option>
-            <option value="산재보험료절감">산재보험료 절감</option>
-            <option value="정부대출정책자금">정부대출 & 정책자금</option>
-            <option value="상속증여절세">상속·증여 절세</option>
-            <option value="세무컨설팅">세무컨설팅</option>
-            <option value="노무컨설팅">노무컨설팅</option>
-            <option value="법인보험설계">법인보험 설계</option>
-            <option value="연금퇴직금설계">연금·퇴직금 설계</option>
-            <option value="비상장주식평가">비상장주식평가</option>
-            <option value="개인투자보험">개인 투자 & 보험</option>
-            <option value="기타">기타</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="message">문의 내용 *</label>
-          <textarea id="message" name="message" required></textarea>
-        </div>
-
-        <button type="submit" class="form-submit">상담 신청하기</button>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section">
-  <div class="container">
-    <h2 class="section-title reveal">부담 없이 시작하세요</h2>
-    <p class="cta-sub reveal">"제 고객은 제 자산입니다. 항상 여러분 편에 서서 컨설팅 합니다."</p>
-    <a href="tel:+82-10-2110-6010" class="btn-dark reveal">📞 지금 전화하기</a>
-  </div>
-</section>
-
-<!-- FOOTER -->
 <footer>
-  <p>제유종 · 삼성생명 법인사업부 팀장</p>
-  <p>서울 강남 · 010-2110-6010</p>
-  <p style="margin-top: 10px; opacity: 0.6;">"제 고객은 제 자산입니다. 항상 여러분 편에 서서 컨설팅 합니다."</p>
-  <p style="margin-top: 12px; opacity: 0.3;">© 2026 · 본 페이지는 개인 소개 및 비즈니스 목적으로 제작되었습니다.</p>
-  <p style="margin-top: 8px;"><a href="privacy.html" style="color: rgba(255,255,255,0.5); font-size: 12px; text-decoration: underline;">개인정보처리방침</a></p>
+  <div class="footer-inner">
+    <p class="meta">© 2026 · 본 페이지는 개인 소개 및 비즈니스 목적으로 제작되었습니다.</p>
+    <p class="meta"><a href="privacy.html">개인정보처리방침</a></p>
+  </div>
 </footer>
 
-<script>
-  // Scroll reveal animation
-  const reveals = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { 
-        e.target.classList.add('visible');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  reveals.forEach(el => io.observe(el));
-
-  // Contact form handling
-  const contactForm = document.getElementById('contactForm');
-  const formMessage = document.getElementById('formMessage');
-
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    // Get form data
-    const formData = new FormData(contactForm);
-    
-    // Show loading state
-    const submitBtn = contactForm.querySelector('.form-submit');
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = '전송 중...';
-    submitBtn.disabled = true;
-
-    try {
-      const response = await fetch('https://formspree.io/f/mjgqjpev', {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      });
-
-      if (response.ok) {
-        formMessage.textContent = '✓ 상담 신청이 완료되었습니다. 빠른 시일 내에 연락드리겠습니다.';
-        formMessage.classList.remove('error');
-        formMessage.classList.add('success');
-        contactForm.reset();
-      } else {
-        throw new Error('전송 실패');
-      }
-    } catch (error) {
-      formMessage.textContent = '✕ 전송에 실패했습니다. 다시 시도해 주세요.';
-      formMessage.classList.remove('success');
-      formMessage.classList.add('error');
-    }
-
-    // Restore button
-    submitBtn.textContent = originalText;
-    submitBtn.disabled = false;
-  });
-</script>
 </body>
 </html>
